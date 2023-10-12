@@ -1,15 +1,23 @@
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Logo from "../../components/Logo";
 import {
   SignupValidationSchema,
   signupValidationSchema,
-} from "../../utils/signupValidation";
-import { Link, json } from "react-router-dom";
-import InputField from "./Components/InputField";
-import { useState } from "react";
+} from "../utils/signupValidation";
+import { Link, useNavigate } from "react-router-dom";
+import InputField from "../Components/InputField";
+
+import useRegisterUser from "../api/useRegisterUser";
+import { Button } from "../../../components/Elements/Button";
+import useAuthCheck from "../../../hooks/useAuthCheck";
 
 const Signup = () => {
+  // useAuthCheck();
+  const navigate = useNavigate();
+  const isLoggedIn = useAuthCheck();
+  if (isLoggedIn) {
+    navigate("/home");
+  }
   const {
     control,
     register,
@@ -22,9 +30,16 @@ const Signup = () => {
   const handleInputChange = async (field: keyof SignupValidationSchema) => {
     await trigger(field); // Trigger validation for the specified field
   };
+  const { mutate, error, isLoading } = useRegisterUser();
   const onSubmit: SubmitHandler<SignupValidationSchema> = (data) => {
     console.log("data", data);
-    // setData(JSON.stringify(data));
+    mutate({
+      email: data.email,
+      password: data.password,
+      role: "USER",
+      username:
+        data.firstName.toLowerCase() + "_" + data.lastName.toLowerCase(),
+    });
   };
 
   return (
@@ -39,7 +54,7 @@ const Signup = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className=" md:flex md:justify-between">
-              <InputField
+              <InputField<SignupValidationSchema>
                 name="firstName"
                 control={control}
                 errors={errors}
@@ -48,7 +63,7 @@ const Signup = () => {
                 onKeyDown={handleInputChange}
               />
 
-              <InputField
+              <InputField<SignupValidationSchema>
                 name="lastName"
                 control={control}
                 errors={errors}
@@ -57,16 +72,16 @@ const Signup = () => {
                 onKeyDown={handleInputChange}
               />
             </div>
-            <InputField
+            <InputField<SignupValidationSchema>
               name="email"
               control={control}
-              errors={errors}
+              errors={errors || error}
               label="Email"
               type="text"
               onKeyDown={handleInputChange}
               className="w-full"
             />
-            <InputField
+            <InputField<SignupValidationSchema>
               name="password"
               control={control}
               errors={errors}
@@ -74,7 +89,7 @@ const Signup = () => {
               type="password"
               onKeyDown={handleInputChange}
             />
-            <InputField
+            <InputField<SignupValidationSchema>
               name="confirmPassword"
               control={control}
               errors={errors}
@@ -99,13 +114,13 @@ const Signup = () => {
               )}
             </div>
             <div className="mb-6 text-center">
-              <button
-                // disabled={!isValid}
+              <Button
                 className="w-full px-4 py-2 font-bold rounded-full text-slate-700 hover:animate-pulse bg-gradient-to-r from-teal-200 to-teal-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                 type="submit"
+                isLoading={isLoading}
               >
                 Register Account
-              </button>
+              </Button>
             </div>
             <hr className="mb-6 border-t" />
             <div className="text-center">
@@ -117,7 +132,7 @@ const Signup = () => {
               </a>
             </div>
             <div className="text-sm text-center">
-              Already have an account? &nbsp; 
+              Already have an account? &nbsp;
               <Link
                 className="inline-block text-teal-500 align-baseline hover:text-teal-800"
                 to={"/login"}

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt } from "@fortawesome/free-solid-svg-icons";
-import Logo from "../../components/Logo";
+import Logo from "../../../components/Logo";
 interface ContainerProps {
   children: ReactNode;
 }
