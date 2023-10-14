@@ -5,6 +5,7 @@ import { Author } from "features/posts/types/postType";
 
 const getUser = () => {
   const getUserProfile = () => {
+    console.log("fetch user data");
     return axios.get<ResponseType<Author>>("/social-media/profile");
   };
   return useQuery({

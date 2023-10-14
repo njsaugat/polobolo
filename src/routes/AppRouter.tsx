@@ -4,8 +4,11 @@ import ErrorElement from "../components/ErrorElement";
 import Login from "../features/auth/routes/Login";
 import Signup from "../features/auth/routes/Signup";
 import Container from "../features/auth/routes/Container";
-import Home from "../features/home/Home";
+import Home from "../features/posts/Components/Posts";
 import LandingPage from "../features/landing/LandingPage";
+import UserProfile from "../features/home/Components/UserProfile";
+import UserProfileAbout from "features/home/Components/UserProfileAbout";
+import UserPosts from "../features/home/Components/UserPosts";
 
 const appRouter = createBrowserRouter([
   {
@@ -20,6 +23,16 @@ const appRouter = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/user/:username",
+        element: <UserProfile />,
+        // children: [
+        //   {
+        //     path: "/posts",
+        //     element: <UserPosts />,
+        //   },
+        // ],
       },
     ],
   },

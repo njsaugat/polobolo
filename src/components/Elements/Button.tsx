@@ -4,11 +4,12 @@ import * as React from "react";
 import { Spinner } from "./Spinner";
 
 const variants = {
-  primary: "bg-blue-600 text-slate-700",
+  primary: "bg-gradient-to-r from-teal-200 to-teal-500 text-slate-700",
   inverse: "bg-white text-teal-600",
-  danger: "bg-gradient-to-l from-red-200 to-red-500 text-white",
-  blend: "bg-gradient-to-r from-teal-100 to-teal-200 border-none",
+  danger: "bg-gradient-to-r from-red-300 to-red-600 text-white border-none",
+  blend: "bg-gradient-to-r from-teal-200 to-teal-500 border-none",
   light: "bg-gradient-to-t from-slate-300 to-teal-300 border-none",
+  transparent:'bg-gradient-to-r from-teal-50 to-teal-200'
 };
 
 const sizes = {
@@ -48,7 +49,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={cslx(
-          "flex justify-center items-center border border-gray-300 disabled:opacity-70 disabled:cursor-not-allowed    hover:opacity-80 bg-gradient-to-r from-teal-200 to-teal-500 focus:outline-none focus:shadow-outline",
+          "flex justify-center items-center border border-gray-300 disabled:opacity-70 disabled:cursor-not-allowed    hover:opacity-80  focus:outline-none focus:shadow-outline",
           variants[variant],
           sizes[size],
           className

@@ -1,19 +1,45 @@
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEllipsis, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { Fragment } from "react";
 
-export default function DropMenu() {
+type EditDeleteMenuProps = {
+  openEditModal: () => void;
+  openDeleteModal: () => void;
+  className?: string;
+  isShown?: boolean;
+};
+export default function EditDeleteMenu({
+  openEditModal,
+  openDeleteModal,
+  className,
+  isShown,
+}: EditDeleteMenuProps) {
   return (
-    <Menu as="div" className="absolute top-4 right-4">
+    <Menu
+      as="div"
+      className={`absolute z-50 top-4  ${
+        className
+          ? "translate-x-1.5 -translate-y-0.5  right-0 bottom-0.5"
+          : "right-4"
+      }`}
+    >
       <div>
-        <Menu.Button>
-          <FontAwesomeIcon
-            className="text-xl rotate-90 cursor-pointer text-slate-700"
-            icon={faEllipsis}
-            // onClick={}
-          />
+        <Menu.Button
+          className={`${
+            className ? " " : "w-8 h-8  hover:bg-slate-200"
+          }   rounded-full transtion-all`}
+        >
+          {isShown && (
+            <FontAwesomeIcon
+              className={`text-xl rotate-90 rounded-full cursor-pointer ${
+                className ? "text-slate-500" : "text-slate-700"
+              }`}
+              icon={faEllipsis}
+              // onClick={}
+            />
+          )}
         </Menu.Button>
       </div>
 
@@ -26,16 +52,33 @@ export default function DropMenu() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items
+          className={`absolute right-0 z-50  ${
+            className
+              ? "w-20 h-20 overflow-auto -translate-y-10 -translate-x-6"
+              : "w-32"
+          }  h-auto origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+        >
           <div className="px-1 py-1 ">
             <Menu.Item>
               {({ active }) => (
                 <button
                   className={`${
-                    active ? "bg-violet-500 text-white" : "text-gray-900"
+                    active
+                      ? "bg-gradient-to-r from-teal-200 to-teal-400  text-slate-700"
+                      : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  onClick={openEditModal}
                 >
-                  Edit
+                  {/* <EditActiveIcon /> */}
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    className={`pr-1  ${
+                      active ? " text-slate-700" : "text-gray-900"
+                    }`}
+                  />
+                  <span className={`${className ? "text-xs" : ""} `}>Edit</span>
+                  {/* {className ? "" : "Edit"} */}
                 </button>
               )}
             </Menu.Item>
@@ -43,10 +86,21 @@ export default function DropMenu() {
               {({ active }) => (
                 <button
                   className={`${
-                    active ? "bg-violet-500 text-white" : "text-gray-900"
+                    active
+                      ? "bg-gradient-to-r from-teal-200 to-teal-400"
+                      : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                  onClick={openDeleteModal}
                 >
-                  Duplicate
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className={`pr-1 
+                      ${active ? " text-slate-700" : "text-gray-900"}
+                      `}
+                  />
+                  <span className={`${className ? "text-xs" : ""}`}>
+                    Delete
+                  </span>
                 </button>
               )}
             </Menu.Item>
@@ -54,45 +108,5 @@ export default function DropMenu() {
         </Menu.Items>
       </Transition>
     </Menu>
-  );
-}
-
-export function EditActiveIcon() {
-  return (
-    <svg
-      className="w-5 h-5 mr-2"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4 13V16H7L16 7L13 4L4 13Z"
-        fill="#000000"
-        stroke="#000000"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
-export function DeleteActiveIcon() {
-  return (
-    <svg
-      className="w-5 h-5 mr-2"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect
-        x="5"
-        y="6"
-        width="10"
-        height="10"
-        fill="#8B5CF6"
-        stroke="#C4B5FD"
-        strokeWidth="2"
-      />
-      <path d="M3 6H17" stroke="#C4B5FD" strokeWidth="2" />
-      <path d="M8 6V4H12V6" stroke="#C4B5FD" strokeWidth="2" />
-    </svg>
   );
 }

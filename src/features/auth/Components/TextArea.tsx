@@ -24,6 +24,7 @@ interface TextAreaProps<SchemaType> {
   onKeyDown: (field: keyof SchemaType) => void;
   className?: string;
   children?: React.ReactNode;
+  defaultValue: string;
 }
 function calcHeight(value: string) {
   let numberOfLineBreaks = (value.match(/\n/g) || []).length;
@@ -46,16 +47,11 @@ const TextArea = forwardRef(
       onChange,
       onKeyUp,
       disabled,
+      defaultValue,
     }: // handlePostComment,
     TextAreaProps<SchemaType>,
     ref: ForwardedRef<HTMLTextAreaElement>
   ) => {
-    //     useEffect(()=>{
-    //         ref?.current.addEventListener("input", function () {
-    //     this.style.height = "auto"; // Reset the height to auto to account for content changes.
-    //     this.style.height = this.scrollHeight + "px"; // Set the height to the content's scroll height.
-    //   });
-    //     },ref?.current?.value)
     return (
       <div className="z-50 mb-4 transition-all duration-300 md:mr-2">
         <label
@@ -75,14 +71,13 @@ const TextArea = forwardRef(
                 id={name}
                 ref={ref}
                 placeholder={placeholder ? placeholder : label}
+                defaultValue={defaultValue}
                 className={`${inputFieldStyle}  resize-none h-10 overflow-auto pr-10 ${
                   errors[name] && "border-red-500 hover:border-red-500 "
                 }  ${className}`}
                 onKeyDown={() => onKeyDown(name)}
                 onKeyUp={() => {
-                  console.log("here");
                   if (ref && "current" in ref && ref?.current) {
-                    console.log("here -->", ref.current);
                     ref.current.style.height =
                       calcHeight(ref?.current.value) + "px";
                   }

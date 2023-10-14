@@ -166,14 +166,14 @@ export default function DragAndDrop({
       />
 
       <p>
-        <span className="hidden md:inline">Drag & Drop files or </span>
+        <span className="hidden md:inline">🚀 Drag & Drop files or </span>
         <span
           className="font-bold text-teal-600 cursor-pointer"
           onClick={openFileExplorer}
         >
-          <u>Select files</u>
+          <u> Select files</u>
         </span>{" "}
-        to upload
+        📂to upload
       </p>
 
       {fileDataURLs?.length >= 0 && (

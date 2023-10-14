@@ -101,3 +101,10 @@ export interface Comment {
 export interface Comments {
   comments: Comment[];
 }
+
+export type UserProfile = Author & {
+  __v: number;
+  followersCount: number;
+  followingCount: number;
+  isFollowing: boolean;
+};

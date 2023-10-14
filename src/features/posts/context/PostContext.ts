@@ -5,11 +5,11 @@ export type PostRefetchContext = {
   refetch: ({}: object) => void;
   page: number;
   postId: string;
-  user: Author | undefined;
+  // user: Author | undefined;
 };
 export const PostRefetchContext = createContext<PostRefetchContext>({
   refetch: () => {},
   page: 0,
   postId: "",
-  user: undefined,
+  // user/: undefined,
 });

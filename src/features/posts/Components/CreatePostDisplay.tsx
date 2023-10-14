@@ -27,6 +27,7 @@ const CreatePostDisplay = () => {
             <Avatar
               url={user?.account.avatar.url}
               firstName={user?.account.username}
+              username={user?.account.username}
             />
           </div>
           <div
@@ -36,7 +37,7 @@ const CreatePostDisplay = () => {
             }}
           >
             <input
-              placeholder="Speak your mind."
+              placeholder="Speak your mind 💬"
               onChange={() => {
                 openModal();
               }}

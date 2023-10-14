@@ -35,12 +35,13 @@ import {
 import createPost from "../api/createPost";
 
 const TOTAL_TAGS = 10;
-type CreatePostProps = {
+export type CreatePostDialogProps = {
   post?: Post;
+  postId?: string;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostProps) => {
+const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
   // const [isOpen, setIsOpen] = useState(false);
   const [tags, setTags] = useState<string[]>(post?.tags ? post?.tags : []);
   const postContentRef = useRef<HTMLTextAreaElement>(null);
@@ -82,7 +83,6 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostProps) => {
   } = useForm<CreatePostValidationSchema>({
     resolver: zodResolver(createPostValidationSchema),
   });
-  console.log(errors);
   function onKeyDownTag(e: KeyboardEvent) {
     if (e.key === "Enter") {
       console.log("Enter key pressed");
@@ -174,6 +174,7 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostProps) => {
             <Avatar
               url={user?.account.avatar.url}
               firstName={user?.account.username}
+              username={user?.account.username}
             />
           </div>
           <div className="flex flex-col justify-center w-10/12 h-16 transition-all duration-300 lg:w-11/12">
@@ -201,7 +202,7 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostProps) => {
                   {...field}
                   ref={postContentRef}
                   id="post-content"
-                  placeholder="Speak your mind."
+                  placeholder="Speak your mind 💬"
                   defaultValue={post?.content ? post?.content : ""}
                   className={`block w-full h-48 md:h-28 px-3 py-2 placeholder-gray-400 border border-gray-300 shadow-lg appearance-none resize-none rounded-2xl focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm 
                           ${
@@ -236,7 +237,7 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostProps) => {
                 name="tag"
                 type="text"
                 className="w-full p-2 mt-2 border shadow-lg md:mt-1 rounded-xl focus:outline-none"
-                placeholder="Add #tags and press enter"
+                placeholder="Add 🔖tags and press enter"
                 ref={tagRef}
                 onKeyDown={(e) => onKeyDownTag(e)}
                 disabled={tags.length >= TOTAL_TAGS}

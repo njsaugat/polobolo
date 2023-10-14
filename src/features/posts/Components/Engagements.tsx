@@ -26,13 +26,14 @@ import Avatar from "./Avatar";
 import Like from "../../../components/Elements/Like";
 import Bookmark from "../../../components/Elements/Bookmark";
 import postLike from "../api/postLike";
-import { RefetchProps } from "./Posts";
+import { RefetchProps } from "./Post";
 import { CommentRefetchContext } from "../context/CommentContext";
 import { PostRefetchContext } from "../context/PostContext";
 import { useDispatch } from "react-redux";
 import { addRefetch } from "../../../stores/refetchSlice";
 import ShimmerComment from "../../../components/Elements/ShimmerComment";
-import TextArea from "../../../features/auth/Components/TextArea";
+import CreateComment from "./CreateComment";
+import { UserContext } from "../context/UserContext";
 
 export const commentValidationSchema = z.object({
   content: z
@@ -48,26 +49,12 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
     isModalOpen ? isModalOpen : false
   );
   const dispatch = useDispatch();
+  const handleRefetch = () => {
+    dispatch(addRefetch(refetch));
+  };
   const handleShowComments = () => {
     setShowComments(true);
   };
-  const handleComment = (ref: ForwardedRef<HTMLTextAreaElement>) => {
-    if (ref && "current" in ref && ref.current) {
-      console.log(ref?.current?.value);
-      ref.current.value = " ";
-    }
-  };
-  const {
-    control,
-    register,
-    trigger,
-    handleSubmit,
-    setValue,
-    formState: { errors, isValid },
-  } = useForm<CommentValidationSchema>({
-    resolver: zodResolver(commentValidationSchema),
-  });
-  const { mutate, error, isLoading } = postComment(post._id);
   const {
     isLoading: isCommentLoading,
     error: commentError,
@@ -77,21 +64,13 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
     hasNextPage,
     refetch,
   } = getComments(post._id, showComments);
-  const onSubmit: SubmitHandler<CommentValidationSchema> = (data) => {
-    mutate(data);
-    setValue("content", "");
-  };
 
   const { mutate: mutateLike, error: likeError } = postLike(
     post._id,
     post.isLiked
   );
-  const { user } = useContext(PostRefetchContext);
+  const { user } = useContext(UserContext);
 
-  const handleInputChange = async (field: keyof CommentValidationSchema) => {
-    !showComments && handleShowComments();
-    await trigger(field);
-  };
   return (
     <>
       <div className="flex items-center justify-between mt-4">
@@ -122,44 +101,15 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
           <Avatar
             url={user?.account.avatar.url}
             firstName={user?.account.username}
+            username={user?.account.username}
           />
         </div>
-
-        <form
-          className="w-10/12 h-16 transition-all duration-300 lg:w-11/12"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <TextArea<CommentValidationSchema>
-            ref={commentRef}
-            name="content"
-            control={control}
-            errors={errors || error}
-            label=""
-            type="comment"
-            placeholder="Enter a comment"
-            onKeyDown={handleInputChange}
-            className="border shadow-lg rounded-2xl"
-            // handlePostComment={handlePostComment}
-          >
-            <Button
-              type="submit"
-              size="xs"
-              variant="inverse"
-              isLoading={isLoading}
-              className="absolute border-none rounded-full cursor-pointer top-2 h-11/12 right-2 bg-gradient-to-l from-white to-transparent "
-              onClick={(e) => {
-                handleComment(commentRef);
-                handleShowComments();
-                dispatch(addRefetch(refetch));
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faPaperPlane}
-                className="text-base text-slate-500"
-              />
-            </Button>
-          </TextArea>
-        </form>
+        <CreateComment
+          showComments={showComments}
+          handleShowComments={handleShowComments}
+          handleRefetch={handleRefetch}
+          postId={post._id}
+        />
       </div>
       {showComments && (
         //  :
@@ -184,6 +134,13 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
                 </div>
               )}
               {data?.pages.map((page, pageIndex) => {
+                if (page?.data?.comments.length === 0) {
+                  return (
+                    <div className="mt-2 text-base text-slate-700">
+                      👋 Enter the first comment.
+                    </div>
+                  );
+                }
                 return page?.data?.comments?.map(
                   (comment: Comment, index: number) => (
                     <CommentRefetchContext.Provider
