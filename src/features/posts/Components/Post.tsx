@@ -1,32 +1,21 @@
-// import { Dialog } from "../../../components/Elements/Dialog";
-import React, { Fragment, useEffect, useRef, useState } from "react";
-// import { Dialog, Transition } from "@headlessui/react";
+import { useState } from "react";
 import { Dialog } from "../../../components/Elements/Dialog";
-import Image from "./Image";
 
 import { Author, PostCardProps } from "../types/postType";
 import PostAuthor from "./PostAuthor";
 import Tags from "./Tags";
-import Engagements from "./Engagements";
-import Carousel from "./Carousel";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCross,
-  faEdit,
-  faEllipsis,
-  faPencil,
-  faTimes,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import Engagements from "./PostEngagements";
+import Carousel from "../../../components/Shared/Carousel";
 import CloseModal from "../../../components/Elements/CloseModal";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
-import { Menu, Transition } from "@headlessui/react";
 import CreatePost from "./CreatePost";
 import DeletePost from "./DeletePost";
-import EditDeleteMenu from "./Menu";
+import EditDeleteMenu from "./EditDeletePostMenu";
 import deletePost from "../api/deletePost";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import LoadImage from "../../../components/Elements/LoadImage";
+import useScreenSize from "../../../hooks/useScreenSize";
 export type RefetchProps = {
   refetch: () => void;
 };
@@ -36,14 +25,13 @@ const PostCard = ({ post }: PostCardProps) => {
   const [isOpenPostEdit, setIsOpenPostEdit] = useState(false);
   const [isOpenPostDelete, setIsOpenPostDelete] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isScreenSmall, setIsScreenSmall] = useState(true);
   const { pathname } = useLocation();
+  const isScreenSmall = useScreenSize(992);
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
   const { mutate, error, isLoading } = deletePost(post._id);
 
-  // const imageRef=useRef(null)
   function closeModal() {
     setIsOpen(false);
   }
@@ -61,26 +49,11 @@ const PostCard = ({ post }: PostCardProps) => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % post.images.length);
   };
 
-  const handleResize = () => {
-    if (window.innerWidth >= 992) {
-      setIsScreenSmall(false);
-    } else {
-      setIsScreenSmall(true);
-    }
-  };
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <div className="relative w-11/12 p-4 bg-white rounded-lg shadow-2xl drop- md:w-3/5 lg:w-1/2">
-      <PostAuthor post={post} />
+      <PostAuthor post={post}>
+        <p className="mt-4">{post.content}</p>
+      </PostAuthor>
       {post.author._id === user?._id &&
         pathname.includes(user?.account.username.toLowerCase()) && (
           <>
@@ -129,7 +102,13 @@ const PostCard = ({ post }: PostCardProps) => {
                   setCurrentIndex(index);
                 }}
               >
-                <Image image={image} />
+                <div className="w-full h-32 overflow-hidden rounded-lg">
+                  <LoadImage
+                    src={image.url}
+                    alt={`Post Image ${index + 1}`}
+                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out transform rounded-lg hover:scale-110 hover:rounded-lg "
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -143,7 +122,9 @@ const PostCard = ({ post }: PostCardProps) => {
         <CloseModal closeModal={closeModal} />
         <div className="lg:flex lg:flex-row-reverse lg:items-start">
           <div className={`flex-col my-4 lg:mx-4 lg:w-1/4 `}>
-            <PostAuthor post={post} />
+            <PostAuthor post={post}>
+              <p className="mt-4">{post.content}</p>
+            </PostAuthor>
             <Tags post={post} />
             <div className="hidden lg:block">
               <Engagements post={post} isModalOpen={isOpen} />

@@ -59,9 +59,7 @@ const postLike = (postId: string, isLiked: boolean) => {
       queryClient.setQueryData(["posts"], context.previousLikes);
     },
     onSuccess: (response) => {
-      console.log(response);
       const { message } = response;
-      console.log("message-->", message);
       const { dispatch } = store;
 
       dispatch(
@@ -71,7 +69,6 @@ const postLike = (postId: string, isLiked: boolean) => {
           message: `Post ${message}`,
         })
       );
-      console.log(message);
       refetch({
         refetchPage: (_: number, index: number) => index === page - 1,
       });

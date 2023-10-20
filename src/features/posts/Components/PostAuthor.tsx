@@ -1,31 +1,27 @@
-import React from "react";
-import { PostCardProp, PostCardProps } from "../types/postType";
-import { Link } from "react-router-dom";
+import { ReactNode } from "react";
+import { PostCardProp } from "../types/postType";
+import AuthorProfile from "../../user/Components/AuthorProfile";
 
 type PostAuthor = {
   className?: string;
+  children: ReactNode;
 };
-const PostAuthor = ({ post, className }: PostCardProp & PostAuthor) => {
-  // console.log('username',post?.author?.account?.username)
+const PostAuthor = ({
+  post,
+  className,
+  children,
+}: PostCardProp & PostAuthor) => {
   return (
     <div className={` ${className}`}>
-      <Link to={`/user/${post?.author?.account?.username}`}>
-        <div className={`flex items-center w-auto space-x-4 `}>
-          <img
-            src={post.author.account.avatar.url}
-            alt="Author Avatar"
-            className="w-12 h-12 rounded-full"
-          />
-          <div>
-            <h2 className="text-lg font-semibold">
-              {post.author.firstName} {post.author.lastName}
-            </h2>
-            <p className="text-gray-500">{post.author.bio}</p>
-          </div>
-        </div>
-      </Link>
+      <AuthorProfile
+        username={post?.author?.account?.username}
+        url={post.author.account.avatar.url}
+        firstName={post.author.firstName}
+        lastName={post.author.lastName}
+        bio={post.author.bio}
+      />
 
-      <p className="mt-4">{post.content}</p>
+      {children}
     </div>
   );
 };

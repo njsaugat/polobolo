@@ -1,4 +1,4 @@
-import Logo from "../../../components/Logo";
+import Logo from "../../../components/Shared/Logo";
 import LinkedinLogo from "../../../assets/images/w-linkedin.svg";
 import InstagramLogo from "../../../assets/images/w-instagram.svg";
 import TwitterLogo from "../../../assets/images/w-twitter.svg";

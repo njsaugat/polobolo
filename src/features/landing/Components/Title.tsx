@@ -7,8 +7,8 @@ const Title = () => {
     <div className="flex flex-col justify-around w-screen my-20 md:flex-row mx-28">
       <section className="w-1/2 md:">
         <h1 className="text-6xl font-bold leading-normal tracking-wide">
-          Grow Your Business with
-          <div className="text-orange-theme"> Micro-Influencers.</div>
+          Supercharge your online presence with
+          <div className="text-orange-theme"> PoloBolo</div>
         </h1>
         <h3 className="mt-10 mb-8 text-2xl leading-normal text-slate-500">
           Save time & money by gaining access to micro-influencers of all
@@ -21,7 +21,11 @@ const Title = () => {
         </div>
       </section>
       <div className="w-full md:w-1/2">
-        <img src={GraphImage} alt="graph-visual-png" className="md:w-2/3 lg:w-1/2" />
+        <img
+          src={GraphImage}
+          alt="graph-visual-png"
+          className="md:w-2/3 lg:w-1/2"
+        />
       </div>
     </div>
   );

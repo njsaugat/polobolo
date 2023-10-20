@@ -1,33 +1,16 @@
-import React, {
-  KeyboardEvent,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import Avatar from "./Avatar";
+import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
+import Avatar from "../../user/Components/Avatar";
 import { Button } from "../../../components/Elements/Button";
-import InputField, {
-  inputFieldStyle,
-} from "../../../features/auth/Components/InputField";
-import {
-  commentValidationSchema,
-  CommentValidationSchema,
-} from "./Engagements";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { PostRefetchContext } from "../context/PostContext";
 import { useSelector } from "react-redux";
 import store, { RootState } from "../../../stores/store";
 import { Author, Post } from "../types/postType";
 import { Dialog } from "../../../components/Elements/Dialog";
 import CloseModal from "../../../components/Elements/CloseModal";
-import DragAndDrop from "./DragDropPhotos";
+import DragAndDrop from "../../../components/Shared/DragDropPhotos";
 import CreateTags from "./CreateTags";
 import { addNotification } from "../../../stores/notificationSlice";
-import { z } from "zod";
 import {
   CreatePostValidationSchema,
   createPostValidationSchema,
@@ -42,7 +25,6 @@ export type CreatePostDialogProps = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
-  // const [isOpen, setIsOpen] = useState(false);
   const [tags, setTags] = useState<string[]>(post?.tags ? post?.tags : []);
   const postContentRef = useRef<HTMLTextAreaElement>(null);
   const tagRef = useRef<HTMLInputElement>(null);
@@ -85,8 +67,6 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
   });
   function onKeyDownTag(e: KeyboardEvent) {
     if (e.key === "Enter") {
-      console.log("Enter key pressed");
-      // handleInputChange(field);
       e.preventDefault();
       if (
         tagRef &&
@@ -94,10 +74,7 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
         tagRef.current &&
         tagRef?.current?.value
       ) {
-        console.log(tagRef?.current?.value);
         setTags((prevTags) => {
-          console.log([...prevTags, tagRef?.current?.value || ""]);
-
           return [...prevTags, tagRef?.current?.value || ""];
         });
         // tagRef.current.value = "";
@@ -143,7 +120,6 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
     tags.forEach((tag, ind) => {
       formData.append(`tags`, tag);
     });
-    console.log(formData);
     mutate(formData);
     setIsOpen(false);
     setFileDataURLs([]);
@@ -153,7 +129,6 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
     setErrorDispatched(false);
   };
   const handleInputChange = async (field: keyof CreatePostValidationSchema) => {
-    console.log("field -->", field);
     await trigger(field);
   };
   const user = useSelector<RootState, Author | undefined>(
@@ -221,6 +196,7 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
             <DragAndDrop
               fileDataURLs={fileDataURLs}
               setFileDataURLs={setFileDataURLs}
+              TOTAL_UPLOADABLE_IMAGES={6}
             />
 
             <div className="flex flex-col w-full h-auto gap-2 mt-6">

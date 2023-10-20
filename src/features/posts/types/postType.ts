@@ -11,9 +11,7 @@ export interface Account {
   username: string;
 }
 
-export interface Author {
-  account: Account;
-  coverImage: CoverImage;
+export type AuthorInfo = {
   _id: string;
   firstName: string;
   lastName: string;
@@ -25,7 +23,11 @@ export interface Author {
   owner: string;
   phoneNumber: string;
   updatedAt: string;
-}
+};
+export type Author = AuthorInfo & {
+  account: Account;
+  coverImage: CoverImage;
+};
 
 export interface CoverImage {
   _id: string;
@@ -106,5 +108,13 @@ export type UserProfile = Author & {
   __v: number;
   followersCount: number;
   followingCount: number;
+  isFollowing: boolean;
+};
+
+export type FollowerProfile = Account & {
+  profile: AuthorInfo & {
+    coverImage: CoverImage;
+    __v: number;
+  };
   isFollowing: boolean;
 };

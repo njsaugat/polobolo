@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useInfiniteScroll = (fetchNextPage) => {
+const useInfiniteScroll = (fetchNextPage: any) => {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     let debounceTimer: number;

@@ -1,8 +1,5 @@
 import { Button } from "../../../components/Elements/Button";
 import { Dialog } from "../../../components/Elements/Dialog";
-import React from "react";
-import deletePost from "../api/deletePost";
-import { Post } from "../types/postType";
 export type DeletePostDialogProps = {
   isOpen: boolean;
   closeModal: () => void;
@@ -19,10 +16,10 @@ const DeletePost = ({
 }: DeletePostDialogProps) => {
   return (
     <Dialog
-      className=" md:w-1/2 lg:w-1/3  min-h-[10rem] rounded-lg"
+      className="rounded-lg md:w-1/2 lg:w-1/3 deleteDialog "
       isOpen={isOpen}
       closeModal={closeModal}
-      modalClassName="mx-10"
+      modalClassName=" mx-10"
     >
       <h1 className="text-center">{content}</h1>
       <div className="flex justify-center w-full gap-4 mt-4 mb-0">

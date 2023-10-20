@@ -18,7 +18,6 @@ export const Notifications = () => {
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-end px-4 py-6 space-y-4 pointer-events-none sm:p-6 sm:items-start">
       {notifications.map((notification) => {
-        console.log("first rendered");
         return (
           <SingleNotification
             key={notification.id}

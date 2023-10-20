@@ -44,7 +44,7 @@ export const ConfirmationDialog = ({
   return (
     <>
       {trigger}
-      <Dialog isOpen={isOpen} onClose={close} initialFocus={cancelButtonRef}>
+      <Dialog isOpen={isOpen} closeModal={close} initialFocus={cancelButtonRef}>
         <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
           <div className="sm:flex sm:items-start">
             {icon === "danger" && (

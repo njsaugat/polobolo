@@ -9,7 +9,8 @@ const variants = {
   danger: "bg-gradient-to-r from-red-300 to-red-600 text-white border-none",
   blend: "bg-gradient-to-r from-teal-200 to-teal-500 border-none",
   light: "bg-gradient-to-t from-slate-300 to-teal-300 border-none",
-  transparent:'bg-gradient-to-r from-teal-50 to-teal-200'
+  transparent: "bg-gradient-to-r from-teal-50 to-teal-200",
+  moretransparent: "bg-gradient-to-r from-teal-50 to-teal-100",
 };
 
 const sizes = {

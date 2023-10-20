@@ -27,7 +27,6 @@ const deletePost = (postId: string | undefined) => {
           message: "Post deleted successfully.",
         })
       );
-      console.log(response);
     },
   });
 };

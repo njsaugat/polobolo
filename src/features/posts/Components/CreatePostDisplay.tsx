@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
 import { Author } from "../types/postType";
-import Avatar from "./Avatar";
+import Avatar from "../../user/Components/Avatar";
 import CreatePost from "./CreatePost";
 
 // type CreatePostDisplayProps={
@@ -49,10 +49,10 @@ const CreatePostDisplay = () => {
       </div>
       <div className="flex justify-between w-full text-slate-600">
         <button className="w-1/2 hover:bg-slate-200" onClick={openModal}>
-          Photos
+          📷 Photos
         </button>
         <button className="w-1/2 hover:bg-slate-200" onClick={openModal}>
-          Tags
+          #️⃣ Tags
         </button>
       </div>
       {/* {children} */}
