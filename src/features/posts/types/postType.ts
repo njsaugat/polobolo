@@ -11,6 +11,15 @@ export interface Account {
   username: string;
 }
 
+export type ChatUser = Account & {
+  __v: number;
+  createdAt: string;
+  updatedAt: string;
+  isEmailVerified: boolean;
+  loginType: string;
+  role: string;
+};
+
 export type AuthorInfo = {
   _id: string;
   firstName: string;
@@ -118,3 +127,26 @@ export type FollowerProfile = Account & {
   };
   isFollowing: boolean;
 };
+
+export interface Chat {
+  _id: string;
+  name: string;
+  isGroupChat: boolean;
+  participants: ChatUser[];
+  admin: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  lastMessage: ChatMessage;
+}
+
+export interface ChatMessage {
+  _id: string;
+  sender: Account;
+  content: string;
+  attachments: any[]; // Define the actual type for attachments if needed
+  chat: string; // Assuming chat is the ID of the chat conversation
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}

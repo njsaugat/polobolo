@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axios } from "../../../services/apiClient";
 import { useNavigate } from "react-router-dom";
+import store from "../../../stores/store";
+import { addNotification } from "../../../stores/notificationSlice";
 
 export interface SignupData {
   email: string;
@@ -17,7 +19,15 @@ const useRegisterUser = () => {
     mutationKey: ["register"],
     mutationFn: registerUser,
     onSuccess: () => {
-      navigate("/home");
+      const { dispatch } = store;
+      dispatch(
+        addNotification({
+          type: "success",
+          title: "Success",
+          message: `User profile created successfully. Please Login.`,
+        })
+      );
+      navigate("/login");
     },
   });
 };

@@ -16,14 +16,19 @@ const DeletePost = ({
 }: DeletePostDialogProps) => {
   return (
     <Dialog
-      className="rounded-lg md:w-1/2 lg:w-1/3 deleteDialog "
+      className="z-50 rounded-lg md:w-1/2 lg:w-1/3 deleteDialog "
       isOpen={isOpen}
       closeModal={closeModal}
-      modalClassName=" mx-10"
+      modalClassName="z-50 mx-10"
     >
       <h1 className="text-center">{content}</h1>
       <div className="flex justify-center w-full gap-4 mt-4 mb-0">
-        <Button variant="blend" onClick={closeModal}>
+        <Button
+          variant="blend"
+          onClick={() => {
+            closeModal();
+          }}
+        >
           NO
         </Button>
         <Button

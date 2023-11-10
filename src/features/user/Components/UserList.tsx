@@ -59,6 +59,7 @@ const UserList = ({ isOpen, closeModal, followers }: UserListProps) => {
                           lastName={follower.profile.lastName}
                           bio={follower.profile.bio}
                           className="text-xs "
+                          closeModal={closeModal}
                         />
 
                         <Follow

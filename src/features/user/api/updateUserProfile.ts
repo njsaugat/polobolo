@@ -6,7 +6,7 @@ import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
 import { addUser, removeUser } from "../../../stores/userSlice";
 
-const updateProfile = () => {
+const updateProfile = (isOnboarding: boolean = false) => {
   const queryClient = useQueryClient();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -29,10 +29,16 @@ const updateProfile = () => {
         addNotification({
           type: "success",
           title: "Success",
-          message: "User profile updated successfully.",
+          message: `User profile ${
+            isOnboarding ? "created" : "updated"
+          } successfully.`,
         })
       );
-      navigate(`/user/${username}/about`);
+      if (isOnboarding) {
+        navigate(`/home`);
+      } else {
+        navigate(`/user/${username}/about`);
+      }
     },
   });
 };

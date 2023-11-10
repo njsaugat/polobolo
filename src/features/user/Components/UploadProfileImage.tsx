@@ -35,7 +35,6 @@ const UploadProfileImage = ({
       [new Uint8Array([...binaryData].map((char) => char.charCodeAt(0)))],
       { type: "application/octet-stream" }
     );
-    console.log(formData);
     if (coverImageExist) {
       formData.append(`coverImage`, blob, `file.png`);
     } else {

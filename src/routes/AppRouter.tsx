@@ -1,49 +1,72 @@
-import { createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  useRoutes,
+} from "react-router-dom";
 import App from "../App";
-import ErrorElement from "../components/ErrorElement";
-import Login from "../features/auth/routes/Login";
-import Signup from "../features/auth/routes/Signup";
-import Container from "../features/auth/routes/Container";
+import ErrorElement from "../components/Shared/ErrorElement";
+import Login from "../features/auth/Components/Login";
+import Signup from "../features/auth/Components/Signup";
+import Container from "../features/auth/Components/Container";
 import Home from "../features/posts/Components/Posts";
 import LandingPage from "../features/landing/LandingPage";
-import UserProfile from "../features/home/Components/UserProfile";
-import UserProfileAbout from "features/home/Components/UserProfileAbout";
-import UserPosts from "../features/home/Components/UserPosts";
+import UserProfile from "../features/user/Components/UserProfile";
+import UserProfileAbout from "../features/user/Components/UserProfileAbout";
+import UserPosts from "../features/user/Components/UserPosts";
+import Posts from "../features/posts/Components/Posts";
+import PostsByTag from "../features/posts/Components/PostsByTag";
+import Bookmarks from "../features/posts/Components/BookmarkedPosts";
+import Settings from "../features/user/Components/Settings";
+import useAuthCheck from "../hooks/useAuthCheck";
+import UserDetails from "../features/user/Components/UserDetails";
+import AnimatedPage from "components/Shared/AnimatedPage";
+import Chat from "../features/chat/components/Chat";
+import ChatSection from "../features/chat/components/ChatSection";
 
-const appRouter = createBrowserRouter([
+export const AppRoutes = () => {
+  const loggedIn = useAuthCheck();
+
+  // const commonRoutes = [];
+
+  const routes = loggedIn ? protectedRoutes : publicRoutes;
+  // const element = useRoutes([...routes, ...commonRoutes]);
+
+  const router = createBrowserRouter([...routes]);
+
+  return <RouterProvider router={router} />;
+};
+
+const publicRoutes = [
   {
     path: "/",
     element: <App />,
     errorElement: <ErrorElement />,
     children: [
       {
-        path: "/",
+        index: true,
         element: <LandingPage />,
       },
       {
-        path: "/home",
-        element: <Home />,
+        path: "/signup",
+        element: (
+          <Container>
+            <Signup />
+          </Container>
+        ),
       },
       {
-        path: "/user/:username",
-        element: <UserProfile />,
-        // children: [
-        //   {
-        //     path: "/posts",
-        //     element: <UserPosts />,
-        //   },
-        // ],
+        path: "/login",
+        element: (
+          <Container>
+            <Login />
+          </Container>
+        ),
       },
     ],
   },
-  {
-    path: "/signup",
-    element: (
-      <Container>
-        <Signup />
-      </Container>
-    ),
-  },
+];
+
+const protectedRoutes = [
   {
     path: "/login",
     element: (
@@ -52,6 +75,75 @@ const appRouter = createBrowserRouter([
       </Container>
     ),
   },
-]);
 
-export default appRouter;
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorElement />,
+    children: [
+      // {
+      //   path: "/",
+      //   element: <LandingPage />,
+      // },
+      {
+        index: true, // Use the index property to specify the default route
+        element: <Home />,
+      },
+      {
+        path: "/chats",
+        element: <Chat />,
+        children: [{ path: ":chatId", element: <ChatSection /> }],
+      },
+      {
+        path: "/onboarding",
+        element: (
+          <Container>
+            <UserDetails isOnboarding={true} />
+          </Container>
+        ),
+      },
+      {
+        path: "/home",
+        element: <Posts />,
+        // children: [
+        //   {
+        //     path: "",
+        //     element: <Posts />,
+        //   },
+        // ],
+      },
+      {
+        path: "posts/tags/:tag",
+        element: <PostsByTag />,
+      },
+      {
+        path: "user/:username",
+        element: <UserProfile />,
+        children: [
+          {
+            index: true, // Use the index property to specify the default route
+            element: <UserProfileAbout />,
+          },
+          {
+            path: "about", // This can be used as well for the about page
+            element: <UserProfileAbout />,
+          },
+          {
+            path: "posts",
+            element: <Posts />,
+          },
+          {
+            path: "bookmarks",
+            element: <Bookmarks />,
+          },
+          {
+            path: "settings",
+            element: <Settings />,
+          },
+        ],
+      },
+    ],
+  },
+];
+
+// export default appRouter;

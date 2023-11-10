@@ -44,6 +44,34 @@ const Posts = ({ tag, bookmarks }: PostsProps) => {
     );
   }
 
+  if (bookmarks && data?.pages[0].data?.bookmarkedPosts?.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center ">
+        <div className="flex flex-col items-center justify-center w-full gap-4 gap-y-6 lg:gap-y-10">
+          <h1>
+            No bookmarked posts😞.
+            <br /> Bookmark your first Post📑.
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
+  if (data?.pages[0].data?.posts?.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center ">
+        <div className="flex flex-col items-center justify-center w-full gap-4 gap-y-6 lg:gap-y-10">
+          <CreatePostDisplay />
+          <h1>
+            {username === user?.account.username
+              ? "👋 Create your first Post!"
+              : "No Posts Available. 😞"}
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center ">
@@ -68,6 +96,7 @@ const Posts = ({ tag, bookmarks }: PostsProps) => {
                 </PostRefetchContext.Provider>
               ));
             }
+
             return page?.data.posts.map((post: Post) => (
               <PostRefetchContext.Provider
                 value={{

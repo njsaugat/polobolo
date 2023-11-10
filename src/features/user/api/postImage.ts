@@ -25,7 +25,6 @@ const postImage = (coverImageExist: boolean | undefined) => {
       queryClient.invalidateQueries(["user", username]);
       const message = response?.message;
       const { dispatch } = store;
-      console.log(response);
       dispatch(
         addNotification({
           type: "success",

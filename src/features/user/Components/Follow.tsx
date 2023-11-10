@@ -20,7 +20,6 @@ const Follow = ({
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
-  console.log(user?.account._id !== toBeFollowedUserId);
   return (
     <>
       {user?.account._id !== toBeFollowedUserId && (

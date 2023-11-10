@@ -26,7 +26,9 @@ export const Dialog = ({
     <Transition appear show={isOpen} as={Fragment}>
       <UIDialog
         as="div"
-        className="relative z-10 font-montserrat"
+        className={`relative font-montserrat ${
+          className?.includes("delete") ? "z-50" : "z-10"
+        }`}
         onClose={closeModal}
       >
         <Transition.Child

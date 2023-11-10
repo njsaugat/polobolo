@@ -9,7 +9,6 @@ import { Author } from "features/posts/types/postType";
 
 const postFollow = (toBeFollowedUserId: string | undefined) => {
   const queryClient = useQueryClient();
-  console.log("-->", toBeFollowedUserId);
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );

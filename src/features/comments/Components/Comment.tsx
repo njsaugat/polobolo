@@ -86,7 +86,7 @@ const SingleComment = ({ comment }: CommentProps) => {
             <>
               <DeletePost
                 isOpen={isOpenCommentDelete}
-                closeModal={() => setIsOpenCommentDelete(false)}
+                closeModal={closeModal}
                 isLoading={isLoading}
                 handleDelete={() => {
                   mutateDelete();

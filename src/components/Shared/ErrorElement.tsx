@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 
 const ErrorElement = () => {
@@ -18,6 +19,7 @@ const ErrorElement = () => {
             : "Unknown error message"}
         </i>
       </p>
+      <Link to={"/"} className="underline">Return Home</Link>
     </div>
   );
 };

@@ -56,7 +56,11 @@ const UserProfile = () => {
             className="relative object-cover w-full h-56 transition-all rounded-t-lg duration-800 md:h-48 lg:h-72 bg-theme-color bg-gradient-to-r from-teal-200 to-teal-500"
             onMouseEnter={() => setIsCoverHovered(true)}
             onMouseLeave={() => setIsCoverHovered(false)}
-            onClick={() => setIsCoverImageUploadOpen(true)}
+            onClick={() =>
+              loggedInUser?.account.username === username
+                ? setIsCoverImageUploadOpen(true)
+                : setIsCoverImageUploadOpen(false)
+            }
           >
             {user?.coverImage.url.includes("placeholder") ? (
               <h3 className="absolute text-5xl text-white lowercase -translate-x-1/2 -translate-y-1/2 md:uppercase left-1/2 font-cursive top-1/2">
@@ -71,7 +75,7 @@ const UserProfile = () => {
               />
             )}
 
-            {isCoverHovered && (
+            {isCoverHovered && loggedInUser?.account.username === username && (
               <div className="absolute w-full h-full cursor-pointer bg-gradient-to-t from-transparent to-gray-300">
                 <FontAwesomeIcon
                   icon={faCamera}
@@ -84,14 +88,18 @@ const UserProfile = () => {
             className="absolute bottom-0 w-40 h-40 mb-2 transition-all duration-300 transform -translate-x-1/2 translate-y-1/2 border-4 rounded-full cursor-pointer border-slate-200 lg:translate-y-3/4 lg:w-40 lg:h-40 lg:mb-16 left-1/2 "
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            onClick={() => setIsImageUploadOpen(true)}
+            onClick={() =>
+              loggedInUser?.account.username === username
+                ? setIsImageUploadOpen(true)
+                : setIsImageUploadOpen(false)
+            }
           >
             <LoadImage
               src={user?.account?.avatar?.url}
               alt="Avatar"
               className="object-cover w-full h-full rounded-full "
             />
-            {isHovered && (
+            {isHovered && loggedInUser?.account.username === username && (
               <div className="h-full -translate-y-full rounded-full cursor-pointer bg-gradient-to-b from-transparent to-slate-600">
                 <FontAwesomeIcon
                   icon={faCamera}

@@ -1,16 +1,28 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Logo from "./components/Logo";
+import Logo from "./components/Shared/Logo";
 import LandingPage from "../src/features/landing/LandingPage";
 import Navbar from "./features/landing/Components/Navbar";
 import { useDispatch } from "react-redux";
 import { UserContext } from "./features/posts/context/UserContext";
 import { addUser } from "./stores/userSlice";
-import getUser from "./features/home/api/getUser";
+import getUser from "./features/user/api/getUser";
+import { LocalStorage } from "./utils";
+import useAuthCheck from "./hooks/useAuthCheck";
 
 const App = () => {
+  // const accessToken = LocalStorage.get("accessToken");
+  // if (accessToken) {
+  // }
+  const loggedIn = useAuthCheck();
+  if (!loggedIn) {
+    return (
+      <>
+        <Outlet />
+      </>
+    );
+  }
   const { isLoading: isUserLoading, data: userData } = getUser();
-  console.log("userdata--->", userData);
   const dispatch = useDispatch();
   dispatch(addUser(userData?.data && userData?.data));
 

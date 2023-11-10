@@ -7,13 +7,13 @@ import Title from "./Components/Title";
 
 const LandingPage = () => {
   return (
-    <div className=" font-montserrat">
-      {/* <Navbar /> */}
+    <div className="overflow-x-hidden font-montserrat">
+      <Navbar />
       <Title />
       {/* <Features/> */}
       <Highlights />
-      <MarketingFuture/>
-      <Footer/>
+      <MarketingFuture />
+      <Footer />
     </div>
   );
 };

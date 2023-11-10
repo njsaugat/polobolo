@@ -29,6 +29,9 @@ interface TextAreaProps<SchemaType> {
 function calcHeight(value: string) {
   let numberOfLineBreaks = (value.match(/\n/g) || []).length;
   // min-height + lines x line-height + padding + border
+  if (numberOfLineBreaks > 7) {
+    return 200;
+  }
   let newHeight = 27 + numberOfLineBreaks * 20 + 12 + 2;
   return newHeight;
 }
@@ -53,7 +56,7 @@ const TextArea = forwardRef(
     ref: ForwardedRef<HTMLTextAreaElement>
   ) => {
     return (
-      <div className="z-50 mb-4 transition-all duration-300 md:mr-2">
+      <div className="z-50 w-11/12 mb-4 transition-all duration-300 md:mr-2">
         <label
           className="block mb-2 text-sm font-bold text-gray-700"
           htmlFor={name}
