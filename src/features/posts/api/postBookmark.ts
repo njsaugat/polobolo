@@ -11,7 +11,6 @@ const postBookmark = (postId: string | undefined) => {
     return axios.post(`/social-media/bookmarks/${postId}`);
   };
   return useMutation({
-    // mutationKey: ["user"],
     mutationFn: postData,
     onError: () => {},
     onSuccess: (response) => {

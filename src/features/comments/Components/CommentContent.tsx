@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 type CommentContentProps = {
   content: string;
-  //   maxLength: number;
 };
 
 function getMaxLength(windowSize: number) {

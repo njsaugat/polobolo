@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../../components/Form/InputField";
 import { Button } from "../../../components/Elements/Button";
 import useLoginUser from "../api/loginUser";
-import { LocalStorage } from "../../../utils/index";
 import { useEffect } from "react";
 import useAuthCheck from "../../../hooks/useAuthCheck";
 import { useSelector } from "react-redux";
@@ -16,7 +15,6 @@ import { RootState } from "stores/store";
 
 const Login = () => {
   const navigate = useNavigate();
-  //this authCheck is a bad approach
   const isLoggedIn = useAuthCheck();
   const isInitialLogin = useSelector<RootState, boolean>(
     (store) => store.user.isInitialLogin
@@ -40,7 +38,7 @@ const Login = () => {
     resolver: zodResolver(loginValidationSchema),
   });
   const handleInputChange = async (field: keyof LoginValidationSchema) => {
-    await trigger(field); // Trigger validation for the specified field
+    await trigger(field);
   };
 
   const { mutate, error, isLoading } = useLoginUser();

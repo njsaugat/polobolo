@@ -36,7 +36,6 @@ export default function DragAndDrop({
   function handleChange(e: any) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      // addURLs(e.target.files);
       for (let i = 0; i < e.target.files["length"]; i++) {
         setFiles((prevState: any) => [...prevState, e.target.files[i]]);
       }
@@ -50,7 +49,6 @@ export default function DragAndDrop({
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      // addURLs(e.dataTransfer.files);
       for (let i = 0; i < e.dataTransfer.files["length"]; i++) {
         setFiles((prevState: any) => [...prevState, e.dataTransfer.files[i]]);
       }
@@ -76,7 +74,6 @@ export default function DragAndDrop({
   }
 
   function removeFileURL(url: string, idx: number) {
-    // removeFile(idx);
     return setFileDataURLs((prevURLs) =>
       prevURLs.filter((prevURL, index) => {
         if (index !== idx) {

@@ -32,16 +32,14 @@ const EditGroupPostName = ({
     resolver: zodResolver(commentValidationSchema),
   });
   const handleInputChange = async (field: keyof CommentValidationSchema) => {
-    await trigger(field); // Trigger validation for the specified field
+    await trigger(field);
   };
   const { mutate, error } = updateGroupChatName();
 
   useEffect(() => {
     setValue("content", groupName);
   }, []);
-  const onSubmit: SubmitHandler<CommentValidationSchema> = (data) => {
-    console.log({ chatId, groupName: data.content });
-  };
+  const onSubmit: SubmitHandler<CommentValidationSchema> = (data) => {};
 
   return (
     <>

@@ -24,7 +24,6 @@ import { UserContext } from "../../posts/context/UserContext";
 
 const postComment = (postId: string, commentId?: string) => {
   const { page, refetch } = useContext(PostRefetchContext);
-  // const { refetch: refetchComment } = useContext(CommentRefetchContext);
   const { user } = useContext(UserContext);
   const refetchComment = useSelector<RootState, Refetch>(
     (store) => store.refetch.refetch
@@ -66,7 +65,6 @@ const postComment = (postId: string, commentId?: string) => {
                     }
                     return eachComment;
                   }),
-                  // page.data.comments.push(),
                 },
               };
             }
@@ -131,7 +129,6 @@ const postComment = (postId: string, commentId?: string) => {
                       },
                       ...page.data.comments,
                     ],
-                  // page.data.comments.push(),
                 },
               };
             }
@@ -146,7 +143,6 @@ const postComment = (postId: string, commentId?: string) => {
     },
     onSuccess: (response, varaibles, context) => {
       const { dispatch } = store;
-      // console.log
       const pageNumber = context?.pageNumber;
 
       dispatch(

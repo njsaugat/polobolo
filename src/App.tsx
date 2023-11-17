@@ -10,10 +10,8 @@ import getUser from "./features/user/api/getUser";
 import { LocalStorage } from "./utils";
 import useAuthCheck from "./hooks/useAuthCheck";
 
+const MemoNavbar = React.memo(Navbar);
 const App = () => {
-  // const accessToken = LocalStorage.get("accessToken");
-  // if (accessToken) {
-  // }
   const loggedIn = useAuthCheck();
   if (!loggedIn) {
     return (
@@ -29,12 +27,8 @@ const App = () => {
   return (
     <UserContext.Provider value={{ user: userData?.data }}>
       <div className="min-w-full overflow-x-hidden font-montserrat">
-        {/* <LandingPage/> */}
-        <Navbar />
+        <MemoNavbar />
         <Outlet />
-        {/* <div className="flex flex-col h-full text-5xl ">
-        Main
-      </div> */}
       </div>
     </UserContext.Provider>
   );

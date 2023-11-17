@@ -39,7 +39,6 @@ const checkIfDetailsEmpty = (firstname: string, lastname: string) => {
     return false;
   }
   return true;
-  // if(firstname && lastname && firstname)
 };
 const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
   const {
@@ -53,7 +52,7 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
     resolver: zodResolver(settingsValidationSchema),
   });
   const handleInputChange = async (field: keyof SettingsValidationSchema) => {
-    await trigger(field); // Trigger validation for the specified field
+    await trigger(field);
   };
   const loggedInUser = useSelector<RootState, Author | undefined>(
     (store) => store.user.user

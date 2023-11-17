@@ -16,7 +16,6 @@ const updateProfile = (isOnboarding: boolean = false) => {
   };
 
   return useMutation({
-    // mutationKey: ["user"],
     mutationFn: postData,
     onError: () => {},
     onSuccess: (response) => {

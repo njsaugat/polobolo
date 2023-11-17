@@ -20,9 +20,6 @@ const useLogoutUser = () => {
         queryClient.removeQueries(["auth-user"]);
         const { dispatch } = store;
         dispatch(handleLogoutUser());
-        // setTimeout(() => {
-        //   navigate("/");
-        // }, 500);
         setTimeout(() => {
           <Navigate to={"/"} />;
         }, 500);

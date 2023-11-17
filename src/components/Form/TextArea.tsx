@@ -28,7 +28,6 @@ interface TextAreaProps<SchemaType> {
 }
 function calcHeight(value: string) {
   let numberOfLineBreaks = (value.match(/\n/g) || []).length;
-  // min-height + lines x line-height + padding + border
   if (numberOfLineBreaks > 7) {
     return 200;
   }
@@ -51,8 +50,7 @@ const TextArea = forwardRef(
       onKeyUp,
       disabled,
       defaultValue,
-    }: // handlePostComment,
-    TextAreaProps<SchemaType>,
+    }: TextAreaProps<SchemaType>,
     ref: ForwardedRef<HTMLTextAreaElement>
   ) => {
     return (
@@ -69,7 +67,6 @@ const TextArea = forwardRef(
             control={control}
             render={({ field }) => (
               <textarea
-                // contentEditable
                 {...field}
                 id={name}
                 ref={ref}

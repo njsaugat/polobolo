@@ -88,7 +88,6 @@ export interface Pagination {
 
 export interface PostCardProps {
   post: Post;
-  // page: number;
 }
 export interface PostCardProp {
   post: Post;
@@ -102,7 +101,7 @@ export interface Comment {
   _id: string;
   content: string;
   postId: string;
-  author: Author; // You need to define Author type separately
+  author: Author;
   __v: number;
   createdAt: string;
   updatedAt: string;
@@ -144,8 +143,8 @@ export interface ChatMessage {
   _id: string;
   sender: Account;
   content: string;
-  attachments: any[]; // Define the actual type for attachments if needed
-  chat: string; // Assuming chat is the ID of the chat conversation
+  attachments: any[];
+  chat: string;
   createdAt: string;
   updatedAt: string;
   __v: number;

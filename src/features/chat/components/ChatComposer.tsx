@@ -27,13 +27,10 @@ type ChatComposerProps = {
 };
 const ChatComposer = ({ addCurrentMessage }: ChatComposerProps) => {
   const { chatId } = useParams();
-
-  const [isSelfTyping, setIsSelfTyping] = useState(true);
   const inactivityTimeoutRef = useRef<number>();
   const inactiveThreshold = 5000;
   const {
     control,
-    register,
     trigger,
     handleSubmit,
     setValue,
@@ -48,7 +45,6 @@ const ChatComposer = ({ addCurrentMessage }: ChatComposerProps) => {
     field: keyof ChatMessageValidationSchema
   ) => {
     socket?.emit(TYPING_EVENT, chatId);
-    // if(e.key)
     if (inactivityTimeoutRef.current) {
       clearTimeout(inactivityTimeoutRef?.current);
     }
@@ -56,9 +52,6 @@ const ChatComposer = ({ addCurrentMessage }: ChatComposerProps) => {
       socket?.emit(STOP_TYPING_EVENT, chatId);
     }, inactiveThreshold);
 
-    // if()
-    // socket?.emit(TYPING_EVENT, chatId);
-    // setTimeout()
     await trigger(field);
   };
 
@@ -93,11 +86,7 @@ const ChatComposer = ({ addCurrentMessage }: ChatComposerProps) => {
           variant="inverse"
           isLoading={isLoading}
           className="absolute border-none rounded-full cursor-pointer top-2 h-11/12 right-2 bg-gradient-to-l from-white to-transparent "
-          onClick={(e) => {
-            // handleComment(commentRef);
-            // handleShowComments();
-            // handleRefetch();
-          }}
+          onClick={(e) => {}}
         >
           <FontAwesomeIcon
             icon={faPaperPlane}
@@ -105,7 +94,6 @@ const ChatComposer = ({ addCurrentMessage }: ChatComposerProps) => {
           />
         </Button>
       </TextArea>
-      {/* <h1>hel</h1> */}
     </form>
   );
 };

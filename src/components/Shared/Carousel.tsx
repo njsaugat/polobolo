@@ -1,5 +1,8 @@
 import React from "react";
-import { PostCardProp, PostCardProps } from "../../features/posts/types/postType";
+import {
+  PostCardProp,
+  PostCardProps,
+} from "../../features/posts/types/postType";
 import LoadImage from "../Elements/LoadImage";
 
 type CarouselProps = {
@@ -19,7 +22,6 @@ const Carousel = ({
         <div className="carousel-inner">
           {post.images.map((image, index) => (
             <div
-              // key={index}
               key={image._id}
               className={`carousel-slide h-[24rem] md:h-[36rem] lg:h-[54rem] transition-all duration-200  ${
                 index === currentIndex ? "block" : "hidden"
@@ -29,7 +31,6 @@ const Carousel = ({
                 src={image.url}
                 alt={`Image ${index + 1}`}
                 className="object-contain w-full h-full"
-                // loading="lazy"
               />
             </div>
           ))}

@@ -16,7 +16,6 @@ const postFollow = (toBeFollowedUserId: string | undefined) => {
     return axios.post(`/social-media/follow/${toBeFollowedUserId}`);
   };
   return useMutation({
-    // mutationKey: ["user"],
     mutationFn: postFollowData,
     onError: () => {},
     onSuccess: (response) => {

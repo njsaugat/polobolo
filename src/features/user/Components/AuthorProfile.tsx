@@ -33,7 +33,6 @@ const AuthorProfile = ({
         closeModal && closeModal();
         createChat && createChat();
       }}
-      // className={`${isChat && "border w-full"}`}
     >
       <AuthorProfileChildren
         firstName={firstName}

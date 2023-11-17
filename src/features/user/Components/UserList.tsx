@@ -14,7 +14,6 @@ import Follow from "./Follow";
 type UserListProps = {
   isOpen: boolean;
   closeModal: () => void;
-  //   data: any;
   followers: boolean;
 };
 const UserList = ({ isOpen, closeModal, followers }: UserListProps) => {

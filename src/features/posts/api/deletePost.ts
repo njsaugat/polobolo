@@ -14,7 +14,6 @@ const deletePost = (postId: string | undefined) => {
     return axios.delete(`/social-media/posts/${postId}`, config);
   };
   return useMutation({
-    // mutationKey: ["user"],
     mutationFn: deleteData,
     onError: () => {},
     onSuccess: (response) => {

@@ -19,7 +19,6 @@ const createPost = (postId: string | undefined) => {
     return axios.post("/social-media/posts", formData, config);
   };
   return useMutation({
-    // mutationKey: ["user"],
     mutationFn: postData,
     onError: () => {},
     onSuccess: (response) => {

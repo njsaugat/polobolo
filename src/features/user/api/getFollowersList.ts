@@ -20,7 +20,6 @@ const getFollowersList = (followers: boolean) => {
   };
   return useInfiniteQuery({
     queryKey: [followers ? "followers" : "following", username],
-    // queryFn: getUserProfile,
     queryFn: ({ pageParam = 1 }) => getUserProfile(pageParam),
     getNextPageParam: (lastFollower, allFollowers) => {
       if (
@@ -37,7 +36,6 @@ const getFollowersList = (followers: boolean) => {
       }
       return null;
     },
-    // staleTime: 60 * 60 * 1000,
   });
 };
 

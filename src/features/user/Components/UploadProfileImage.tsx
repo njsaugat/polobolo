@@ -54,7 +54,6 @@ const UploadProfileImage = ({
         <form
           className="flex flex-col"
           onSubmit={(e) => {
-            // e.preventDefault();
             handleSubmit(e);
           }}
         >
@@ -71,7 +70,6 @@ const UploadProfileImage = ({
               fileDataURLs.length < 1 ? "cursor-not-allowed" : ""
             } self-center mt-4 mb-2 border-none`}
             type="submit"
-            // onClick={(e) => handleSubmit(e)}
           >
             ☁️ Upload
           </Button>

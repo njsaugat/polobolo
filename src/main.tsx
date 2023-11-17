@@ -18,6 +18,8 @@ import AnimatedPage from "./components/Shared/AnimatedPage";
 type RootAppProviderProps = {
   children: React.ReactNode;
 };
+const queryClient = new QueryClient();
+
 const RootApp = ({ children }: RootAppProviderProps) => (
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
@@ -30,7 +32,6 @@ const RootApp = ({ children }: RootAppProviderProps) => (
     </QueryClientProvider>
   </Provider>
 );
-const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <RootApp>{/* <AppRoutes /> */}</RootApp>
 );

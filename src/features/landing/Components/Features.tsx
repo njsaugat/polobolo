@@ -16,7 +16,7 @@ const FeatureItem: React.FC<featureProps> = ({
   setSelectedListItem,
 }) => {
   return (
-    <div className="flex w-full px-28 items-end justify-between">
+    <div className="flex items-end justify-between w-full px-28">
       <div
         className={` flex px-8 py-8 w-1/2 gap-x-10 items-center cursor-pointer text-slate-400 rounded-2xl  ${
           selectedListItem === feature.id &&
@@ -24,18 +24,18 @@ const FeatureItem: React.FC<featureProps> = ({
         }`}
         onClick={() => setSelectedListItem(feature.id)}
       >
-        <div className="bg-slate-400 rounded-full text-white w-8 h-8 flex justify-center items-center">
+        <div className="flex items-center justify-center w-8 h-8 text-white rounded-full bg-slate-400">
           {feature.id}
         </div>
         <div>
           <div className="text-xl font-bold">{feature.title}</div>
-          <div className="text-sm my-3 tracking-wider">
+          <div className="my-3 text-sm tracking-wider">
             {feature.description}
           </div>
         </div>
       </div>
       {selectedListItem === feature.id && (
-        <div className="w-1/2 absolute -right-1/4 -bottom-3/4   ">
+        <div className="absolute w-1/2 -right-1/4 -bottom-3/4 ">
           <img className="full md:w-1/3" src={feature.imageLink} />
         </div>
       )}
@@ -43,7 +43,6 @@ const FeatureItem: React.FC<featureProps> = ({
   );
 };
 
-// const
 const Features = () => {
   const [selectedBrandInfluencer, setSelectedBrandInfluencer] =
     useState<brandInfluencer>("brand");
@@ -56,11 +55,11 @@ const Features = () => {
     }
   };
   return (
-    <div className="flex flex-col w-full items-center mb-44">
-      <h1 className="text-4xl mt-28 mb-10 font-bold text-center tracking-wider">
+    <div className="flex flex-col items-center w-full mb-44">
+      <h1 className="mb-10 text-4xl font-bold tracking-wider text-center mt-28">
         Data driven influencer marketing campaigns
       </h1>
-      <div className="rounded-3xl border-2 border-orange-theme my-20 flex justify-center items-center   w-48 h-10 ">
+      <div className="flex items-center justify-center w-48 h-10 my-20 border-2 rounded-3xl border-orange-theme ">
         <div
           className={`text-orange-theme  ${
             selectedBrandInfluencer === "brand" &&

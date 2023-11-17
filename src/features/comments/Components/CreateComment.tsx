@@ -74,7 +74,6 @@ const CreateComment = ({
         defaultValue={comment ? comment.content : ""}
         onKeyDown={handleInputChange}
         className="border shadow-lg rounded-2xl"
-        // handlePostComment={handlePostComment}
       >
         <Button
           type="submit"
@@ -83,7 +82,6 @@ const CreateComment = ({
           isLoading={isLoading}
           className="absolute border-none rounded-full cursor-pointer top-2 h-11/12 right-2 bg-gradient-to-l from-white to-transparent "
           onClick={(e) => {
-            // handleComment(commentRef);
             handleShowComments();
             handleRefetch();
           }}

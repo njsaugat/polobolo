@@ -67,7 +67,6 @@ export default function NavbarMenu({ username }: NavbarMenuProps) {
                           ? "bg-gradient-to-r from-teal-200 to-teal-400  text-slate-700"
                           : "text-gray-900"
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm `}
-                      //   onClick={openEditModal}
                     >
                       {link.icon} &nbsp;
                       <span className={` text-xs `}>{link.text}</span>

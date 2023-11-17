@@ -88,7 +88,6 @@ const Posts = ({ tag, bookmarks }: PostsProps) => {
                     refetch,
                     page: page.data.page,
                     postId: post._id,
-                    // user: userData?.data,
                   }}
                   key={post._id}
                 >
@@ -103,7 +102,6 @@ const Posts = ({ tag, bookmarks }: PostsProps) => {
                   refetch,
                   page: page.data.page,
                   postId: post._id,
-                  // user: userData?.data,
                 }}
                 key={post._id}
               >

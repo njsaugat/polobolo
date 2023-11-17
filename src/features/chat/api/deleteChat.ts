@@ -46,7 +46,6 @@ const deleteChat = () => {
     return axios.delete<ResponseType<{}>>(`/chat-app/chats/remove/${chatId}`);
   };
   return useMutation({
-    // mutationKey: ["user"],
     mutationFn: deleteChatData,
     onMutate: (variables) => {
       const previousChats = queryClient.getQueryData(["chats"]);

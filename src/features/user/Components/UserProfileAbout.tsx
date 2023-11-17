@@ -1,20 +1,7 @@
 import { useParams } from "react-router-dom";
-import {
-  FollowerProfile,
-  UserProfile,
-} from "../../posts/types/postType";
 import React, { useState } from "react";
 import getUserByUsername from "../api/getUserByUsername";
-import getFollowersList from "../api/getFollowersList";
-import { Dialog } from "../../../components/Elements/Dialog";
-import PostAuthor from "features/posts/Components/PostAuthor";
-import AuthorProfile from "./AuthorProfile";
 import UserList from "./UserList";
-import { Button } from "../../../components/Elements/Button";
-
-// type UserProfileAboutProps = {
-//   user: UserProfile;
-// };
 
 function formatDateStringToBirthday(dateString: string) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -34,7 +21,6 @@ const UserProfileAbout = () => {
   return (
     <div className="flex flex-col lg:w-3/4 ">
       <div className="py-3 md:px-9 ">
-        {/* Additional User Information */}
         <div className="flex justify-between mt-4 mb-5">
           <div
             onClick={() =>
@@ -88,14 +74,11 @@ const UserProfileAbout = () => {
             📞
           </p>
         </div>
-
-        {/* Follower and Following Counts */}
       </div>
       {isFollowersOpen && (
         <UserList
           isOpen={isFollowersOpen}
           closeModal={() => setIsFollowersOpen(false)}
-          // data={followersData}
           followers={true}
         />
       )}
@@ -104,7 +87,6 @@ const UserProfileAbout = () => {
         <UserList
           isOpen={isFollowingOpen}
           closeModal={() => setIsFollowingOpen(false)}
-          // data={followingsData}
           followers={false}
         />
       )}

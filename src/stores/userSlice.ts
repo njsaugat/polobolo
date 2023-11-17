@@ -46,6 +46,4 @@ export const {
   handleEmailVerification,
   handleInitialLogin,
 } = userSlice.actions;
-// export const notificationSelector = (state: RootState) =>
-//   state.notification.notificationReducer;
 export default userSlice.reducer;

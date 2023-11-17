@@ -4,26 +4,22 @@ import { LocalStorage } from "../utils";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
 import { Author } from "features/posts/types/postType";
+import { QueryClient } from "@tanstack/react-query";
 
 const useAuthCheck = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // useEffect(() => {
-  //   const accessToken = LocalStorage.get("accessToken");
-
-  //   if (accessToken) {
-  //     setIsLoggedIn(true);
-  //     //   navigate("/home");
-  //   } else {
-  //     setIsLoggedIn(false);
-  //   }
-  // }, []);
-  // return isLoggedIn;
-  // const accessToken = LocalStorage.get("accessToken");
-  const isLoggedIn = useSelector<RootState, boolean>(
-    (store) => store.user.isLoggedIn
-  );
+  let isLoggedIn;
+  const queryClient = new QueryClient();
+  const user = queryClient.getQueryData(["user"]);
+  console.log(user);
+  if (user) {
+    isLoggedIn = true;
+    console.log("here logged in");
+  } else {
+    isLoggedIn = useSelector<RootState, boolean>(
+      (store) => store.user.isLoggedIn
+    );
+  }
   const accessToken = LocalStorage.get("accessToken");
-
   if (isLoggedIn || accessToken) {
     return true;
   }

@@ -5,10 +5,6 @@ import { Author } from "../types/postType";
 import Avatar from "../../user/Components/Avatar";
 import CreatePost from "./CreatePost";
 
-// type CreatePostDisplayProps={
-//   // children:ReactNode;
-//   openModal:()=>void;
-// }
 
 const CreatePostDisplay = () => {
   const [isOpen, setIsOpen] = useState(false);

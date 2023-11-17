@@ -61,12 +61,9 @@ const ChatSection = () => {
   };
 
   useEffect(() => {
-    // if (!socket) return;
-    // socket?.on()
     socket?.on(TYPING_EVENT, handleOnSocketTyping);
     socket?.on(STOP_TYPING_EVENT, handleOnSocketStopTyping);
     socket?.on(MESSAGE_RECEIVED_EVENT, onMessageReceived);
-    // socket?.emit(CONNECTED_EVENT, chatId);
 
     return () => {
       socket?.off(MESSAGE_RECEIVED_EVENT, onMessageReceived);

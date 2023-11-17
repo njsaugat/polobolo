@@ -10,7 +10,6 @@ const getComments = (postId: string, showComments: boolean) => {
   const limit = 5;
   const getComments = (pageParam: number) => {
     const params = { page: pageParam, limit };
-    // queryClient.invalidateQueries(["comments", postId]);
     return axios.get(`/social-media/comments/post/${postId}`, {
       params: params,
     });

@@ -28,7 +28,6 @@ const useLoginUser = () => {
     return axios.post("/users/login", loginData);
   };
   return useMutation({
-    // mutationKey: ["user"],
     mutationFn: loginUser,
     onSuccess: (response) => {
       const { accessToken } = response.data;
@@ -62,22 +61,7 @@ const useLoginUser = () => {
               })
             );
           }, 1000);
-          // return navigate("/onboarding");
         }
-        // setTimeout(() => {
-        //   if (!isEmailVerified) {
-        //     dispatch(
-        //       addNotification({
-        //         type: "info",
-        //         title: "Caution",
-        //         message: "Verify your email address or modify it here. 🔒",
-        //       })
-        //     );
-        //     return navigate("/onboarding");
-        //   } else {
-        //     navigate("/home");
-        //   }
-        // }, 500);
       }
     },
   });

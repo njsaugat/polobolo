@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import LoadImage from "../../../components/Elements/LoadImage";
 import moment from "moment";
@@ -36,7 +35,6 @@ const ChatAuthorProfile = ({
 }: ChatAuthorProfileProps) => {
   return (
     <>
-      {/* <Link to={`/user/${username}`} onClick={closeModal}> */}
       <div
         className={`flex  ${
           isChatSection && isUserSender && "flex-row-reverse "

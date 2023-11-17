@@ -12,24 +12,19 @@ import Home from "../features/posts/Components/Posts";
 import LandingPage from "../features/landing/LandingPage";
 import UserProfile from "../features/user/Components/UserProfile";
 import UserProfileAbout from "../features/user/Components/UserProfileAbout";
-import UserPosts from "../features/user/Components/UserPosts";
 import Posts from "../features/posts/Components/Posts";
 import PostsByTag from "../features/posts/Components/PostsByTag";
 import Bookmarks from "../features/posts/Components/BookmarkedPosts";
 import Settings from "../features/user/Components/Settings";
 import useAuthCheck from "../hooks/useAuthCheck";
 import UserDetails from "../features/user/Components/UserDetails";
-import AnimatedPage from "components/Shared/AnimatedPage";
 import Chat from "../features/chat/components/Chat";
 import ChatSection from "../features/chat/components/ChatSection";
 
 export const AppRoutes = () => {
   const loggedIn = useAuthCheck();
 
-  // const commonRoutes = [];
-
   const routes = loggedIn ? protectedRoutes : publicRoutes;
-  // const element = useRoutes([...routes, ...commonRoutes]);
 
   const router = createBrowserRouter([...routes]);
 
@@ -81,12 +76,8 @@ const protectedRoutes = [
     element: <App />,
     errorElement: <ErrorElement />,
     children: [
-      // {
-      //   path: "/",
-      //   element: <LandingPage />,
-      // },
       {
-        index: true, // Use the index property to specify the default route
+        index: true,
         element: <Home />,
       },
       {
@@ -105,12 +96,6 @@ const protectedRoutes = [
       {
         path: "/home",
         element: <Posts />,
-        // children: [
-        //   {
-        //     path: "",
-        //     element: <Posts />,
-        //   },
-        // ],
       },
       {
         path: "posts/tags/:tag",
@@ -145,5 +130,3 @@ const protectedRoutes = [
     ],
   },
 ];
-
-// export default appRouter;

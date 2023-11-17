@@ -12,7 +12,6 @@ import { Button } from "../../../components/Elements/Button";
 import useAuthCheck from "../../../hooks/useAuthCheck";
 
 const Signup = () => {
-  // useAuthCheck();
   const navigate = useNavigate();
   const isLoggedIn = useAuthCheck();
   if (isLoggedIn) {
@@ -28,7 +27,7 @@ const Signup = () => {
     resolver: zodResolver(signupValidationSchema),
   });
   const handleInputChange = async (field: keyof SignupValidationSchema) => {
-    await trigger(field); // Trigger validation for the specified field
+    await trigger(field);
   };
   const { mutate, error, isLoading } = useRegisterUser();
   const onSubmit: SubmitHandler<SignupValidationSchema> = (data) => {

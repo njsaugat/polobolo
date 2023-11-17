@@ -12,17 +12,18 @@ import useAuthCheck from "../../../hooks/useAuthCheck";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 import AvailableUsers from "../../../features/chat/components/AvailableUsers";
-import React from "react";
+import React, { useState } from "react";
 
-// const MemoAvailableUsers = React.memo(AvailableUsers);
 const Navbar = () => {
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
+  const [isSearching, setIsSearching] = useState(false);
   const isLoggedIn = useAuthCheck();
   const isScreenSmall = useScreenSize(765);
+  console.log("rendered");
   return (
-    <div className="flex items-center justify-between w-screen mt-3 mb-10 overflow-x-hidden md:mx-28">
+    <div className="flex items-center justify-between w-screen mt-3 mb-10 overflow-hidden md:mx-28">
       <ul className="flex items-center justify-start md:w-2/3 lg:w-1/3 md:justify-between">
         {/* {isScreenSmall ? <Logo content={"Pb"} className="w-16" /> : <Logo />} */}
         <Logo />
@@ -36,7 +37,11 @@ const Navbar = () => {
       {/* <input className={`${inputFieldStyle} rounded-full lg:w-1/2`} /> */}
       {!isScreenSmall && isLoggedIn && user && (
         <div className="w-1/3">
-          <AvailableUsers isChat={false} />
+          {/* <AvailableUsers
+            isChat={false}
+            setIsSearching={setIsSearching}
+            isSearching={isSearching}
+          /> */}
           {/* <MemoAvailableUsers isChat={false} /> */}
         </div>
       )}
@@ -79,7 +84,6 @@ const Navbar = () => {
             </>
           </>
         ) : (
-          // </Link>
           <>
             <Link to="/login">
               <Button className="p-3 mx-3 font-bold bg-gradient-to-r from-teal-50 to-slate-100">

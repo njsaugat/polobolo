@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { z } from "zod";
 import getAllUsers from "../api/getAllUser";
 import { Combobox, Menu, Transition } from "@headlessui/react";
 import AuthorProfile from "../../../features/user/Components/AuthorProfile";
@@ -21,11 +20,16 @@ const ShimmerAvatars = () =>
   new Array(6)
     .fill(1)
     .map((profile, index) => <ShimmerAvatar key={profile + index} />);
-let count = 0;
-const AvailableUsers = ({ isChat }: { isChat: boolean }) => {
-  if (isChat) {
-    console.log("available users", count++);
-  }
+type AvailableUsersProps = {
+  isChat: boolean;
+  buttonRef?: React.RefObject<HTMLButtonElement>;
+  addParticipant?: (participantId: string) => void;
+};
+const AvailableUsers = ({
+  isChat,
+  buttonRef,
+  addParticipant,
+}: AvailableUsersProps) => {
   const queryClient = useQueryClient();
   const [isSearching, setIsSearching] = useState(
     queryClient.getQueriesData(["chats", "users"])?.length > 0 ? true : false
@@ -34,15 +38,12 @@ const AvailableUsers = ({ isChat }: { isChat: boolean }) => {
   const [query, setQuery] = useState("");
   const [isGroupChatEnabled, setIsGroupChatEnabled] = useState(false);
   const [selected, setSelected] = useState<ChatUser | ChatUser[]>();
-  const [showUserOptions, setShowOptions] = useState(true);
-  console.log("selected", selected);
   const { mutate, error: createChatError } = createChat();
 
   const loggedInUser = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
   const handleClear = () => {
-    console.log("here");
     isGroupChatEnabled ? setSelected([]) : setSelected(undefined);
     setIsGroupChatEnabled(false);
     setQuery(" ");
@@ -62,13 +63,17 @@ const AvailableUsers = ({ isChat }: { isChat: boolean }) => {
   }
 
   useEffect(() => {
-    // setSelected(undefined);
+    if (buttonRef) {
+      buttonRef.current && buttonRef.current.click();
+    }
+  }, [buttonRef]);
+
+  useEffect(() => {
     if (isGroupChatEnabled) {
       setSelected([]);
     } else {
       setSelected(undefined);
     }
-    // setShowOptions(true);
   }, [isGroupChatEnabled]);
 
   return (
@@ -103,6 +108,7 @@ const AvailableUsers = ({ isChat }: { isChat: boolean }) => {
               <Combobox.Button
                 className="absolute inset-y-0 right-0 flex items-center pr-2"
                 onClick={() => (!isSearching ? setIsSearching(true) : null)}
+                ref={buttonRef}
               >
                 <ChevronDownIcon
                   className="w-5 h-5 text-gray-400"
@@ -155,7 +161,6 @@ const AvailableUsers = ({ isChat }: { isChat: boolean }) => {
                         >
                           {({ selected, active }) => (
                             <>
-                              {console.log("selected", selected)}
                               {
                                 <div
                                   onClick={
@@ -171,7 +176,9 @@ const AvailableUsers = ({ isChat }: { isChat: boolean }) => {
                                     lastName={""}
                                     bio={""}
                                     isChat={isChat}
-                                    isGroupChat={isGroupChatEnabled}
+                                    isGroupChat={
+                                      isGroupChatEnabled || !!addParticipant
+                                    }
                                     closeModal={
                                       !isGroupChatEnabled
                                         ? handleClear
@@ -185,17 +192,11 @@ const AvailableUsers = ({ isChat }: { isChat: boolean }) => {
                                               receiverIds: [user._id],
                                               name: user.username,
                                             })
+                                        : addParticipant
+                                        ? () => addParticipant(user._id)
                                         : () => {}
                                     }
                                   />
-                                  {/* {isGroupChatEnabled && (
-                                    <input
-                                      defaultChecked={selected}
-                                      type="checkbox"
-                                      name="radio_value"
-                                      multiple
-                                    />
-                                  )} */}
                                 </div>
                               }
                               {selected ? (
@@ -228,7 +229,6 @@ const AvailableUsers = ({ isChat }: { isChat: boolean }) => {
                 variant="blend"
                 className=""
                 onClick={() => {
-                  // setShowOptions(false);
                   setIsGroupChatEnabled(false);
                   mutate({
                     isGroup: true,
@@ -245,11 +245,10 @@ const AvailableUsers = ({ isChat }: { isChat: boolean }) => {
                         }, "")}`
                       : "",
                   });
-                  // setSelected(undefined);
                 }}
                 disabled={!(Array.isArray(selected) && selected?.length > 1)}
               >
-                Create Group
+                {"Create Group"}
               </Button>
             </div>
           </div>

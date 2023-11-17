@@ -33,8 +33,6 @@ const UploadImage = ({
       />
       {!fileDataURL.includes("http://") && hovered && (
         <Button
-          // onMouseEnter={() => setHovered(true)}
-          // onMouseLeave={() => setHovered(true)}
           variant="danger"
           size="xs"
           className="absolute z-50 w-8 h-8 translate-x-1/2 translate-y-1/2 rounded-full pointer-events-none right-1/2 bottom-1/2 hover:opacity-100 bg-gradient-to-r from-red-200 to-red-500"

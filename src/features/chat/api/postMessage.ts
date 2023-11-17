@@ -22,7 +22,6 @@ export const updateChatListLastMessage = (
   content: string,
   queryClient: QueryClient
 ) => {
-  // const queryClient = useQueryClient();
   queryClient.setQueryData<ResponseType<Chat[]>>(["chats"], (oldChatsList) => {
     if (!oldChatsList) return oldChatsList;
 
@@ -44,31 +43,6 @@ export const updateChatListLastMessage = (
   });
 };
 
-// export const updateChatMessage=(chatId:string|undefined)=>{
-//   const queryClient = useQueryClient();
-//   queryClient.setQueryData<ResponseType<ChatMessage[]>>(
-//     ["chats", "messages", chatId],
-//     (oldChats) => {
-//       if (!oldChats) return oldChats;
-//       let existingChatMessage = oldChats.data.find(
-//         (message) => message.sender._id === user?.account._id
-//       );
-//       let newChatMessage = {
-//         ...existingChatMessage,
-//         _id: nanoid(),
-//         content: formData.get("content"),
-//       };
-//       // newChatMessage.content = formData.get("content");
-//       const newChats = [newChatMessage, ...oldChats.data];
-
-//       return {
-//         ...oldChats,
-//         data: newChats,
-//       };
-//     }
-//   );
-// }
-
 const postMessage = (chatId: string | undefined) => {
   const queryClient = useQueryClient();
   const user = useSelector<RootState, Author | undefined>(
@@ -83,7 +57,6 @@ const postMessage = (chatId: string | undefined) => {
     return axios.post(`/chat-app/messages/${chatId}`, formData, config);
   };
   return useMutation({
-    // mutationKey: ["user"],
     mutationFn: postChatData,
     onMutate: async (formData) => {
       await queryClient.cancelQueries({
@@ -127,14 +100,6 @@ const postMessage = (chatId: string | undefined) => {
     },
     onSuccess: (response) => {
       queryClient.invalidateQueries(["chats", "messages", chatId]);
-      //   const { dispatch } = store;
-      //   dispatch(
-      //     addNotification({
-      //       type: "success",
-      //       title: "Success",
-      //       message: response?.message,
-      //     })
-      //   );
     },
   });
 };

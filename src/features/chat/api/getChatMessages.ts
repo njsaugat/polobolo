@@ -21,10 +21,6 @@ const getChatMessages = (chatId: string | undefined) => {
     staleTime: 1000 * 60 * 60,
     onSuccess: (data) => {
       socket?.emit(JOIN_CHAT_EVENT, chatId);
-
-      // if (data) {
-      //   data.data.reverse(); // Reverse the chat messages array
-      // }
     },
   });
 };

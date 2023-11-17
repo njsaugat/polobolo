@@ -74,7 +74,6 @@ const SingleComment = ({ comment }: CommentProps) => {
         )}
       </div>
       {comment.author._id === user?._id && (
-        // <div className="translate-y-3">
         <>
           <EditDeleteMenu
             openEditModal={() => setIsOpenCommentEdit(true)}

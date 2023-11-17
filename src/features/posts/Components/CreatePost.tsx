@@ -77,7 +77,6 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
         setTags((prevTags) => {
           return [...prevTags, tagRef?.current?.value || ""];
         });
-        // tagRef.current.value = "";
       }
     }
   }
@@ -101,7 +100,6 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
     }
   }, [tags]);
   const onSubmit: SubmitHandler<CreatePostValidationSchema> = (data) => {
-    // mutate(data);
     const formData = new FormData();
 
     fileDataURLs
@@ -170,7 +168,6 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
             <Controller
               name="content"
               control={control}
-              // shouldUnregister={!!post?.content}
               rules={validationRules}
               render={({ field }) => (
                 <textarea

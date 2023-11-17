@@ -4,12 +4,14 @@ import {
   faInfo,
   faSignOut,
   faTrash,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 type EditDeleteMenuProps = {
+  openAddParticipantModal?: () => void;
   openInfoModal?: () => void;
   openLeaveModal?: () => void;
   openEditModal: () => void;
@@ -20,8 +22,10 @@ type EditDeleteMenuProps = {
   isNotDelete?: boolean;
   showGroupInfo?: boolean;
   isGroupLeaveOption?: boolean;
+  isGroupAdmin?: boolean;
 };
 export default function EditDeleteMenu({
+  openAddParticipantModal,
   openInfoModal,
   openLeaveModal,
   openEditModal,
@@ -32,6 +36,7 @@ export default function EditDeleteMenu({
   isNotDelete,
   showGroupInfo,
   isGroupLeaveOption,
+  isGroupAdmin,
 }: EditDeleteMenuProps) {
   return (
     <Menu
@@ -54,7 +59,6 @@ export default function EditDeleteMenu({
                 className ? "text-slate-500" : "text-slate-700"
               }`}
               icon={faEllipsis}
-              // onClick={}
             />
           )}
         </Menu.Button>
@@ -77,6 +81,32 @@ export default function EditDeleteMenu({
           }  h-auto origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
         >
           <div className="px-1 py-1 ">
+            {showGroupInfo && isGroupAdmin ? (
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${
+                      active
+                        ? "bg-gradient-to-r from-teal-200 to-teal-400  text-slate-700"
+                        : "text-gray-900"
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    onClick={openAddParticipantModal}
+                  >
+                    {/* <EditActiveIcon /> */}
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className={`pr-2  ${
+                        active ? " text-slate-700" : "text-gray-900"
+                      }`}
+                    />
+                    <span className={`${className ? "text-xs" : ""} `}>
+                      Add User
+                    </span>
+                    {/* {className ? "" : "Edit"} */}
+                  </button>
+                )}
+              </Menu.Item>
+            ) : null}
             {showGroupInfo ? (
               <Menu.Item>
                 {({ active }) => (

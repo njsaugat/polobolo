@@ -107,7 +107,6 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
         />
       </div>
       {showComments && (
-        //  :
         <>
           <hr />
           <div
@@ -143,7 +142,6 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
                       value={{
                         refetch,
                         page: page.data.page,
-                        // handleShowComments: handleShowComments,
                       }}
                     >
                       {pageIndex === 0 &&

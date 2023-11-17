@@ -14,12 +14,13 @@ const ErrorElement = () => {
       <p className="text-slate-400">
         <i>
           {isRouteErrorResponse(error)
-            ? // note that error is type `ErrorResponse`
-              error.error?.message || error.statusText
+            ? error.error?.message || error.statusText
             : "Unknown error message"}
         </i>
       </p>
-      <Link to={"/"} className="underline">Return Home</Link>
+      <Link to={"/"} className="underline">
+        Return Home
+      </Link>
     </div>
   );
 };

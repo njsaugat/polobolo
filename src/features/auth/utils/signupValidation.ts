@@ -25,7 +25,6 @@ export const signupValidationSchema = z
     terms: z.literal(true, {
       errorMap: () => ({ message: "You must accept Terms and Conditions" }),
     }),
-    // loginPassword: z.string().min(1, { message: "Password is required" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],

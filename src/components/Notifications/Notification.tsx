@@ -7,7 +7,6 @@ import {
 } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 import { Fragment, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Notification } from "stores/notificationSlice";
 
 const icons = {
@@ -45,7 +44,6 @@ export const SingleNotification = ({
   notification: { id, type, title, message },
   onDismiss,
 }: NotificationProps) => {
-  // const dispatch=useDispatch();
   useEffect(() => {
     let interval = setTimeout(() => {
       onDismiss();

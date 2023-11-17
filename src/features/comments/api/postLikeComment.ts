@@ -12,11 +12,7 @@ import { CommentRefetchContext } from "../../posts/context/CommentContext";
 import { addNotification } from "../../../stores/notificationSlice";
 import store from "../../../stores/store";
 
-const postLikeComment = (
-  commentId: string,
-  isLiked: boolean
-  // postId: string
-) => {
+const postLikeComment = (commentId: string, isLiked: boolean) => {
   const { postId } = useContext(PostRefetchContext);
   const { refetch, page } = useContext(CommentRefetchContext);
 
@@ -66,7 +62,6 @@ const postLikeComment = (
       queryClient.setQueryData(["comments", postId], context.previousLikes);
     },
     onSuccess: (response) => {
-      // queryClient.setQueryData(["comments",postId])
       const { message } = response;
       const { dispatch } = store;
 

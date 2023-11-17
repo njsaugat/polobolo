@@ -30,7 +30,6 @@ const deleteComment = (commentId: string | undefined, postId: string) => {
   };
 
   return useMutation({
-    // mutationKey: ["user"],
     mutationFn: deleteData,
     onMutate: async () => {
       let pageNumber = 0;
@@ -95,7 +94,6 @@ const deleteComment = (commentId: string | undefined, postId: string) => {
     },
     onError: () => {},
     onSuccess: (response, varaibles, context) => {
-      //   queryClient.invalidateQueries(["posts"]);
       const pageNumber = context?.pageNumber;
 
       const { dispatch } = store;

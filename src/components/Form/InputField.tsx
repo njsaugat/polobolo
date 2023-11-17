@@ -20,7 +20,6 @@ interface InputFieldProps<SchemaType> {
   onKeyUp?: (e: any) => void;
   type: string;
   onKeyDown: (field: keyof SchemaType) => void;
-  //   onKeyUp: (field: keyof LoginValidationSchema) => void;
   className?: string;
   children?: React.ReactNode;
   defaultValue?: string;
@@ -42,8 +41,7 @@ const InputField = forwardRef(
       onKeyUp,
       disabled,
       defaultValue,
-    }: // handlePostComment,
-    InputFieldProps<SchemaType>,
+    }: InputFieldProps<SchemaType>,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const [isEyeShown, setIsEyeShown] = useState(false);
@@ -98,7 +96,6 @@ const InputField = forwardRef(
           </p>
         )}
       </div>
-      //   </div>
     );
   }
 );

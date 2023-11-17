@@ -8,33 +8,23 @@ import { useSocket } from "../../../context/SocketContext";
 import { addNotification } from "../../../stores/notificationSlice";
 import store from "../../../stores/store";
 
-const createChat = () => {
+const addChatMember = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { socket } = useSocket();
-  const postCreateChat = ({
-    receiverIds,
-    isGroup,
-    name,
+  const postAddChatMember = ({
+    chatId,
+    participantId,
   }: {
-    receiverIds: string[];
-    name: string;
-    isGroup: boolean;
+    participantId: string;
+    chatId: string;
   }) => {
-    if (isGroup) {
-      const groupChatData = { name: name, participants: receiverIds };
-      return axios.post<ResponseType<Chat>>(
-        "/chat-app/chats/group",
-        groupChatData
-      );
-    }
-
     return axios.post<ResponseType<Chat>>(
-      `/chat-app/chats/c/${receiverIds[0]}`
+      `/chat-app/chats/group/${chatId}/${participantId}`
     );
   };
   return useMutation({
-    mutationFn: postCreateChat,
+    mutationFn: postAddChatMember,
     onError: () => {},
     onSuccess: (response) => {
       const chatId = response.data._id;
@@ -47,7 +37,7 @@ const createChat = () => {
         addNotification({
           type: "success",
           title: "Success",
-          message: "Chat created successfully.",
+          message: "Chat member added successfully.",
         })
       );
 
@@ -56,4 +46,4 @@ const createChat = () => {
   });
 };
 
-export default createChat;
+export default addChatMember;
