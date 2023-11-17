@@ -12,7 +12,6 @@ import {
 import store, { RootState } from "../../../stores/store";
 import useAuthCheck from "../../../hooks/useAuthCheck";
 import { addNotification } from "../../../stores/notificationSlice";
-/*  */
 const isUserInitialLogin = (createdAt: string, updatedAt: string) => {
   let createdAtDate = new Date(createdAt).valueOf();
   let updatedAtDate = new Date(updatedAt).valueOf();

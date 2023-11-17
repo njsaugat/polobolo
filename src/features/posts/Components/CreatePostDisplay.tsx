@@ -5,7 +5,6 @@ import { Author } from "../types/postType";
 import Avatar from "../../user/Components/Avatar";
 import CreatePost from "./CreatePost";
 
-
 const CreatePostDisplay = () => {
   const [isOpen, setIsOpen] = useState(false);
   function openModal() {
@@ -51,7 +50,6 @@ const CreatePostDisplay = () => {
           #️⃣ Tags
         </button>
       </div>
-      {/* {children} */}
       <CreatePost isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );

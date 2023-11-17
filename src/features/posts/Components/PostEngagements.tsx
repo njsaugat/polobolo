@@ -121,7 +121,6 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
                 <div
                   className={`flex mt-4 flex-col items-center justify-center w-full `}
                 >
-                  {/* <Spinner size={"md"} className="text-center text-current" /> */}
                   {new Array(5).fill(1).map((value, index) => (
                     <ShimmerComment key={value + index} />
                   ))}

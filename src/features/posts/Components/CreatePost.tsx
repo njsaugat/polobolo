@@ -140,7 +140,6 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
       modalClassName="md:mx-10"
     >
       <>
-        {/* <h1 className="text-5xl">Hello world</h1> */}
         <CloseModal closeModal={closeModal} />
         <div className="flex items-center justify-between w-full py-3 mt-4 md:mt-0 gap-x-1 lg:gap-x-0">
           <div className="flex items-start justify-center w-2/12 -translate-y-0.5">
@@ -229,8 +228,6 @@ const CreatePost = ({ post, isOpen, setIsOpen }: CreatePostDialogProps) => {
                 }}
               />
             </div>
-            {/* </div> */}
-
             <Button
               isLoading={isPostLoading}
               type="submit"

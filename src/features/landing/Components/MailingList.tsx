@@ -8,7 +8,6 @@ const MailingList = () => {
         placeholder="Your email address."
         className="w-3/4 p-2 text-xs border-0 outline-none"
       />
-      {/* <SignupButton /> */}
       <Button>Signup</Button>
     </div>
   );

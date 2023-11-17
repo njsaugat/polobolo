@@ -88,7 +88,6 @@ const ChatAuthorProfile = ({
           </div>
         </div>
       </div>
-      {/* </Link> */}
     </>
   );
 };

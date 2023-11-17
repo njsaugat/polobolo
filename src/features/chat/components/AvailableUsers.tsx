@@ -168,7 +168,6 @@ const AvailableUsers = ({
                                   }
                                   className="flex justify-between "
                                 >
-                                  {/* {user.username} */}
                                   <AuthorProfile
                                     username={user?.username}
                                     url={user?.avatar.url}

@@ -25,7 +25,6 @@ const ShimmerProfile = () => {
           </div>
           <div className="w-full md:w-10/12">
             <div className="py-3 md:px-9">
-              {/* Additional User Information */}
               <div className="flex justify-between mt-4 mb-5">
                 <div className="flex items-end w-24 h-12 rounded-lg bg-slate-200 animate-pulse">
                   <div className="w-16 h-2 mx-auto my-2 mt-2 bg-slate-300"></div>

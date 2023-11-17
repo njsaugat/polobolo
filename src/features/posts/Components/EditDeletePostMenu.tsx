@@ -92,7 +92,6 @@ export default function EditDeleteMenu({
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={openAddParticipantModal}
                   >
-                    {/* <EditActiveIcon /> */}
                     <FontAwesomeIcon
                       icon={faUser}
                       className={`pr-2  ${
@@ -102,7 +101,6 @@ export default function EditDeleteMenu({
                     <span className={`${className ? "text-xs" : ""} `}>
                       Add User
                     </span>
-                    {/* {className ? "" : "Edit"} */}
                   </button>
                 )}
               </Menu.Item>
@@ -118,7 +116,6 @@ export default function EditDeleteMenu({
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={openInfoModal}
                   >
-                    {/* <EditActiveIcon /> */}
                     <FontAwesomeIcon
                       icon={faInfo}
                       className={`px-1.5  ${
@@ -128,7 +125,6 @@ export default function EditDeleteMenu({
                     <span className={`${className ? "text-xs" : ""} `}>
                       Info
                     </span>
-                    {/* {className ? "" : "Edit"} */}
                   </button>
                 )}
               </Menu.Item>
@@ -144,7 +140,6 @@ export default function EditDeleteMenu({
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={openEditModal}
                   >
-                    {/* <EditActiveIcon /> */}
                     <FontAwesomeIcon
                       icon={faEdit}
                       className={`pr-1  ${
@@ -154,7 +149,6 @@ export default function EditDeleteMenu({
                     <span className={`${className ? "text-xs" : ""} `}>
                       Edit
                     </span>
-                    {/* {className ? "" : "Edit"} */}
                   </button>
                 )}
               </Menu.Item>
@@ -170,7 +164,6 @@ export default function EditDeleteMenu({
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={openLeaveModal}
                   >
-                    {/* <EditActiveIcon /> */}
                     <FontAwesomeIcon
                       icon={faSignOut}
                       className={`pl-2  rotate-180 ${
@@ -180,7 +173,6 @@ export default function EditDeleteMenu({
                     <span className={`${className ? "text-xs" : ""} `}>
                       Leave
                     </span>
-                    {/* {className ? "" : "Edit"} */}
                   </button>
                 )}
               </Menu.Item>

@@ -27,12 +27,6 @@ const Navbar = () => {
       <ul className="flex items-center justify-start md:w-2/3 lg:w-1/3 md:justify-between">
         {/* {isScreenSmall ? <Logo content={"Pb"} className="w-16" /> : <Logo />} */}
         <Logo />
-
-        {/* <Link to="/home">
-          <li>Home</li>
-        </Link> */}
-        {/* <li>Brands</li>
-        <li>Influencers</li> */}
       </ul>
       {/* <input className={`${inputFieldStyle} rounded-full lg:w-1/2`} /> */}
       {!isScreenSmall && isLoggedIn && user && (
@@ -42,7 +36,7 @@ const Navbar = () => {
             setIsSearching={setIsSearching}
             isSearching={isSearching}
           /> */}
-          {/* <MemoAvailableUsers isChat={false} /> */}
+          <AvailableUsers isChat={false} />
         </div>
       )}
       <Link to={"/chats"}>

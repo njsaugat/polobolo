@@ -50,7 +50,6 @@ const UserProfile = () => {
   return (
     <div className="flex items-center justify-center w-full">
       <div className="w-11/12 p-4 bg-white rounded-lg shadow-md ">
-        {/* Cover Image */}
         <div className="relative mb-4">
           <div
             className="relative object-cover w-full h-56 transition-all rounded-t-lg duration-800 md:h-48 lg:h-72 bg-theme-color bg-gradient-to-r from-teal-200 to-teal-500"

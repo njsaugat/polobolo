@@ -173,7 +173,6 @@ const ChatList = () => {
           </React.Fragment>
         ))}
       </div>
-      {/* TODO: focus the available users and then like instead of create group option have the add participant option */}
       {!!isOpenChatAddParticipant ? (
         <Dialog
           isOpen={!!isOpenChatAddParticipant}

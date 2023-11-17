@@ -10,7 +10,6 @@ const LandingPage = () => {
     <div className="overflow-x-hidden font-montserrat">
       <Navbar />
       <Title />
-      {/* <Features/> */}
       <Highlights />
       <MarketingFuture />
       <Footer />
