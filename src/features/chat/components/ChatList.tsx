@@ -19,6 +19,7 @@ import { Button } from "../../../components/Elements/Button";
 import addChatMember from "../api/addDeleteMembers";
 import useSocketEvents from "../hooks/useSocketEvents";
 import { ResponseType } from "types/responseType";
+import ShimmerChatList from "../../../components/Shimmer/ShimmerChatList";
 
 function truncateMessage(text: string, maxLength: number) {
   if (!text) {
@@ -74,11 +75,7 @@ const ChatList = () => {
   useSocketEvents();
 
   if (isLoading) {
-    return new Array(10).fill(1).map((value, index) => (
-      <div key={value + index} className="w-full px-5 py-1 ">
-        <ShimmerComment isChat={true} key={value + index} />
-      </div>
-    ));
+    return <ShimmerChatList />;
   }
 
   return (

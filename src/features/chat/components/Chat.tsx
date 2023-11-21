@@ -1,5 +1,3 @@
-import { useSocket } from "../../../context/SocketContext";
-import React, { useEffect, useRef, useState } from "react";
 import ChatList from "./ChatList";
 import ChatSection from "./ChatSection";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
@@ -7,16 +5,8 @@ import useScreenSize from "../../../hooks/useScreenSize";
 import { Dialog } from "../../../components/Elements/Dialog";
 import CloseModal from "../../../components/Elements/CloseModal";
 const Chat = () => {
-  const [message, setMessage] = useState("");
-  const { socket } = useSocket();
   const { chatId } = useParams();
   const isScreenSmall = useScreenSize(765);
-
-  const sendChat = (e: React.FormEvent) => {
-    e.preventDefault();
-    socket?.emit("joinChat", { message });
-    setMessage("");
-  };
 
   const navigate = useNavigate();
   const closeModal = () => {

@@ -10,6 +10,7 @@ import CreatePostDisplay from "./CreatePostDisplay";
 import { Author, Post } from "../types/postType";
 import { RootState } from "stores/store";
 import { useParams } from "react-router-dom";
+import ShimmerPosts from "../../../components/Shimmer/ShimmerPosts";
 
 type PostsProps = {
   tag?: string;
@@ -26,21 +27,7 @@ const Posts = ({ tag, bookmarks }: PostsProps) => {
     (store) => store.user.user
   );
   if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center gap-3 overflow-hidden ">
-        <div className="w-11/12 p-4 bg-white rounded-lg shadow-2xl drop- md:w-3/5 lg:w-1/2">
-          <ShimmerCreatePost />
-        </div>
-        {new Array(6).fill(1).map((value, index) => (
-          <div
-            key={value + index}
-            className="w-11/12 p-4 bg-white rounded-lg shadow-2xl drop- md:w-3/5 lg:w-1/2"
-          >
-            <Shimmer />
-          </div>
-        ))}
-      </div>
-    );
+    return <ShimmerPosts />;
   }
 
   if (bookmarks && data?.pages[0].data?.bookmarkedPosts?.length === 0) {

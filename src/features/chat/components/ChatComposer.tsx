@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../components/Elements/Button";
 import TextArea from "../../../components/Form/TextArea";
-import React, { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { z } from "zod";
@@ -10,7 +10,7 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import postMessage from "../api/postMessage";
 import { useParams } from "react-router-dom";
 import { useSocket } from "../../../context/SocketContext";
-import { STOP_TYPING_EVENT, TYPING_EVENT } from "./ChatSection";
+import { STOP_TYPING_EVENT, TYPING_EVENT } from "../../../config/constants";
 
 export const chatMessageValidationSchema = z.object({
   chatMessage: z

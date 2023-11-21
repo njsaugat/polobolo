@@ -1,4 +1,3 @@
-import Features from "./Components/Features";
 import Footer from "./Components/Footer";
 import Highlights from "./Components/Highlights";
 import MarketingFuture from "./Components/MarketingFuture";

@@ -1,26 +1,36 @@
-import {
-  RouterProvider,
-  createBrowserRouter,
-  useRoutes,
-} from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import ErrorElement from "../components/Shared/ErrorElement";
 import Login from "../features/auth/Components/Login";
 import Signup from "../features/auth/Components/Signup";
 import Container from "../features/auth/Components/Container";
-import Home from "../features/posts/Components/Posts";
 import LandingPage from "../features/landing/LandingPage";
-import UserProfile from "../features/user/Components/UserProfile";
 import UserProfileAbout from "../features/user/Components/UserProfileAbout";
-import Posts from "../features/posts/Components/Posts";
-import PostsByTag from "../features/posts/Components/PostsByTag";
-import Bookmarks from "../features/posts/Components/BookmarkedPosts";
 import Settings from "../features/user/Components/Settings";
 import useAuthCheck from "../hooks/useAuthCheck";
 import UserDetails from "../features/user/Components/UserDetails";
-import Chat from "../features/chat/components/Chat";
-import ChatSection from "../features/chat/components/ChatSection";
+import { Suspense, lazy } from "react";
+import ShimmerChat from "../components/Shimmer/ShimmerChat";
+import ShimmerChatSection from "../components/Shimmer/ShimmerChatSection";
+import ShimmerProfile from "../components/Shimmer/ShimmerProfile";
+import ShimmerPosts from "../components/Shimmer/ShimmerPosts";
 
+const Chat = lazy(() => import("../features/chat/components/Chat"));
+const ChatSection = lazy(
+  () => import("../features/chat/components/ChatSection")
+);
+
+const Posts = lazy(() => import("../features/posts/Components/Posts"));
+const UserProfile = lazy(
+  () => import("../features/user/Components/UserProfile")
+);
+const PostsByTag = lazy(
+  () => import("../features/posts/Components/PostsByTag")
+);
+
+const Bookmarks = lazy(
+  () => import("../features/posts/Components/BookmarkedPosts")
+);
 export const AppRoutes = () => {
   const loggedIn = useAuthCheck();
 
@@ -78,12 +88,29 @@ const protectedRoutes = [
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<ShimmerPosts />}>
+            <Posts />
+          </Suspense>
+        ),
       },
       {
         path: "/chats",
-        element: <Chat />,
-        children: [{ path: ":chatId", element: <ChatSection /> }],
+        element: (
+          <Suspense fallback={<ShimmerChat />}>
+            <Chat />,
+          </Suspense>
+        ),
+        children: [
+          {
+            path: ":chatId",
+            element: (
+              <Suspense fallback={<ShimmerChatSection />}>
+                <ChatSection />
+              </Suspense>
+            ),
+          },
+        ],
       },
       {
         path: "/onboarding",
@@ -95,15 +122,27 @@ const protectedRoutes = [
       },
       {
         path: "/home",
-        element: <Posts />,
+        element: (
+          <Suspense fallback={<ShimmerPosts />}>
+            <Posts />
+          </Suspense>
+        ),
       },
       {
         path: "posts/tags/:tag",
-        element: <PostsByTag />,
+        element: (
+          <Suspense fallback={<ShimmerPosts />}>
+            <PostsByTag />
+          </Suspense>
+        ),
       },
       {
         path: "user/:username",
-        element: <UserProfile />,
+        element: (
+          <Suspense fallback={<ShimmerProfile />}>
+            <UserProfile />
+          </Suspense>
+        ),
         children: [
           {
             index: true, // Use the index property to specify the default route
@@ -115,11 +154,19 @@ const protectedRoutes = [
           },
           {
             path: "posts",
-            element: <Posts />,
+            element: (
+              <Suspense fallback={<ShimmerPosts />}>
+                <Posts />
+              </Suspense>
+            ),
           },
           {
             path: "bookmarks",
-            element: <Bookmarks />,
+            element: (
+              <Suspense fallback={<ShimmerPosts />}>
+                <Bookmarks />
+              </Suspense>
+            ),
           },
           {
             path: "settings",

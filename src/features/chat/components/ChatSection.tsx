@@ -1,34 +1,23 @@
-import { InputField } from "components/Form/InputFieldForm";
 import React, { useEffect, useState } from "react";
 import ChatComposer from "./ChatComposer";
 import getChatMessages from "../api/getChatMessages";
-import ShimmerComment from "../../../components/Shimmer/ShimmerComment";
 import ChatAuthorProfile from "./ChatAuthorProfile";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
 import { Author, Chat, ChatMessage } from "features/posts/types/postType";
 import { useParams } from "react-router-dom";
 import { useSocket } from "../../../context/SocketContext";
-import { getChatObjectMetadata } from "../utils/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { ResponseType } from "types/responseType";
 import { updateChatListLastMessage } from "../api/postMessage";
 import TypingChat from "./TypingChat";
-import moment from "moment";
+import ShimmerChatSection from "../../../components/Shimmer/ShimmerChatSection";
+import {
+  MESSAGE_RECEIVED_EVENT,
+  STOP_TYPING_EVENT,
+  TYPING_EVENT,
+} from "../../../config/constants";
 
-type ChatSectionProps = {
-  chatId: string;
-};
-
-export const CONNECTED_EVENT = "connected";
-export const DISCONNECT_EVENT = "disconnect";
-export const JOIN_CHAT_EVENT = "joinChat";
-export const NEW_CHAT_EVENT = "newChat";
-export const TYPING_EVENT = "typing";
-export const STOP_TYPING_EVENT = "stopTyping";
-export const MESSAGE_RECEIVED_EVENT = "messageReceived";
-export const LEAVE_CHAT_EVENT = "leaveChat";
-export const UPDATE_GROUP_NAME_EVENT = "updateGroupName";
 const ChatSection = () => {
   const { chatId } = useParams();
   const queryClient = useQueryClient();
@@ -72,19 +61,7 @@ const ChatSection = () => {
   }, [socket]);
 
   if (isLoading) {
-    return new Array(10).fill(1).map((value, index) => (
-      <div key={value + index} className={`flex flex-col w-full px-5 py-1 `}>
-        <ShimmerComment
-          isChat={true}
-          key={value + index}
-          className={
-            index % 2 === 1
-              ? "flex-row-reverse  items-end justify-center teal"
-              : "flex-row  "
-          }
-        />
-      </div>
-    ));
+    return <ShimmerChatSection />;
   }
   return (
     <>

@@ -16,10 +16,13 @@ import { Button } from "../../../components/Elements/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores/store";
 
-const ShimmerAvatars = () =>
-  new Array(6)
-    .fill(1)
-    .map((profile, index) => <ShimmerAvatar key={profile + index} />);
+const ShimmerAvatars = () => (
+  <>
+    {new Array(6).fill(1).map((profile, index) => (
+      <ShimmerAvatar key={profile + index} />
+    ))}
+  </>
+);
 type AvailableUsersProps = {
   isChat: boolean;
   buttonRef?: React.RefObject<HTMLButtonElement>;
@@ -82,6 +85,7 @@ const AvailableUsers = ({
         <Combobox
           value={selected}
           onChange={setSelected}
+          // @ts-ignore
           multiple={isGroupChatEnabled}
         >
           <div className="relative mx-3 mt-1 mb-5">

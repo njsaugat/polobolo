@@ -1,16 +1,9 @@
-import {
-  useInfiniteQuery,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { axios } from "../../../services/apiClient";
-import { Chat } from "features/posts/types/postType";
-import { ResponseType } from "types/responseType";
-import { JOIN_CHAT_EVENT } from "../components/ChatSection";
+import { JOIN_CHAT_EVENT } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
 
 const getChatMessages = (chatId: string | undefined) => {
-  const queryClient = useQueryClient();
   const { socket } = useSocket();
   const getUserChatMessages = () => {
     return axios.get(`/chat-app/messages/${chatId}`);

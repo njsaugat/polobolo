@@ -1,4 +1,4 @@
-import GraphImage from "../../../assets/images/graph-visual.png";
+import GraphImage from "../../../assets/images/png/graph-visual.png";
 import MailingList from "./MailingList";
 import AppStore from "../../../assets/images/app-store.svg";
 import GooglePlay from "../../../assets/images/google-play.svg";
@@ -11,8 +11,8 @@ const Title = () => {
           <div className="text-orange-theme"> PoloBolo</div>
         </h1>
         <h3 className="mt-10 mb-8 text-2xl leading-normal text-slate-500">
-          Save time & money by gaining access to micro-influencers of all
-          audiences and the actionable insights needed to drive sales and ROI.
+          Unlock the power of influencers across diverse audiences. Elevate you r
+          social media game!
         </h3>
         <MailingList />
         <div className="flex gap-x-3">

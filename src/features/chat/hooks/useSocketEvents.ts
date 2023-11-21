@@ -10,7 +10,7 @@ import {
   LEAVE_CHAT_EVENT,
   NEW_CHAT_EVENT,
   UPDATE_GROUP_NAME_EVENT,
-} from "../components/ChatSection";
+} from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
 
 const useSocketEvents = () => {

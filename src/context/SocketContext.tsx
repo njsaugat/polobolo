@@ -25,7 +25,14 @@ const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   useEffect(() => {
-    setSocket(getSocket());
+    const newSocket = getSocket(); // Assuming getSocket is a function that creates a new socket
+    setSocket(newSocket);
+
+    return () => {
+      if (newSocket) {
+        newSocket.disconnect();
+      }
+    };
   }, []);
 
   return (

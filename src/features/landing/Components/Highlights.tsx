@@ -1,6 +1,6 @@
-import Analytics from "../../../assets/images/analytics.png";
-import AuditCards from "../../../assets/images/audit_cards.png";
-import PostPerformance from "../../../assets/images/post-performance.png";
+import Analytics from "../../../assets/images/png/analytics.png";
+import AuditCards from "../../../assets/images/png/audit_cards.png";
+import PostPerformance from "../../../assets/images/png/post-performance.png";
 
 const analytics = [
   {
@@ -25,7 +25,10 @@ const Highlights = () => {
       <div className="flex flex-wrap justify-center lg:justify-between ">
         {analytics.map((analytic) => {
           return (
-            <div className="flex flex-col items-center justify-center" key={analytic.image}>
+            <div
+              className="flex flex-col items-center justify-center"
+              key={analytic.image}
+            >
               <div className="my-5 w-72 ">
                 <img src={analytic?.image} alt="Analytics" />
               </div>
