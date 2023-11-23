@@ -84,6 +84,7 @@ export interface Pagination {
   hasNextPage: boolean;
   prevPage: number | null;
   nextPage: number | null;
+  totalComments?: number;
 }
 
 export interface PostCardProps {
@@ -95,6 +96,7 @@ export interface PostCardProp {
 
 export interface Posts {
   posts: Post[];
+  bookmarkedPosts?: Post[];
 }
 
 export interface Comment {

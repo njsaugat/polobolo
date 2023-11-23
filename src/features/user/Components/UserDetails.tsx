@@ -12,11 +12,10 @@ import { Author } from "../../posts/types/postType";
 import TextArea from "../../../components/Form/TextArea";
 import updateProfile from "../api/updateUserProfile";
 import { Button } from "../../../components/Elements/Button";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Spinner } from "../../../components/Elements/Spinner";
 
-function getComputedDate(dob: string = "") {
+const getComputedDate = (dob: string = "") => {
   const dateObject = new Date(dob);
 
   const year = dateObject.getFullYear();
@@ -26,7 +25,7 @@ function getComputedDate(dob: string = "") {
   const formattedDate = `${year}-${month}-${day}`;
 
   return formattedDate;
-}
+};
 type UserDetailsProps = {
   isOnboarding?: boolean;
 };
@@ -43,7 +42,6 @@ const checkIfDetailsEmpty = (firstname: string, lastname: string) => {
 const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
   const {
     control,
-    register,
     trigger,
     handleSubmit,
     setValue,
@@ -61,23 +59,25 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
   const onSubmit: SubmitHandler<SettingsValidationSchema> = (data) => {
     mutate(data);
   };
-  const navigate = useNavigate();
   useEffect(() => {
-    if (loggedInUser) {
-      setValue("bio", loggedInUser.bio);
-      setValue("location", loggedInUser.location);
-      setValue("phoneNumber", loggedInUser.phoneNumber);
+    const handleFormValues = () => {
+      setValue("bio", loggedInUser?.bio ?? "");
+      setValue("location", loggedInUser?.location ?? "");
+      setValue("phoneNumber", loggedInUser?.phoneNumber ?? "");
       setValue("dob", getComputedDate(loggedInUser?.dob));
       if (
-        loggedInUser.firstName === "John" &&
-        loggedInUser.lastName === "Doe"
+        loggedInUser?.firstName === "John" &&
+        loggedInUser?.lastName === "Doe"
       ) {
         setValue("firstName", "");
         setValue("lastName", "");
       } else {
-        setValue("firstName", loggedInUser.firstName);
-        setValue("lastName", loggedInUser.lastName);
+        setValue("firstName", loggedInUser?.firstName ?? "");
+        setValue("lastName", loggedInUser?.lastName ?? "");
       }
+    };
+    if (loggedInUser) {
+      handleFormValues();
     }
   }, [loggedInUser]);
   if (!loggedInUser) {

@@ -46,9 +46,17 @@ const InputField = forwardRef(
   ) => {
     const [isEyeShown, setIsEyeShown] = useState(false);
     return (
-      <div className="mb-4 transition-all duration-300 md:mr-2">
+      <div
+        className={`${
+          type === "checkbox"
+            ? "flex  flex-row-reverse items-center space-x-2 justify-between h-auto w-4/5 md:w-3/5 lg:w-[46%]"
+            : null
+        } mb-4 transition-all duration-300 md:mr-2`}
+      >
         <label
-          className="block mb-2 text-sm font-bold text-gray-700"
+          className={`block ${
+            type === "checkbox" ? "" : "mb-2"
+          }  text-sm font-bold text-gray-700`}
           htmlFor={name}
         >
           {label}

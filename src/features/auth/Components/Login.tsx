@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   LoginValidationSchema,
@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import useAuthCheck from "../../../hooks/useAuthCheck";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
+import AuthFormEnhancements from "./AuthFormEnhancements";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,7 +31,6 @@ const Login = () => {
   }, [isLoggedIn]);
   const {
     control,
-    register,
     trigger,
     handleSubmit,
     formState: { errors, isValid },
@@ -82,23 +82,7 @@ const Login = () => {
               </Button>
             </div>
             <hr className="mb-6 border-t" />
-            <div className="text-center">
-              <a
-                className="inline-block text-sm text-teal-500 align-baseline hover:text-teal-800"
-                href="#test"
-              >
-                Forgot Password?
-              </a>
-            </div>
-            <div className="text-sm text-center">
-              Don't have an account? &nbsp;
-              <Link
-                className="inline-block text-sm text-teal-500 align-baseline hover:text-teal-800"
-                to={"/signup"}
-              >
-                Signup !
-              </Link>
-            </div>
+            <AuthFormEnhancements formType="signup" />
           </form>
         </div>
       </div>

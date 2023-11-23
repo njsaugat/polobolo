@@ -1,37 +1,40 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Logo from "./components/Shared/Logo";
-import LandingPage from "../src/features/landing/LandingPage";
 import Navbar from "./features/landing/Components/Navbar";
 import { useDispatch } from "react-redux";
 import { UserContext } from "./features/posts/context/UserContext";
 import { addUser } from "./stores/userSlice";
 import getUser from "./features/user/api/getUser";
-import { LocalStorage } from "./utils";
 import useAuthCheck from "./hooks/useAuthCheck";
 
-const MemoNavbar = React.memo(Navbar);
 const App = () => {
   const loggedIn = useAuthCheck();
+
   if (!loggedIn) {
-    return (
-      <>
-        <Outlet />
-      </>
-    );
+    return <Outlet />;
   }
-  const { isLoading: isUserLoading, data: userData } = getUser();
-  const dispatch = useDispatch();
-  dispatch(addUser(userData?.data && userData?.data));
+
+  const userData = fetchUserData();
 
   return (
-    <UserContext.Provider value={{ user: userData?.data }}>
+    <UserContext.Provider value={{ user: userData }}>
       <div className="min-w-full overflow-x-hidden font-montserrat">
-        <MemoNavbar />
+        <Navbar />
         <Outlet />
       </div>
     </UserContext.Provider>
   );
+};
+
+const fetchUserData = () => {
+  const { isLoading, data } = getUser();
+  const dispatch = useDispatch();
+
+  if (!isLoading) {
+    dispatch(addUser(data?.data));
+  }
+
+  return data?.data;
 };
 
 export default App;

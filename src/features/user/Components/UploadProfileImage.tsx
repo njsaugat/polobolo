@@ -4,6 +4,7 @@ import { Dialog } from "../../../components/Elements/Dialog";
 import DragAndDrop from "../../../components/Shared/DragDropPhotos";
 import { useState } from "react";
 import postImage from "../api/postImage";
+import { convertToBlob } from "../../../utils/convertToBlob";
 
 type UploadProfileImageProps = {
   isImageUploadOpen: boolean;
@@ -27,14 +28,7 @@ const UploadProfileImage = ({
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const formData = new FormData();
-
-    const dataURL = fileDataURLs[0];
-    const base64String = dataURL.split(",")[1]; // Split the Data URL to get the base64 part
-    const binaryData = atob(base64String);
-    const blob = new Blob(
-      [new Uint8Array([...binaryData].map((char) => char.charCodeAt(0)))],
-      { type: "application/octet-stream" }
-    );
+    const blob = convertToBlob(fileDataURLs[0]);
     if (coverImageExist) {
       formData.append(`coverImage`, blob, `file.png`);
     } else {

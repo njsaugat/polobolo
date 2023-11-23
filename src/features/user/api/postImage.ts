@@ -3,6 +3,7 @@ import { axios } from "../../../services/apiClient";
 import { useParams } from "react-router-dom";
 import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
+import { handleUpdateProfilePic } from "../../../stores/userSlice";
 
 const postImage = (coverImageExist: boolean | undefined) => {
   const queryClient = useQueryClient();
@@ -24,7 +25,11 @@ const postImage = (coverImageExist: boolean | undefined) => {
     onSuccess: (response) => {
       queryClient.invalidateQueries(["user", username]);
       const message = response?.message;
+      const updatedPicURL = response?.data?.avatar?.url;
       const { dispatch } = store;
+      if (!coverImageExist) {
+        dispatch(handleUpdateProfilePic(updatedPicURL));
+      }
       dispatch(
         addNotification({
           type: "success",

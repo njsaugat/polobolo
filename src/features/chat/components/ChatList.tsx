@@ -97,7 +97,7 @@ const ChatList = () => {
                         isActive
                           ? "   bg-gradient-to-r from-teal-50 to-teal-200   "
                           : "hover:bg-gradient-to-l  hover:from-slate-50 hover:to-slate-100"
-                      }  block px-2 py-3 cursor-pointer nav-link `
+                      }  block px-2 py-3 cursor-pointer nav-link relative`
                     }
                     to={`${chat?._id}`}
                     onMouseEnter={() => setHoveredId(chat?._id)}

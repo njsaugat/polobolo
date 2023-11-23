@@ -25,6 +25,7 @@ interface TextAreaProps<SchemaType> {
   className?: string;
   children?: React.ReactNode;
   defaultValue: string;
+  isNotIncreasePostHeight?: boolean;
 }
 function calcHeight(value: string) {
   let numberOfLineBreaks = (value.match(/\n/g) || []).length;
@@ -50,11 +51,16 @@ const TextArea = forwardRef(
       onKeyUp,
       disabled,
       defaultValue,
+      isNotIncreasePostHeight,
     }: TextAreaProps<SchemaType>,
     ref: ForwardedRef<HTMLTextAreaElement>
   ) => {
     return (
-      <div className="z-50 w-11/12 mb-4 transition-all duration-300 md:mr-2">
+      <div
+        className={`z-50  mb-4 transition-all duration-300 md:mr-2 ${
+          isNotIncreasePostHeight ? "w-full" : "w-11/12"
+        }`}
+      >
         <label
           className="block mb-2 text-sm font-bold text-gray-700"
           htmlFor={name}
@@ -76,12 +82,16 @@ const TextArea = forwardRef(
                   errors[name] && "border-red-500 hover:border-red-500 "
                 }  ${className}`}
                 onKeyDown={() => onKeyDown(name)}
-                onKeyUp={() => {
-                  if (ref && "current" in ref && ref?.current) {
-                    ref.current.style.height =
-                      calcHeight(ref?.current.value) + "px";
-                  }
-                }}
+                onKeyUp={
+                  !isNotIncreasePostHeight
+                    ? () => {
+                        if (ref && "current" in ref && ref?.current) {
+                          ref.current.style.height =
+                            calcHeight(ref?.current.value) + "px";
+                        }
+                      }
+                    : () => {}
+                }
               ></textarea>
             )}
           />

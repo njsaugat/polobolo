@@ -13,7 +13,7 @@ const Chat = () => {
     navigate(".");
   };
   return (
-    <div className="w-screen flex border-t-[0.1px] h-[calc(100vh-115px)] overflow-auto  ">
+    <div className="w-screen flex border-t-[0.1px] h-[calc(100vh-137px)]  overflow-auto ">
       <div className="w-full md:w-2/5 lg:w-1/3 border-r-[0.1px] h-full pt-4">
         <ChatList />
       </div>

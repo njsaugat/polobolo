@@ -1,5 +1,5 @@
-import React, { useContext, useRef, useState } from "react";
-import { Comment, PostCardProps } from "../types/postType";
+import React, { useState } from "react";
+import { Author, PostCardProps } from "../types/postType";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,32 +14,34 @@ import Like from "../../../components/Shared/Like";
 import Bookmark from "../../../components/Shared/Bookmark";
 import postLike from "../api/postLike";
 import { CommentRefetchContext } from "../context/CommentContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addRefetch } from "../../../stores/refetchSlice";
 import ShimmerComment from "../../../components/Shimmer/ShimmerComment";
 import CreateComment from "../../comments/Components/CreateComment";
-import { UserContext } from "../context/UserContext";
 import postBookmark from "../api/postBookmark";
+import { RootState } from "../../../stores/store";
 
 export const commentValidationSchema = z.object({
   content: z
     .string()
     .min(3, { message: "Comment should be at least 3 characters." }),
 });
-export type ModelOpen = { isModalOpen?: boolean };
+export type ModalOpen = { isModalOpen?: boolean };
 
 export type CommentValidationSchema = z.infer<typeof commentValidationSchema>;
-const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
+const ShimmerComments = () => (
+  <div className={`flex mt-4 flex-col items-center justify-center w-full `}>
+    {new Array(5).fill(1).map((value, index) => (
+      <ShimmerComment key={value + index} />
+    ))}
+  </div>
+);
+const Engagements = ({ post, isModalOpen }: PostCardProps & ModalOpen) => {
   const [showComments, setShowComments] = useState(
     isModalOpen ? isModalOpen : false
   );
   const dispatch = useDispatch();
-  const handleRefetch = () => {
-    dispatch(addRefetch(refetch));
-  };
-  const handleShowComments = () => {
-    setShowComments(true);
-  };
+
   const {
     isLoading: isCommentLoading,
     error: commentError,
@@ -58,7 +60,15 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
     post._id
   );
 
-  const { user } = useContext(UserContext);
+  const user = useSelector<RootState, Author | undefined>(
+    (store) => store.user.user
+  );
+  const handleRefetch = () => {
+    dispatch(addRefetch(refetch));
+  };
+  const handleShowComments = () => {
+    setShowComments(true);
+  };
 
   return (
     <>
@@ -117,16 +127,8 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
                 isModalOpen && " lg:h-auto lg:overflow-y-auto"
               }`}
             >
-              {isCommentLoading && (
-                <div
-                  className={`flex mt-4 flex-col items-center justify-center w-full `}
-                >
-                  {new Array(5).fill(1).map((value, index) => (
-                    <ShimmerComment key={value + index} />
-                  ))}
-                </div>
-              )}
-              {data?.pages.map((page, pageIndex) => {
+              {isCommentLoading ? <ShimmerComments /> : null}
+              {data?.pages?.map((page, pageIndex) => {
                 if (page?.data?.comments.length === 0) {
                   return (
                     <div className="mt-2 text-base text-slate-700">
@@ -134,39 +136,30 @@ const Engagements = ({ post, isModalOpen }: PostCardProps & ModelOpen) => {
                     </div>
                   );
                 }
-                return page?.data?.comments?.map(
-                  (comment: Comment, index: number) => (
-                    <CommentRefetchContext.Provider
-                      key={comment._id}
-                      value={{
-                        refetch,
-                        page: page.data.page,
-                      }}
-                    >
-                      {pageIndex === 0 &&
-                      index === 0 &&
-                      isModalOpen &&
-                      page?.data.comments.length > 2 ? (
-                        <div className="w-full lg:mt-1">
-                          <SingleComment comment={comment} />
-                        </div>
-                      ) : (
+                return page?.data?.comments?.map((comment, index) => (
+                  <CommentRefetchContext.Provider
+                    key={comment._id}
+                    value={{
+                      refetch,
+                      page: page.data.page,
+                    }}
+                  >
+                    {pageIndex === 0 &&
+                    index === 0 &&
+                    isModalOpen &&
+                    page?.data.comments.length > 2 ? (
+                      <div className="w-full lg:mt-1">
                         <SingleComment comment={comment} />
-                      )}
-                    </CommentRefetchContext.Provider>
-                  )
-                );
+                      </div>
+                    ) : (
+                      <SingleComment comment={comment} />
+                    )}
+                  </CommentRefetchContext.Provider>
+                ));
               })}
               {hasNextPage && (
                 <>
-                  {isFetchingNextPage && (
-                    <div className="flex flex-col items-center justify-center w-full mt-4">
-                      {/* <Spinner size={"md"} className="text-center text-current" /> */}
-                      {new Array(5).fill(1).map((value, index) => (
-                        <ShimmerComment key={value + index} />
-                      ))}
-                    </div>
-                  )}
+                  {isFetchingNextPage ? <ShimmerComments /> : null}
                   <Button
                     variant="blend"
                     size="md"

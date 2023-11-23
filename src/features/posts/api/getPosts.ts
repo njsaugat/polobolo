@@ -1,5 +1,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { axios } from "../../../services/apiClient";
+import { ResponseType } from "types/responseType";
+import { Pagination, Posts } from "../types/postType";
 
 const getPosts = (
   username: string | undefined,
@@ -15,23 +17,34 @@ const getPosts = (
   const getPosts = (pageParam: number) => {
     const params = { page: pageParam, limit };
     if (tag) {
-      return axios.get(`/social-media/posts/get/t/${tag}`, {
-        params: params,
-      });
+      return axios.get<ResponseType<Posts & Pagination>>(
+        `/social-media/posts/get/t/${tag}`,
+        {
+          params: params,
+        }
+      );
     }
 
     if (bookmarks) {
-      return axios.get(`/social-media/bookmarks`, {
-        params: params,
-      });
+      return axios.get<ResponseType<Posts & Pagination>>(
+        `/social-media/bookmarks`,
+        {
+          params: params,
+        }
+      );
     }
     if (username) {
-      return axios.get(`/social-media/posts/get/u/${username}`, {
-        params: params,
-      });
+      return axios.get<ResponseType<Posts & Pagination>>(
+        `/social-media/posts/get/u/${username}`,
+        {
+          params: params,
+        }
+      );
     }
 
-    return axios.get("/social-media/posts", { params: params });
+    return axios.get<ResponseType<Posts & Pagination>>("/social-media/posts", {
+      params: params,
+    });
   };
   const getQueryKey = () => {
     if (bookmarks) {

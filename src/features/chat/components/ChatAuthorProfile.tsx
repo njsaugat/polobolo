@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import LoadImage from "../../../components/Elements/LoadImage";
 import moment from "moment";
+import Avatar from "../../../features/user/Components/Avatar";
 
 type ChatAuthorProfileProps = {
   username: string;
@@ -46,12 +47,13 @@ const ChatAuthorProfile = ({
         }      `}
       >
         <Link to={`/user/${username}`}>
-          <LoadImage
-            src={url}
-            alt="Author Avatar"
+          <Avatar
+            url={url}
             className={`${
               isChatSection ? " w-8 h-8 " : " w-12 h-12 mr-4 "
             }  rounded-full`}
+            username={username}
+            firstName={username}
           />
         </Link>
         <div

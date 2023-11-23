@@ -4,19 +4,13 @@ import {
   SignupValidationSchema,
   signupValidationSchema,
 } from "../utils/signupValidation";
-import { Link, useNavigate } from "react-router-dom";
 import InputField from "../../../components/Form/InputField";
 
 import useRegisterUser from "../api/registerUser";
 import { Button } from "../../../components/Elements/Button";
-import useAuthCheck from "../../../hooks/useAuthCheck";
+import AuthFormEnhancements from "./AuthFormEnhancements";
 
 const Signup = () => {
-  const navigate = useNavigate();
-  const isLoggedIn = useAuthCheck();
-  if (isLoggedIn) {
-    navigate("/home");
-  }
   const {
     control,
     register,
@@ -95,49 +89,24 @@ const Signup = () => {
               type="password"
               onKeyDown={handleInputChange}
             />
-            <div className="mb-4">
-              <input type="checkbox" id="terms" {...register("terms")} />
-              <label
-                htmlFor="terms"
-                className={`ml-2 mb-2 text-sm font-bold ${
-                  errors.terms ? "text-red-500" : "text-gray-700"
-                }`}
-              >
-                Accept Terms & Conditions
-              </label>
-              {errors.terms && (
-                <p className="mt-2 text-xs italic text-red-500">
-                  {errors.terms?.message}
-                </p>
-              )}
-            </div>
-            <div className="mb-6 text-center">
-              <Button
-                className="w-full px-4 py-2 font-bold rounded-full text-slate-700 hover:animate-pulse bg-gradient-to-r from-teal-200 to-teal-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                type="submit"
-                isLoading={isLoading}
-              >
-                Register Account
-              </Button>
-            </div>
-            <hr className="mb-6 border-t" />
-            <div className="text-center">
-              <a
-                className="inline-block text-sm text-teal-500 align-baseline hover:text-teal-800"
-                href="#test"
-              >
-                Forgot Password?
-              </a>
-            </div>
-            <div className="text-sm text-center">
-              Already have an account? &nbsp;
-              <Link
-                className="inline-block text-teal-500 align-baseline hover:text-teal-800"
-                to={"/login"}
-              >
-                Login !
-              </Link>
-            </div>
+            <InputField<SignupValidationSchema>
+              name="terms"
+              control={control}
+              errors={errors}
+              label="Accept Terms & Conditions"
+              type="checkbox"
+              onKeyDown={() => {}}
+            />
+
+            <Button
+              className="w-full px-4 py-2 font-bold rounded-full text-slate-700 hover:animate-pulse bg-gradient-to-r from-teal-200 to-teal-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+              type="submit"
+              isLoading={isLoading}
+            >
+              Register Account
+            </Button>
+            <hr className="my-6 border-t" />
+            <AuthFormEnhancements formType="login" />
           </form>
         </div>
       </div>

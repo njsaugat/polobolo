@@ -3,7 +3,7 @@ import getAllUsers from "../api/getAllUser";
 import { Combobox, Menu, Transition } from "@headlessui/react";
 import AuthorProfile from "../../../features/user/Components/AuthorProfile";
 import { Author, Chat, ChatUser } from "../../../features/posts/types/postType";
-import ShimmerAvatar from "../../../components/Shimmer/ShimmerAvatar";
+import { ShimmerAvatars } from "../../../components/Shimmer/ShimmerAvatar";
 import createChat from "../api/createOnetoOneChat";
 import { useQueryClient } from "@tanstack/react-query";
 import {
@@ -16,13 +16,6 @@ import { Button } from "../../../components/Elements/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores/store";
 
-const ShimmerAvatars = () => (
-  <>
-    {new Array(6).fill(1).map((profile, index) => (
-      <ShimmerAvatar key={profile + index} />
-    ))}
-  </>
-);
 type AvailableUsersProps = {
   isChat: boolean;
   buttonRef?: React.RefObject<HTMLButtonElement>;

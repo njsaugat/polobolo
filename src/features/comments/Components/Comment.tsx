@@ -35,7 +35,7 @@ const SingleComment = ({ comment }: CommentProps) => {
         <div className="flex items-center mb-2">
           <Avatar
             url={comment.author.account.avatar.url}
-            firstName={comment.author.account.avatar.url}
+            firstName={comment.author.firstName}
             username={comment.author.account.username}
           />
           <span className="font-bold">

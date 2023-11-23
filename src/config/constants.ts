@@ -9,3 +9,5 @@ export const STOP_TYPING_EVENT = "stopTyping";
 export const MESSAGE_RECEIVED_EVENT = "messageReceived";
 export const LEAVE_CHAT_EVENT = "leaveChat";
 export const UPDATE_GROUP_NAME_EVENT = "updateGroupName";
+export const TOTAL_TAGS = 10;
+export const TOTAL_UPLOADABLE_IMAGES = 6;

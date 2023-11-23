@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LoadImage from "../../../components/Elements/LoadImage";
+import Avatar from "./Avatar";
 
 type AuthorProfileProps = {
   username: string;
@@ -14,6 +15,7 @@ type AuthorProfileProps = {
   createChat?: () => void;
   isGroupChat?: boolean;
 };
+
 const AuthorProfile = ({
   username,
   url,
@@ -26,62 +28,44 @@ const AuthorProfile = ({
   createChat,
   isGroupChat,
 }: AuthorProfileProps) => {
-  return !isChat && !isGroupChat ? (
-    <Link
-      to={`${`/user/${username}`}`}
-      onClick={() => {
-        closeModal && closeModal();
-        createChat && createChat();
-      }}
-    >
-      <AuthorProfileChildren
-        firstName={firstName}
-        lastName={lastName}
+  const handleClick = () => {
+    closeModal && closeModal();
+    createChat && createChat();
+  };
+
+  const commonContent = (
+    <div className={`flex items-center w-auto space-x-4 ${className}`}>
+      <Avatar
         url={url}
-        bio={bio}
-        className={className}
+        className="w-12 h-12 rounded-full"
         username={username}
+        firstName={firstName}
       />
-    </Link>
-  ) : (
+      <div>
+        <h2 className={`${className ? "text-sm" : "text-lg"}`}>
+          {firstName} {lastName}
+        </h2>
+        <p className="text-gray-500">{bio}</p>
+      </div>
+    </div>
+  );
+
+  return (
     <div
-      className="w-full cursor-pointer"
-      onClick={() => {
-        closeModal && closeModal();
-        createChat && createChat();
-      }}
+      className={`w-full cursor-pointer ${
+        isChat || isGroupChat ? "" : "hover:underline"
+      }`}
+      onClick={handleClick}
     >
-      <AuthorProfileChildren
-        firstName={firstName}
-        lastName={lastName}
-        url={url}
-        bio={bio}
-        className={className}
-        username={username}
-      />
+      {isChat || isGroupChat ? (
+        commonContent
+      ) : (
+        <Link to={`/user/${username}`} onClick={handleClick}>
+          {commonContent}
+        </Link>
+      )}
     </div>
   );
 };
 
-const AuthorProfileChildren = ({
-  className,
-  url,
-  firstName,
-  lastName,
-  bio,
-}: AuthorProfileProps) => (
-  <div className={`flex items-center w-auto space-x-4  ${className} `}>
-    <LoadImage
-      src={url}
-      alt="Author Avatar"
-      className="w-12 h-12 rounded-full"
-    />
-    <div>
-      <h2 className={`${className ? "text-sm" : "text-lg"} `}>
-        {firstName} {lastName}
-      </h2>
-      <p className="text-gray-500">{bio}</p>
-    </div>
-  </div>
-);
 export default AuthorProfile;

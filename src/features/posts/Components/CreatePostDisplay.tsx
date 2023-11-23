@@ -7,13 +7,12 @@ import CreatePost from "./CreatePost";
 
 const CreatePostDisplay = () => {
   const [isOpen, setIsOpen] = useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
 
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
   return (
     <div className="w-11/12 p-4 bg-white border rounded-lg shadow-2xl drop- md:w-3/5 lg:w-1/2">
       <div className="flex">
@@ -50,7 +49,11 @@ const CreatePostDisplay = () => {
           #️⃣ Tags
         </button>
       </div>
-      <CreatePost isOpen={isOpen} setIsOpen={setIsOpen} />
+      <CreatePost
+        isOpen={isOpen}
+        openPostModal={openModal}
+        closePostModal={closeModal}
+      />
     </div>
   );
 };

@@ -9,22 +9,22 @@ import store, { RootState } from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
 import {
   Comments,
-  Comment,
   Pagination,
   Posts,
+  Author,
 } from "../../posts/types/postType";
 import { ResponseType } from "types/responseType";
 import { useContext } from "react";
 import { PostRefetchContext } from "../../posts/context/PostContext";
 import { nanoid } from "nanoid";
-import { CommentRefetchContext } from "../../posts/context/CommentContext";
 import { useSelector } from "react-redux";
 import { Refetch } from "stores/refetchSlice";
-import { UserContext } from "../../posts/context/UserContext";
 
 const postComment = (postId: string, commentId?: string) => {
   const { page, refetch } = useContext(PostRefetchContext);
-  const { user } = useContext(UserContext);
+  const user = useSelector<RootState, Author | undefined>(
+    (store) => store.user.user
+  );
   const refetchComment = useSelector<RootState, Refetch>(
     (store) => store.refetch.refetch
   );

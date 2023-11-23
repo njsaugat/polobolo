@@ -28,3 +28,11 @@ const ShimmerAvatar = ({ children, className }: ShimmerAvatarProps) => {
 };
 
 export default ShimmerAvatar;
+
+export const ShimmerAvatars = () => (
+  <>
+    {new Array(6).fill(1).map((profile, index) => (
+      <ShimmerAvatar key={profile + index} />
+    ))}
+  </>
+);

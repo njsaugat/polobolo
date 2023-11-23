@@ -18,21 +18,7 @@ export default function DragAndDrop({
   const [dragActive, setDragActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
   const [files, setFiles] = useState<any>([]);
-  function addURLs(files: any) {
-    if (fileDataURLs?.length <= TOTAL_UPLOADABLE_IMAGES - 1) {
-      const result = URL.createObjectURL(files[files["length"] - 1]);
-      setFileDataURLs((prevURLs) => [...prevURLs, result]);
-    } else {
-      const { dispatch } = store;
-      dispatch(
-        addNotification({
-          type: "error",
-          title: "Error",
-          message: `Only ${TOTAL_UPLOADABLE_IMAGES} images are allowed to be uploaded.`,
-        })
-      );
-    }
-  }
+
   function handleChange(e: any) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
@@ -41,8 +27,6 @@ export default function DragAndDrop({
       }
     }
   }
-
-  function handleSubmitFile(e: any) {}
 
   function handleDrop(e: any) {
     e.preventDefault();

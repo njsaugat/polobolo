@@ -1,10 +1,11 @@
-import CloseModal from "components/Elements/CloseModal";
 import { Dialog } from "../../../components/Elements/Dialog";
 import AuthorProfile from "./AuthorProfile";
 import { FollowerProfile } from "../../posts/types/postType";
 import React, { useRef } from "react";
 import getFollowersList from "../api/getFollowersList";
-import ShimmerAvatar from "../../../components/Shimmer/ShimmerAvatar";
+import ShimmerAvatar, {
+  ShimmerAvatars,
+} from "../../../components/Shimmer/ShimmerAvatar";
 import { Button } from "../../../components/Elements/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
@@ -38,9 +39,7 @@ const UserList = ({ isOpen, closeModal, followers }: UserListProps) => {
       >
         <div ref={divRef}>
           {isLoading ? (
-            new Array(6)
-              .fill(1)
-              .map((profile, index) => <ShimmerAvatar key={profile + index} />)
+            <ShimmerAvatars />
           ) : (
             <div className="flex flex-col space-y-3 ">
               {data?.pages?.map((page: any) => {
@@ -74,12 +73,7 @@ const UserList = ({ isOpen, closeModal, followers }: UserListProps) => {
 
               {hasNextPage && (
                 <>
-                  {isFetchingNextPage &&
-                    new Array(6)
-                      .fill(1)
-                      .map((profile, index) => (
-                        <ShimmerAvatar key={profile + index} />
-                      ))}
+                  {isFetchingNextPage ? <ShimmerAvatars /> : null}
                   <Button
                     variant="blend"
                     size="md"

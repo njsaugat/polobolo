@@ -6,11 +6,13 @@ const initialState: {
   isLoggedIn: boolean;
   isEmailVerified: boolean;
   isInitialLogin: boolean;
+  updatedProfilePicURL: string | undefined;
 } = {
   user: undefined,
   isLoggedIn: false,
   isEmailVerified: false,
   isInitialLogin: true,
+  updatedProfilePicURL: undefined,
 };
 
 export const userSlice = createSlice({
@@ -35,6 +37,9 @@ export const userSlice = createSlice({
     handleInitialLogin: (state, action: PayloadAction<boolean>) => {
       state.isInitialLogin = action.payload;
     },
+    handleUpdateProfilePic: (state, action: PayloadAction<string>) => {
+      state.updatedProfilePicURL = action.payload;
+    },
   },
 });
 
@@ -45,5 +50,6 @@ export const {
   handleLogoutUser,
   handleEmailVerification,
   handleInitialLogin,
+  handleUpdateProfilePic,
 } = userSlice.actions;
 export default userSlice.reducer;

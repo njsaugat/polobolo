@@ -10,7 +10,6 @@ import {
   handleLoginUser,
 } from "../../../stores/userSlice";
 import store, { RootState } from "../../../stores/store";
-import useAuthCheck from "../../../hooks/useAuthCheck";
 import { addNotification } from "../../../stores/notificationSlice";
 const isUserInitialLogin = (createdAt: string, updatedAt: string) => {
   let createdAtDate = new Date(createdAt).valueOf();
@@ -22,7 +21,6 @@ const isUserInitialLogin = (createdAt: string, updatedAt: string) => {
 const useLoginUser = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const isLoggedIn = useAuthCheck();
   const loginUser = (loginData: LoginValidationSchema) => {
     return axios.post("/users/login", loginData);
   };
@@ -42,6 +40,7 @@ const useLoginUser = () => {
         dispatch(handleInitialLogin(isInitialLogin));
 
         if (isInitialLogin) {
+          navigate("/onboarding");
           dispatch(
             addNotification({
               type: "success",
@@ -49,6 +48,8 @@ const useLoginUser = () => {
               message: "Please update your profile.",
             })
           );
+        } else {
+          navigate("/home");
         }
         if (!isEmailVerified) {
           setTimeout(() => {

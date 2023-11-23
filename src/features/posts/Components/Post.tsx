@@ -21,7 +21,7 @@ export type RefetchProps = {
 };
 
 const PostCard = ({ post }: PostCardProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenPostImage, setIsOpenPostImage] = useState(false);
   const [isOpenPostEdit, setIsOpenPostEdit] = useState(false);
   const [isOpenPostDelete, setIsOpenPostDelete] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,12 +32,12 @@ const PostCard = ({ post }: PostCardProps) => {
   );
   const { mutate, error, isLoading } = deletePost(post._id);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-  function openModal() {
-    setIsOpen(true);
-  }
+  const closePostImageModal = () => setIsOpenPostImage(false);
+
+  const openPostImageModal = () => setIsOpenPostImage(true);
+
+  const openModalEdit = () => setIsOpenPostEdit(true);
+  const closeModalEdit = () => setIsOpenPostEdit(false);
 
   const prevSlide = () => {
     setCurrentIndex(
@@ -48,12 +48,14 @@ const PostCard = ({ post }: PostCardProps) => {
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % post.images.length);
   };
-
+  const postTextContent = (
+    <PostAuthor post={post}>
+      <p className="mt-4">{post.content}</p>
+    </PostAuthor>
+  );
   return (
     <div className="relative w-11/12 p-4 bg-white rounded-lg shadow-2xl drop- md:w-3/5 lg:w-1/2">
-      <PostAuthor post={post}>
-        <p className="mt-4">{post.content}</p>
-      </PostAuthor>
+      {postTextContent}
       {post.author._id === user?._id &&
         pathname.includes(user?.account.username.toLowerCase()) && (
           <>
@@ -62,31 +64,32 @@ const PostCard = ({ post }: PostCardProps) => {
               openDeleteModal={() => setIsOpenPostDelete(true)}
               isShown={true}
             />
-            {isOpenPostEdit && (
+            {isOpenPostEdit ? (
               <CreatePost
                 isOpen={isOpenPostEdit}
-                setIsOpen={setIsOpenPostEdit}
+                openPostModal={openModalEdit}
+                closePostModal={closeModalEdit}
                 post={post}
               />
-            )}
-            {isOpenPostDelete && (
+            ) : null}
+            {isOpenPostDelete ? (
               <DeletePost
                 isOpen={isOpenPostDelete}
                 closeModal={() => setIsOpenPostDelete(false)}
                 isLoading={isLoading}
                 handleDelete={() => {
                   mutate();
-                  closeModal();
+                  closePostImageModal();
                 }}
                 content="Are you sure you want to delete the post❓"
               />
-            )}
+            ) : null}
           </>
         )}
 
       {post?.images.length > 0 && (
         <div
-          onClick={openModal}
+          onClick={openPostImageModal}
           className="px-4 py-2 text-sm font-medium text-white rounded-md cursor-pointer bg-slate-100 bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         >
           <div className="grid grid-cols-3 gap-4 mt-4 ">
@@ -114,34 +117,36 @@ const PostCard = ({ post }: PostCardProps) => {
           </div>
         </div>
       )}
-      <Dialog
-        isOpen={isOpen}
-        closeModal={closeModal}
-        modalClassName="lg:overflow-hidden lg:min-h-screen"
-      >
-        <CloseModal closeModal={closeModal} />
-        <div className="lg:flex lg:flex-row-reverse lg:items-start">
-          <div className={`flex-col my-4 lg:mx-4 lg:w-1/4 `}>
-            <PostAuthor post={post}>
-              <p className="mt-4">{post.content}</p>
-            </PostAuthor>
-            <Tags post={post} />
-            <div className="hidden lg:block">
-              <Engagements post={post} isModalOpen={isOpen} />
-            </div>
-          </div>
-          <Carousel
-            post={post}
-            currentIndex={currentIndex}
-            prevSlide={prevSlide}
-            nextSlide={nextSlide}
-          />
-        </div>
-        {isScreenSmall && <Engagements post={post} isModalOpen={isOpen} />}
-      </Dialog>
-
       <Tags post={post} />
-      <Engagements post={post} isModalOpen={isOpen} />
+      <Engagements post={post} isModalOpen={isOpenPostImage} />
+
+      {isOpenPostImage ? (
+        <Dialog
+          isOpen={isOpenPostImage}
+          closeModal={closePostImageModal}
+          modalClassName="lg:overflow-hidden lg:min-h-screen"
+        >
+          <CloseModal closeModal={closePostImageModal} />
+          <div className="lg:flex lg:flex-row-reverse lg:items-start">
+            <div className={`flex-col my-4 lg:mx-4 lg:w-1/4 `}>
+              {postTextContent}
+              <Tags post={post} />
+              <div className="hidden lg:block">
+                <Engagements post={post} isModalOpen={isOpenPostImage} />
+              </div>
+            </div>
+            <Carousel
+              post={post}
+              currentIndex={currentIndex}
+              prevSlide={prevSlide}
+              nextSlide={nextSlide}
+            />
+          </div>
+          {isScreenSmall && (
+            <Engagements post={post} isModalOpen={isOpenPostImage} />
+          )}
+        </Dialog>
+      ) : null}
     </div>
   );
 };

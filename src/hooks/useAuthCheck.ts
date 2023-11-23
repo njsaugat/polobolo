@@ -7,23 +7,14 @@ import { Author } from "features/posts/types/postType";
 import { QueryClient } from "@tanstack/react-query";
 
 const useAuthCheck = () => {
-  let isLoggedIn;
   const queryClient = new QueryClient();
   const user = queryClient.getQueryData(["user"]);
-  console.log(user);
-  if (user) {
-    isLoggedIn = true;
-    console.log("here logged in");
-  } else {
-    isLoggedIn = useSelector<RootState, boolean>(
-      (store) => store.user.isLoggedIn
-    );
-  }
-  const accessToken = LocalStorage.get("accessToken");
-  if (isLoggedIn || accessToken) {
-    return true;
-  }
-  return false;
+  const userData = useSelector<RootState, boolean>(
+    (store) => store.user.isLoggedIn
+  );
+  const accessToken: string = LocalStorage.get("accessToken");
+
+  return userData || !!accessToken;
 };
 
 export default useAuthCheck;
