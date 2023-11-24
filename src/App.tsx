@@ -6,6 +6,7 @@ import { UserContext } from "./features/posts/context/UserContext";
 import { addUser } from "./stores/userSlice";
 import getUser from "./features/user/api/getUser";
 import useAuthCheck from "./hooks/useAuthCheck";
+import { SocketProvider } from "./context/SocketContext";
 
 const App = () => {
   const loggedIn = useAuthCheck();
@@ -17,12 +18,12 @@ const App = () => {
   const userData = fetchUserData();
 
   return (
-    <UserContext.Provider value={{ user: userData }}>
+    <SocketProvider>
       <div className="min-w-full overflow-x-hidden font-montserrat">
         <Navbar />
         <Outlet />
       </div>
-    </UserContext.Provider>
+    </SocketProvider>
   );
 };
 

@@ -1,8 +1,14 @@
-import { Link } from "react-router-dom";
+import useAuthCheck from "../../hooks/useAuthCheck";
+import { Link, Navigate } from "react-router-dom";
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 
-const ErrorElement = () => {
+const ErrorRouteElement = () => {
   const error = useRouteError();
+  const isLoggedIn = useAuthCheck();
+  console.log(isLoggedIn);
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div
@@ -25,4 +31,4 @@ const ErrorElement = () => {
   );
 };
 
-export default ErrorElement;
+export default ErrorRouteElement;

@@ -1,13 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import getAllUsers from "../api/getAllUser";
-import { Combobox, Menu, Transition } from "@headlessui/react";
-import AuthorProfile from "../../../features/user/Components/AuthorProfile";
-import { Author, Chat, ChatUser } from "../../../features/posts/types/postType";
+import { Combobox, Transition } from "@headlessui/react";
+import { Author, ChatUser } from "../../../features/posts/types/postType";
 import { ShimmerAvatars } from "../../../components/Shimmer/ShimmerAvatar";
 import createChat from "../api/createOnetoOneChat";
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  CheckIcon,
   ChevronDownIcon,
   SearchIcon as MagnifyingGlassIcon,
 } from "@heroicons/react/outline";
@@ -15,6 +13,7 @@ import Toggle from "../../../components/Elements/Toggle";
 import { Button } from "../../../components/Elements/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores/store";
+import AvailableUserOption from "./AvailableUserOption";
 
 type AvailableUsersProps = {
   isChat: boolean;
@@ -45,6 +44,22 @@ const AvailableUsers = ({
     setQuery(" ");
   };
   let filteredPeople: ChatUser[] | undefined = undefined;
+  const handleCreateGroup = () => {
+    setIsGroupChatEnabled(false);
+    mutate({
+      isGroup: true,
+      receiverIds: Array.isArray(selected) ? selected?.map((u) => u._id) : [""],
+      name: Array.isArray(selected)
+        ? `${
+            loggedInUser ? loggedInUser?.account.username : ""
+          },${selected.reduce((result, user) => {
+            return result === ""
+              ? user.username
+              : `${result}, ${user.username}`;
+          }, "")}`
+        : "",
+    });
+  };
 
   if (!isLoading && isSearching) {
     filteredPeople =
@@ -120,101 +135,43 @@ const AvailableUsers = ({
               leaveTo="opacity-0"
               afterLeave={() => handleClear()}
             >
-              {true ? (
-                <Combobox.Options className="absolute z-50 w-full py-1 mt-1 overflow-auto overflow-x-hidden text-base bg-white rounded-md max-h-60 ring-1 ring-black/5 focus:outline-none sm:text-sm">
-                  {isLoading ? (
-                    <ShimmerAvatars />
-                  ) : filteredPeople?.length === 0 && query !== "" ? (
-                    <div className="relative px-4 py-2 text-gray-700 cursor-default select-none">
-                      Nothing found.
-                    </div>
-                  ) : (
-                    <>
-                      {isChat && isSearching ? (
-                        <div className="flex items-center justify-between w-full pr-3 pl-14 ">
-                          <span>Create group</span>
-                          <Toggle
-                            enabled={isGroupChatEnabled}
-                            setEnabled={setIsGroupChatEnabled}
-                            removePreviousSelected={() =>
-                              isGroupChatEnabled
-                                ? setSelected([])
-                                : setSelected(undefined)
-                            }
-                          />
-                        </div>
-                      ) : null}
-                      {filteredPeople?.map((user) => (
-                        <Combobox.Option
-                          key={user?._id}
-                          className={({ active }) =>
-                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                              active
-                                ? "bg-teal-600 text-white"
-                                : "text-gray-900"
-                            }`
+              <Combobox.Options className="absolute z-50 w-full py-1 mt-1 overflow-auto overflow-x-hidden text-base bg-white rounded-md max-h-60 ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                {isLoading ? (
+                  <ShimmerAvatars />
+                ) : filteredPeople?.length === 0 && query !== "" ? (
+                  <div className="relative px-4 py-2 text-gray-700 cursor-default select-none">
+                    Nothing found.
+                  </div>
+                ) : (
+                  <>
+                    {isChat && isSearching ? (
+                      <div className="flex items-center justify-between w-full pr-3 pl-14 ">
+                        <span>Create group</span>
+                        <Toggle
+                          enabled={isGroupChatEnabled}
+                          setEnabled={setIsGroupChatEnabled}
+                          removePreviousSelected={() =>
+                            isGroupChatEnabled
+                              ? setSelected([])
+                              : setSelected(undefined)
                           }
-                          value={user}
-                        >
-                          {({ selected, active }) => (
-                            <>
-                              {
-                                <div
-                                  onClick={
-                                    !isGroupChatEnabled ? handleClear : () => {}
-                                  }
-                                  className="flex justify-between "
-                                >
-                                  <AuthorProfile
-                                    username={user?.username}
-                                    url={user?.avatar.url}
-                                    firstName={user?.username}
-                                    lastName={""}
-                                    bio={""}
-                                    isChat={isChat}
-                                    isGroupChat={
-                                      isGroupChatEnabled || !!addParticipant
-                                    }
-                                    closeModal={
-                                      !isGroupChatEnabled
-                                        ? handleClear
-                                        : () => {}
-                                    }
-                                    createChat={
-                                      isChat && !isGroupChatEnabled
-                                        ? () =>
-                                            mutate({
-                                              isGroup: false,
-                                              receiverIds: [user._id],
-                                              name: user.username,
-                                            })
-                                        : addParticipant
-                                        ? () => addParticipant(user._id)
-                                        : () => {}
-                                    }
-                                  />
-                                </div>
-                              }
-                              {selected ? (
-                                <span
-                                  className={`absolute  justify-center   inset-y-0  right-2 flex items-center pl-3 ${
-                                    active ? "text-white" : "text-teal-600"
-                                  }`}
-                                >
-                                  <CheckIcon
-                                    className="w-5 h-5"
-                                    aria-hidden="true"
-                                  />
-                                </span>
-                              ) : null}
-                            </>
-                          )}
-                        </Combobox.Option>
-                      ))}
-                    </>
-                  )}
-                </Combobox.Options>
-              ) : null}
+                        />
+                      </div>
+                    ) : null}
+                    {filteredPeople?.map((user) => (
+                      <AvailableUserOption
+                        key={user?._id}
+                        user={user}
+                        isGroupChatEnabled={isGroupChatEnabled}
+                        isChat={isChat}
+                        handleClear={handleClear}
+                        mutate={mutate}
+                        addParticipant={addParticipant}
+                      />
+                    ))}
+                  </>
+                )}
+              </Combobox.Options>
             </Transition>
           </div>
         </Combobox>
@@ -224,24 +181,7 @@ const AvailableUsers = ({
               <Button
                 variant="blend"
                 className=""
-                onClick={() => {
-                  setIsGroupChatEnabled(false);
-                  mutate({
-                    isGroup: true,
-                    receiverIds: Array.isArray(selected)
-                      ? selected?.map((u) => u._id)
-                      : [""],
-                    name: Array.isArray(selected)
-                      ? `${
-                          loggedInUser ? loggedInUser?.account.username : ""
-                        },${selected.reduce((result, user) => {
-                          return result === ""
-                            ? user.username
-                            : `${result}, ${user.username}`;
-                        }, "")}`
-                      : "",
-                  });
-                }}
+                onClick={handleCreateGroup}
                 disabled={!(Array.isArray(selected) && selected?.length > 1)}
               >
                 {"Create Group"}

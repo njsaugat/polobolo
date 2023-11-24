@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import ErrorElement from "../components/Shared/ErrorElement";
+import ErrorRouteElement from "../components/Shared/ErrorRouteElement";
 import Login from "../features/auth/Components/Login";
 import Signup from "../features/auth/Components/Signup";
 import Container from "../features/auth/Components/Container";
@@ -45,7 +45,7 @@ const publicRoutes = [
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorElement />,
+    errorElement: <ErrorRouteElement />,
     children: [
       {
         index: true,
@@ -84,7 +84,7 @@ const protectedRoutes = [
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorElement />,
+    errorElement: <ErrorRouteElement />,
     children: [
       {
         index: true,

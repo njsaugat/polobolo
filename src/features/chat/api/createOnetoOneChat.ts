@@ -7,20 +7,16 @@ import { JOIN_CHAT_EVENT } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
 import { addNotification } from "../../../stores/notificationSlice";
 import store from "../../../stores/store";
-
+export type CreateChatProps = {
+  receiverIds: string[];
+  name: string;
+  isGroup: boolean;
+};
 const createChat = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { socket } = useSocket();
-  const postCreateChat = ({
-    receiverIds,
-    isGroup,
-    name,
-  }: {
-    receiverIds: string[];
-    name: string;
-    isGroup: boolean;
-  }) => {
+  const postCreateChat = ({ receiverIds, isGroup, name }: CreateChatProps) => {
     if (isGroup) {
       const groupChatData = { name: name, participants: receiverIds };
       return axios.post<ResponseType<Chat>>(

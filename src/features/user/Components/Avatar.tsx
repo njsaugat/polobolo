@@ -11,12 +11,15 @@ type AvatarProps = {
   username?: string;
 };
 const Avatar = ({ url, firstName, className, username }: AvatarProps) => {
-  const updatedProfilePicURL = useSelector<RootState, string | undefined>(
-    (store) => store.user.updatedProfilePicURL
-  );
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
+  let updatedProfilePicURL;
+  if (user?.account.username === username) {
+    updatedProfilePicURL = useSelector<RootState, string | undefined>(
+      (store) => store.user.updatedProfilePicURL
+    );
+  }
   return (
     <Link to={`/user/${username}`}>
       <LoadImage

@@ -1,25 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import getUserChat from "../api/getUserChat";
-import ShimmerComment from "../../../components/Shimmer/ShimmerComment";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores/store";
 import { Author, Chat, ChatUser } from "../../../features/posts/types/postType";
 import ChatAuthorProfile from "./ChatAuthorProfile";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { useSocket } from "../../../context/SocketContext";
-import { QueryObserver, useQueryClient } from "@tanstack/react-query";
 import AvailableUsers from "./AvailableUsers";
 import EditDeleteMenu from "../../../features/posts/Components/EditDeletePostMenu";
 import DeletePost from "../../../features/posts/Components/DeletePost";
 import deleteChat, { deleteOneToOneChat } from "../api/deleteChat";
 import EditGroupPostName from "./EditGroupPostName";
 import { Dialog } from "../../../components/Elements/Dialog";
-import AuthorProfile from "../../../features/user/Components/AuthorProfile";
 import { Button } from "../../../components/Elements/Button";
 import addChatMember from "../api/addDeleteMembers";
 import useSocketEvents from "../hooks/useSocketEvents";
-import { ResponseType } from "types/responseType";
 import ShimmerChatList from "../../../components/Shimmer/ShimmerChatList";
+import ChatMembers from "./ChatMembers";
 
 function truncateMessage(text: string, maxLength: number) {
   if (!text) {
@@ -45,19 +41,15 @@ type LeaveChat = DeleteChat & {
 const MemoAvailableUsers = React.memo(AvailableUsers);
 const ChatList = () => {
   const { isLoading, data, error } = getUserChat();
-  const queryClient = useQueryClient();
   const [lastMessage, setLastMessage] = useState<string | undefined>();
   const [hoveredId, setHoveredId] = useState("");
-  const [isOpenChatAddParticipant, setIsOpenChatAddParticipant] = useState("");
+  const [addParticipantChatId, setAddParticipantChatId] = useState("");
   const [isOpenChatDelete, setIsOpenChatDelete] = useState<DeleteChat>();
-  const [isOpenChatInfoId, setIsOpenChatInfoId] = useState("");
+  const [chatInfoId, setChatInfoId] = useState("");
   const [isOpenChatLeave, setIsOpenChatLeave] = useState<LeaveChat>();
-  const [isOpenGroupChatEdit, setIsOpenGroupChatEdit] =
-    useState<EditChatName>();
-  const [isConnected, setIsConnected] = useState(false);
-  const [isDisconnected, setIsDisconnected] = useState(false);
+  const [editGroupChat, setEditGroupChat] = useState<EditChatName>();
 
-  const closeAddUserModal = () => setIsOpenChatAddParticipant("");
+  const closeAddUserModal = () => setAddParticipantChatId("");
   const { mutate: mutateAddMember } = addChatMember();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const {
@@ -68,9 +60,39 @@ const ChatList = () => {
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
-  const { socket } = useSocket();
   const navigate = useNavigate();
+  const isUserGroupAdmin = (chat: Chat) => chat?.admin === user?.account?._id;
 
+  const openLeaveChatModal = (chat: Chat) =>
+    setIsOpenChatLeave({
+      chatId: chat?._id,
+      isGroupChat: chat?.isGroupChat,
+      isLeave: true,
+    });
+  const openEditChatNameModal = (chat: Chat) =>
+    chat.isGroupChat && isUserGroupAdmin(chat)
+      ? () =>
+          setEditGroupChat({
+            chatId: chat?._id,
+            groupName: chat?.name,
+          })
+      : () => {};
+
+  const openDeleteChatModal = (chat: Chat) =>
+    !chat.isGroupChat || isUserGroupAdmin(chat)
+      ? setIsOpenChatDelete({
+          chatId: chat?._id,
+          isGroupChat: chat?.isGroupChat,
+        })
+      : () => {};
+  const addParticipant = (participantId: string) => {
+    mutateAddMember({
+      participantId: participantId,
+      chatId: addParticipantChatId,
+    });
+    closeAddUserModal();
+  };
+  const closeInfoModal = () => setChatInfoId("");
   // register all socket events:
   useSocketEvents();
 
@@ -119,49 +141,25 @@ const ChatList = () => {
                     />
                     {hoveredId === chat._id && (
                       <EditDeleteMenu
-                        openInfoModal={() => setIsOpenChatInfoId(chat?._id)}
+                        openInfoModal={() => setChatInfoId(chat?._id)}
                         openAddParticipantModal={() => {
-                          setIsOpenChatAddParticipant(chat?._id);
+                          setAddParticipantChatId(chat?._id);
                         }}
-                        openLeaveModal={() =>
-                          setIsOpenChatLeave({
-                            chatId: chat?._id,
-                            isGroupChat: chat?.isGroupChat,
-                            isLeave: true,
-                          })
-                        }
-                        openEditModal={
-                          chat.isGroupChat && chat?.admin === user?.account?._id
-                            ? () =>
-                                setIsOpenGroupChatEdit({
-                                  chatId: chat?._id,
-                                  groupName: chat?.name,
-                                })
-                            : () => {}
-                        }
-                        openDeleteModal={() =>
-                          !chat.isGroupChat ||
-                          chat?.admin === user?.account?._id
-                            ? setIsOpenChatDelete({
-                                chatId: chat?._id,
-                                isGroupChat: chat?.isGroupChat,
-                              })
-                            : () => {}
-                        }
+                        openLeaveModal={() => openLeaveChatModal(chat)}
+                        openEditModal={openEditChatNameModal(chat)}
+                        openDeleteModal={() => openDeleteChatModal(chat)}
                         isNotEdit={
                           !(chat?.isGroupChat
-                            ? chat?.admin === user?.account?._id
+                            ? isUserGroupAdmin(chat)
                             : chat?.isGroupChat)
                         }
                         showGroupInfo={chat?.isGroupChat}
                         isShown={true}
                         isNotDelete={
-                          !(chat?.isGroupChat
-                            ? chat?.admin === user?.account?._id
-                            : true)
+                          !(chat?.isGroupChat ? isUserGroupAdmin(chat) : true)
                         }
                         isGroupLeaveOption={chat?.isGroupChat}
-                        isGroupAdmin={chat?.admin === user?.account?._id}
+                        isGroupAdmin={isUserGroupAdmin(chat)}
                       />
                     )}
                   </NavLink>
@@ -170,9 +168,9 @@ const ChatList = () => {
           </React.Fragment>
         ))}
       </div>
-      {!!isOpenChatAddParticipant ? (
+      {!!addParticipantChatId ? (
         <Dialog
-          isOpen={!!isOpenChatAddParticipant}
+          isOpen={!!addParticipantChatId}
           closeModal={closeAddUserModal}
           className="rounded-lg md:w-1/2 h-96 lg:w-1/3 deleteDialog "
           modalClassName=" mx-10"
@@ -181,23 +179,12 @@ const ChatList = () => {
             <AvailableUsers
               isChat={false}
               buttonRef={buttonRef}
-              addParticipant={(participantId: string) => {
-                mutateAddMember({
-                  participantId: participantId,
-                  chatId: isOpenChatAddParticipant,
-                });
-                closeAddUserModal();
-              }}
+              addParticipant={addParticipant}
             />
             <Button
               variant="blend"
               className="self-end"
-              onClick={() => {
-                mutateAddMember({
-                  participantId: "",
-                  chatId: isOpenChatAddParticipant,
-                });
-              }}
+              onClick={() => buttonRef?.current?.click()}
             >
               Add Participant
             </Button>
@@ -221,45 +208,15 @@ const ChatList = () => {
           content="Are you sure you want to leave the chat❓"
         />
       ) : null}
-      {!!isOpenChatInfoId ? (
-        <Dialog
-          isOpen={!!isOpenChatInfoId}
-          closeModal={() => setIsOpenChatInfoId("")}
-          className="rounded-lg md:w-1/2 lg:w-1/3 deleteDialog "
-          modalClassName=" mx-10"
-        >
-          <h3>Members:</h3>
-          {queryClient
-            .getQueryData<ResponseType<Chat[]>>(["chats"])
-            ?.data.map((chat: Chat) =>
-              chat._id === isOpenChatInfoId
-                ? chat.participants.map((participant) => (
-                    <div
-                      key={participant?._id + participant?.username}
-                      className="my-2"
-                    >
-                      <AuthorProfile
-                        username={participant?.username}
-                        url={participant?.avatar.url}
-                        firstName={participant?.username}
-                        lastName={""}
-                        bio={""}
-                        isChat={false}
-                        isGroupChat={false}
-                        closeModal={() => {}}
-                      />
-                    </div>
-                  ))
-                : null
-            )}
-        </Dialog>
+      {!!chatInfoId ? (
+        <ChatMembers chatInfoId={chatInfoId} closeModal={closeInfoModal} />
       ) : null}
 
-      {isOpenGroupChatEdit?.chatId ? (
+      {editGroupChat?.chatId ? (
         <EditGroupPostName
-          chatId={isOpenGroupChatEdit?.chatId}
-          closeModal={() => setIsOpenGroupChatEdit(undefined)}
-          groupName={isOpenGroupChatEdit?.groupName}
+          chatId={editGroupChat?.chatId}
+          closeModal={() => setEditGroupChat(undefined)}
+          groupName={editGroupChat?.groupName}
         />
       ) : null}
       {isOpenChatDelete?.chatId ? (

@@ -5,7 +5,7 @@ import ChatAuthorProfile from "./ChatAuthorProfile";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
 import { Author, Chat, ChatMessage } from "features/posts/types/postType";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSocket } from "../../../context/SocketContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { ResponseType } from "types/responseType";
@@ -22,6 +22,15 @@ const ChatSection = () => {
   const { chatId } = useParams();
   const queryClient = useQueryClient();
   const { data, isLoading, error } = getChatMessages(chatId);
+  const navigate = useNavigate();
+  if (error) {
+    console.log("error", error);
+    // return <Navigate to="." />;
+    navigate(".");
+  }
+  // if (error) {
+  //   return <Navigate to="." />;
+  // }
   const [isTyping, setIsTyping] = useState(false);
 
   const user = useSelector<RootState, Author | undefined>(

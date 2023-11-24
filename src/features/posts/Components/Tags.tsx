@@ -15,7 +15,6 @@ const Tags = ({ post }: PostCardProp) => {
                   ? "bg-slate-700 text-gray-200 font-bold"
                   : " text-gray-700 bg-gray-200 "
               }`}
-              onClick={() => {}}
             >
               #{currentTag}
             </span>

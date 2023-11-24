@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import LoadImage from "../../../components/Elements/LoadImage";
 import moment from "moment";
 import Avatar from "../../../features/user/Components/Avatar";
 
@@ -8,7 +7,6 @@ type ChatAuthorProfileProps = {
   url: string;
   lastMessage: string;
   sentTime: string;
-  closeModal?: () => void;
   isChatSection?: boolean;
   isUserSender?: boolean;
   isGroupChat?: boolean;
@@ -28,7 +26,6 @@ const ChatAuthorProfile = ({
   username,
   url,
   lastMessage,
-  closeModal,
   isChatSection,
   isUserSender,
   sentTime,

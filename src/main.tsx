@@ -16,9 +16,9 @@ const RootApp = () => (
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <Notifications />
-      <SocketProvider>
-        <AppRoutes />
-      </SocketProvider>
+      <AppRoutes />
+      {/* <SocketProvider>
+      </SocketProvider> */}
       <ReactQueryDevtools />
     </QueryClientProvider>
   </Provider>

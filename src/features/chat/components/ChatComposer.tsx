@@ -86,7 +86,6 @@ const ChatComposer = ({ addCurrentMessage }: ChatComposerProps) => {
           variant="inverse"
           isLoading={isLoading}
           className="absolute border-none rounded-full cursor-pointer top-2 h-11/12 right-2 bg-gradient-to-l from-white to-transparent "
-          onClick={(e) => {}}
         >
           <FontAwesomeIcon
             icon={faPaperPlane}
