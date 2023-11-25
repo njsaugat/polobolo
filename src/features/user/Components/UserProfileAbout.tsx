@@ -2,15 +2,8 @@ import { useParams } from "react-router-dom";
 import React, { useState } from "react";
 import getUserByUsername from "../api/getUserByUsername";
 import UserList from "./UserList";
+import { formatDateStringToBirthday } from "../../../utils/helpers";
 
-function formatDateStringToBirthday(dateString: string) {
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  const formattedDate = new Date(dateString).toLocaleDateString(
-    undefined,
-    options as Intl.DateTimeFormatOptions
-  );
-  return formattedDate;
-}
 const UserProfileAbout = () => {
   const { username } = useParams();
   const { error, data, isLoading } = getUserByUsername(username);
