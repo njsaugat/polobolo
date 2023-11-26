@@ -14,6 +14,9 @@ import ShimmerChat from "../components/Shimmer/ShimmerChat";
 import ShimmerChatSection from "../components/Shimmer/ShimmerChatSection";
 import ShimmerProfile from "../components/Shimmer/ShimmerProfile";
 import ShimmerPosts from "../components/Shimmer/ShimmerPosts";
+import TestErrorBoundary from "../components/Shared/TestErrorBoundary";
+import { ErrorBoundary } from "react-error-boundary";
+import { FallbackErrorBoundary } from "../components/Shared/FallbackErrorBoundary";
 
 const Chat = lazy(() => import("../features/chat/components/Chat"));
 const ChatSection = lazy(
@@ -139,9 +142,14 @@ const protectedRoutes = [
       {
         path: "user/:username",
         element: (
-          <Suspense fallback={<ShimmerProfile />}>
-            <UserProfile />
-          </Suspense>
+          <ErrorBoundary
+            FallbackComponent={FallbackErrorBoundary}
+            onReset={() => {}}
+          >
+            <Suspense fallback={<ShimmerProfile />}>
+              <UserProfile />
+            </Suspense>
+          </ErrorBoundary>
         ),
         children: [
           {
@@ -173,6 +181,10 @@ const protectedRoutes = [
             element: <Settings />,
           },
         ],
+      },
+      {
+        path: "/test",
+        element: <TestErrorBoundary />,
       },
     ],
   },

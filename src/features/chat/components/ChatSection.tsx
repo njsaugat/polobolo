@@ -17,20 +17,12 @@ import {
   STOP_TYPING_EVENT,
   TYPING_EVENT,
 } from "../../../config/constants";
+import { ErrorBoundary } from "react-error-boundary";
 
 const ChatSection = () => {
   const { chatId } = useParams();
   const queryClient = useQueryClient();
   const { data, isLoading, error } = getChatMessages(chatId);
-  const navigate = useNavigate();
-  if (error) {
-    console.log("error", error);
-    // return <Navigate to="." />;
-    navigate(".");
-  }
-  // if (error) {
-  //   return <Navigate to="." />;
-  // }
   const [isTyping, setIsTyping] = useState(false);
 
   const user = useSelector<RootState, Author | undefined>(
@@ -74,6 +66,7 @@ const ChatSection = () => {
   }
   return (
     <>
+      {/* <ErrorBoundary FallbackComponent={MyFallbackComponent}> */}
       <div className=" flex flex-col-reverse transition-all duration-1000  w-full h-[calc(100vh-140px)] md:h-[calc(100%-70px)] overflow-y-auto">
         {isTyping && <TypingChat />}
         {data?.data?.length === 0 ? (
@@ -110,6 +103,7 @@ const ChatSection = () => {
       </div>
 
       <ChatComposer addCurrentMessage={() => {}} />
+      {/* </ErrorBoundary> */}
     </>
   );
 };

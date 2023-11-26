@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LoadImage from "../../../components/Elements/LoadImage";
 import Avatar from "./Avatar";
 
 type AuthorProfileProps = {
@@ -34,19 +33,11 @@ const AuthorProfile = ({
   };
 
   const commonContent = (
-    <div className={`flex items-center w-auto space-x-4 ${className}`}>
-      <Avatar
-        url={url}
-        className="w-12 h-12 rounded-full"
-        username={username}
-        firstName={firstName}
-      />
-      <div>
-        <h2 className={`${className ? "text-sm" : "text-lg"}`}>
-          {firstName} {lastName}
-        </h2>
-        <p className="text-gray-500">{bio}</p>
-      </div>
+    <div>
+      <h2 className={`${className ? "text-sm" : "text-lg"}`}>
+        {firstName} {lastName}
+      </h2>
+      <p className="text-gray-500">{bio}</p>
     </div>
   );
 
@@ -57,13 +48,22 @@ const AuthorProfile = ({
       }`}
       onClick={handleClick}
     >
-      {isChat || isGroupChat ? (
-        commonContent
-      ) : (
-        <Link to={`/user/${username}`} onClick={handleClick}>
-          {commonContent}
-        </Link>
-      )}
+      <div className={`flex items-center w-auto space-x-4 ${className}`}>
+        <Avatar
+          url={url}
+          className="w-12 h-12 rounded-full"
+          username={username}
+          firstName={firstName}
+        />
+
+        {isChat || isGroupChat ? (
+          commonContent
+        ) : (
+          <Link to={`/user/${username}`} onClick={handleClick}>
+            {commonContent}
+          </Link>
+        )}
+      </div>
     </div>
   );
 };

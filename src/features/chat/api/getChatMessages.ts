@@ -10,6 +10,7 @@ const getChatMessages = (chatId: string | undefined) => {
   };
   return useQuery({
     queryKey: ["chats", "messages", chatId],
+    useErrorBoundary: true,
     queryFn: getUserChatMessages,
     staleTime: 1000 * 60 * 60,
     onSuccess: (data) => {

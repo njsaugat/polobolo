@@ -12,6 +12,7 @@ const getUserByUsername = (userName: string | undefined) => {
   return useQuery({
     queryKey: ["user", userName],
     queryFn: getUserProfile,
+    useErrorBoundary: true,
     staleTime: 60 * 60 * 24 * 1000,
   });
 };

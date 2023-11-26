@@ -14,14 +14,12 @@ import { faComment } from "@fortawesome/free-solid-svg-icons";
 import AvailableUsers from "../../../features/chat/components/AvailableUsers";
 import React, { useState } from "react";
 
-const Navbar = () => {
-  const user = useSelector<RootState, Author | undefined>(
-    (store) => store.user.user
-  );
-  const [isSearching, setIsSearching] = useState(false);
-  const isLoggedIn = useAuthCheck();
+type NavbarProps = {
+  isLoggedIn?: boolean;
+  user?: Author;
+};
+const Navbar = ({ isLoggedIn, user }: NavbarProps) => {
   const isScreenSmall = useScreenSize(765);
-  console.log("rendered");
   return (
     <div className="flex items-center justify-between w-screen mt-3 mb-10 overflow-hidden md:mx-28">
       <ul className="flex items-center justify-start md:w-2/3 lg:w-1/3 md:justify-between">
@@ -30,7 +28,7 @@ const Navbar = () => {
       </ul>
       {/* <input className={`${inputFieldStyle} rounded-full lg:w-1/2`} /> */}
       {!isScreenSmall && isLoggedIn && user && (
-        <div className="w-1/3">
+        <div className="w-1/2 translate-y-2 lg:w-1/3">
           {/* <AvailableUsers
             isChat={false}
             setIsSearching={setIsSearching}
@@ -39,7 +37,7 @@ const Navbar = () => {
           <AvailableUsers isChat={false} />
         </div>
       )}
-      <Link to={"/chats"}>
+      <Link to={"/chats"} className="translate-y-1">
         <FontAwesomeIcon
           icon={faComment}
           className="text-2xl text-teal-500 -rotate-0"

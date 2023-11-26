@@ -6,8 +6,8 @@ import { RootState } from "stores/store";
 import { Author } from "features/posts/types/postType";
 import { QueryClient } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 const useAuthCheck = () => {
-  const queryClient = new QueryClient();
   const user = queryClient.getQueryData(["user"]);
   const userData = useSelector<RootState, boolean>(
     (store) => store.user.isLoggedIn
