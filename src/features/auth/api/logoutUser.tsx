@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { axios } from "../../../services/apiClient";
 import store from "../../../stores/store";
 import { handleLogoutUser } from "../../../stores/userSlice";
-import { Navigate, useNavigate } from "react-router-dom";
 import { LocalStorage } from "../../../utils";
 
 const useLogoutUser = () => {

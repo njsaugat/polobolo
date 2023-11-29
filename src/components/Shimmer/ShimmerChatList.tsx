@@ -1,4 +1,3 @@
-import React from "react";
 import ShimmerComment from "./ShimmerComment";
 
 const ShimmerChatList = () => {

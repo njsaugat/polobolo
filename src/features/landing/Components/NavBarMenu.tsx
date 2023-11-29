@@ -2,13 +2,13 @@ import { faAngleDown, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import useLinks from "../../../utils/navbarLinks";
-import { Link } from "react-router-dom";
-import useLogoutUser from "../../auth/api/logoutUser";
-import { Button } from "../../../components/Elements/Button";
-import DeletePost from "../../../features/posts/Components/DeletePost";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { Button } from "../../../components/Elements/Button";
 import AvailableLanguages from "../../../components/Shared/AvailableLanguages";
+import DeletePost from "../../../features/posts/Components/DeletePost";
+import useLinks from "../../../utils/navbarLinks";
+import useLogoutUser from "../../auth/api/logoutUser";
 
 type NavbarMenuProps = {
   username: string | undefined;

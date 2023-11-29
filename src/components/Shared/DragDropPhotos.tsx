@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { addNotification } from "../../stores/notificationSlice";
 import store from "../../stores/store";
 import UploadImage from "./UploadImage";
-import { useTranslation } from "react-i18next";
 
 type DragAndDropProps = {
   fileDataURLs: string[];

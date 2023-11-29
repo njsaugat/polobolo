@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { RootState } from "stores/store";
+import { Button } from "../../../components/Elements/Button";
+import { Spinner } from "../../../components/Elements/Spinner";
+import InputField from "../../../components/Form/InputField";
+import TextArea from "../../../components/Form/TextArea";
+import { Author } from "../../posts/types/postType";
 import {
   SettingsValidationSchema,
   settingsValidationSchema,
 } from "../../posts/utils/settingSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import InputField from "../../../components/Form/InputField";
-import { useSelector } from "react-redux";
-import { RootState } from "stores/store";
-import { Author } from "../../posts/types/postType";
-import TextArea from "../../../components/Form/TextArea";
 import updateProfile from "../api/updateUserProfile";
-import { Button } from "../../../components/Elements/Button";
-import { Link } from "react-router-dom";
-import { Spinner } from "../../../components/Elements/Spinner";
-import { useTranslation } from "react-i18next";
 
 const getComputedDate = (dob: string = "") => {
   const dateObject = new Date(dob);

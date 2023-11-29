@@ -1,16 +1,7 @@
-import {
-  InfiniteData,
-  useInfiniteQuery,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { Comments, Pagination } from "../../../features/posts/types/postType";
 import { axios } from "../../../services/apiClient";
 import { ResponseType } from "../../../types/responseType";
-import {
-  Comment,
-  Comments,
-  Pagination,
-} from "../../../features/posts/types/postType";
 
 const getComments = (postId: string, showComments: boolean) => {
   const queryClient = useQueryClient();

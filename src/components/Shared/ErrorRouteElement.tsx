@@ -1,8 +1,6 @@
+import { Link, Navigate, isRouteErrorResponse, useRouteError } from "react-router-dom";
 import LoadImage from "../../components/Elements/LoadImage";
 import useAuthCheck from "../../hooks/useAuthCheck";
-import { Link, Navigate } from "react-router-dom";
-import { useRouteError, isRouteErrorResponse } from "react-router-dom";
-import Logo from "./Logo";
 import GradientText from "./GradientText";
 
 const ErrorRouteElement = () => {

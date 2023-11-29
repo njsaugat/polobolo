@@ -1,8 +1,4 @@
-import {
-  Middleware,
-  configureStore,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
+import { Middleware, configureStore } from "@reduxjs/toolkit";
 import notificationReducer from "./notificationSlice";
 import refetchReducer from "./refetchSlice";
 import userSlice from "./userSlice";

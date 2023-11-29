@@ -1,18 +1,18 @@
-import { Author, Comment } from "../../posts/types/postType";
-import Like from "../../../components/Shared/Like";
-import CommentContent from "./CommentContent";
-import Avatar from "../../user/Components/Avatar";
-import postLikeComment from "../api/postLikeComment";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../stores/store";
-import EditDeleteMenu from "../../posts/Components/EditDeletePostMenu";
 import { useContext, useState } from "react";
-import CreateComment from "./CreateComment";
-import CloseModal from "../../../components/Elements/CloseModal";
-import DeletePost from "../../posts/Components/DeletePost";
-import { PostRefetchContext } from "../../posts/context/PostContext";
-import deleteComment from "../api/deleteComment";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import CloseModal from "../../../components/Elements/CloseModal";
+import Like from "../../../components/Shared/Like";
+import { RootState } from "../../../stores/store";
+import DeletePost from "../../posts/Components/DeletePost";
+import EditDeleteMenu from "../../posts/Components/EditDeletePostMenu";
+import { PostRefetchContext } from "../../posts/context/PostContext";
+import { Author, Comment } from "../../posts/types/postType";
+import Avatar from "../../user/Components/Avatar";
+import deleteComment from "../api/deleteComment";
+import postLikeComment from "../api/postLikeComment";
+import CommentContent from "./CommentContent";
+import CreateComment from "./CreateComment";
 
 type CommentProps = { comment: Comment };
 const SingleComment = ({ comment }: CommentProps) => {

@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ReactNode } from "react";
 import Logo from "../../../components/Shared/Logo";
 interface ContainerProps {
   children: ReactNode;

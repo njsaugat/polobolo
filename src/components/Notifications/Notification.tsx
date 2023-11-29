@@ -2,8 +2,8 @@ import { Transition } from "@headlessui/react";
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
-  XCircleIcon,
   InformationCircleIcon,
+  XCircleIcon,
 } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 import { Fragment, useEffect } from "react";

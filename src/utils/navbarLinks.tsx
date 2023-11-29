@@ -5,7 +5,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useMemo, useTransition } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 const useLinks = () => {
   const { t } = useTranslation();

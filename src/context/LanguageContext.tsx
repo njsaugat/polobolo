@@ -1,5 +1,5 @@
-import { SetStateAction, createContext, useContext, useState } from "react";
 import i18n from "i18next";
+import { SetStateAction, createContext, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 export const languages = [
   { key: "en", nativeName: "English" },

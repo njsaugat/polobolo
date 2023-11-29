@@ -3,14 +3,13 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { LocalStorage } from "../../../utils/index";
-import store from "../../../stores/store";
-import { addNotification } from "../../../stores/notificationSlice";
-import { ResponseType } from "../../../types/responseType";
-import { Chat, ChatMessage } from "../../../features/posts/types/postType";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { Chat, ChatMessage } from "../../../features/posts/types/postType";
+import { axios } from "../../../services/apiClient";
+import { addNotification } from "../../../stores/notificationSlice";
+import store from "../../../stores/store";
+import { ResponseType } from "../../../types/responseType";
 
 export const deleteOneToOneChat = (
   queryClient: QueryClient,

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { PostCardProp } from "../types/postType";
 import AuthorProfile from "../../user/Components/AuthorProfile";
+import { PostCardProp } from "../types/postType";
 
 type PostAuthor = {
   className?: string;

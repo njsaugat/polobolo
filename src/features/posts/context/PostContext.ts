@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import { Author } from "../types/postType";
 
 export type PostRefetchContext = {
   refetch: ({}: object) => void;

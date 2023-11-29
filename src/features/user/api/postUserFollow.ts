@@ -1,12 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { LocalStorage } from "../../../utils/index";
-import store, { RootState } from "../../../stores/store";
-import { addNotification } from "../../../stores/notificationSlice";
-import { useSelector } from "react-redux";
 import { Author } from "features/posts/types/postType";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { axios } from "../../../services/apiClient";
+import { addNotification } from "../../../stores/notificationSlice";
+import store, { RootState } from "../../../stores/store";
 
 const postFollow = (toBeFollowedUserId: string | undefined) => {
   const queryClient = useQueryClient();

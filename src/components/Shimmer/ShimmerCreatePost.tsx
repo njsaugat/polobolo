@@ -1,4 +1,3 @@
-import React from "react";
 import ShimmerAvatar from "./ShimmerAvatar";
 
 const ShimmerCreatePost = () => {

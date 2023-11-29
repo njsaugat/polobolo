@@ -1,11 +1,7 @@
-import {
-  useInfiniteQuery,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import { ResponseType } from "types/responseType";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ChatUser } from "features/posts/types/postType";
+import { ResponseType } from "types/responseType";
+import { axios } from "../../../services/apiClient";
 
 const getAllUsers = (showUsers: boolean) => {
   const queryClient = useQueryClient();

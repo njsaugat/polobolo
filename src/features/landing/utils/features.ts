@@ -1,10 +1,10 @@
 import CategoryChoose from "../../../assets/images/category-choose.png";
-import RecommendedInfluencer from "../../../assets/images/recommend-influencer.png";
-import ProfileAudit from "../../../assets/images/profile-audit.png";
+import ConnectSocial from "../../../assets/images/connect-social.png";
 import Deal from "../../../assets/images/deal.png";
 import InfluencerCategory from "../../../assets/images/influencer-category.png";
-import ConnectSocial from "../../../assets/images/connect-social.png";
 import InfluencerOffer from "../../../assets/images/influencer-offer.png";
+import ProfileAudit from "../../../assets/images/profile-audit.png";
+import RecommendedInfluencer from "../../../assets/images/recommend-influencer.png";
 
 export type Feature = {
   id: number;

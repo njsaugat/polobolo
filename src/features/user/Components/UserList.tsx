@@ -1,15 +1,13 @@
-import { Dialog } from "../../../components/Elements/Dialog";
-import AuthorProfile from "./AuthorProfile";
-import { FollowerProfile } from "../../posts/types/postType";
-import React, { useRef } from "react";
-import getFollowersList from "../api/getFollowersList";
-import ShimmerAvatar, {
-  ShimmerAvatars,
-} from "../../../components/Shimmer/ShimmerAvatar";
-import { Button } from "../../../components/Elements/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRef } from "react";
+import { Button } from "../../../components/Elements/Button";
+import { Dialog } from "../../../components/Elements/Dialog";
+import { ShimmerAvatars } from "../../../components/Shimmer/ShimmerAvatar";
 import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
+import { FollowerProfile } from "../../posts/types/postType";
+import getFollowersList from "../api/getFollowersList";
+import AuthorProfile from "./AuthorProfile";
 import Follow from "./Follow";
 
 type UserListProps = {

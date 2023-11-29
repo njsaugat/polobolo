@@ -3,16 +3,16 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import store, { RootState } from "../../../stores/store";
+import { nanoid } from "nanoid";
+import { useSelector } from "react-redux";
+import { ResponseType } from "types/responseType";
 import {
   Author,
   Chat,
   ChatMessage,
 } from "../../../features/posts/types/postType";
-import { useSelector } from "react-redux";
-import { ResponseType } from "types/responseType";
-import { nanoid } from "nanoid";
+import { axios } from "../../../services/apiClient";
+import { RootState } from "../../../stores/store";
 
 export const updateChatListLastMessage = (
   chatId: string | undefined,

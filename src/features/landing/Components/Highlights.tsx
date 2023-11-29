@@ -1,8 +1,8 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import Analytics from "../../../assets/images/png/analytics.png";
 import AuditCards from "../../../assets/images/png/audit_cards.png";
 import PostPerformance from "../../../assets/images/png/post-performance.png";
-import { useMemo } from "react";
 
 const Highlights = () => {
   const { t } = useTranslation();

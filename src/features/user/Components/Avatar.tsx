@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { Author } from "features/posts/types/postType";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoadImage from "../../../components/Elements/LoadImage";
-import { useSelector } from "react-redux";
 import { RootState } from "../../../stores/store";
-import { Author } from "features/posts/types/postType";
 type AvatarProps = {
   url?: string;
   firstName?: string;

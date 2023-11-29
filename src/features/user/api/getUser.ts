@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import { ResponseType } from "types/responseType";
 import { Author } from "features/posts/types/postType";
+import { ResponseType } from "types/responseType";
+import { axios } from "../../../services/apiClient";
 
 const getUser = () => {
   const getUserProfile = () => {

@@ -1,14 +1,13 @@
-import { Author } from "../../posts/types/postType";
 import { useEffect, useState } from "react";
-import getUserByUsername from "../api/getUserByUsername";
-import { Outlet, useLocation, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Button } from "../../../components/Elements/Button";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../stores/store";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import { Button } from "../../../components/Elements/Button";
 import ShimmerProfile from "../../../components/Shimmer/ShimmerProfile";
-import Follow from "./Follow";
+import { RootState } from "../../../stores/store";
 import useLinks from "../../../utils/navbarLinks";
+import { Author } from "../../posts/types/postType";
+import getUserByUsername from "../api/getUserByUsername";
+import Follow from "./Follow";
 import UserProfileImage from "./UserProfileImage";
 
 export interface UserProfileProps {

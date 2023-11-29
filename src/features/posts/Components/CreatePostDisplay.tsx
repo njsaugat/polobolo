@@ -1,10 +1,10 @@
-import React, { ReactNode, useState } from "react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
-import { Author } from "../types/postType";
 import Avatar from "../../user/Components/Avatar";
+import { Author } from "../types/postType";
 import CreatePost from "./CreatePost";
-import { useTranslation } from "react-i18next";
 
 const CreatePostDisplay = () => {
   const [isOpen, setIsOpen] = useState(false);

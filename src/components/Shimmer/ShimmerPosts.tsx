@@ -1,6 +1,5 @@
-import React from "react";
-import ShimmerCreatePost from "./ShimmerCreatePost";
 import Shimmer from "./Shimmer";
+import ShimmerCreatePost from "./ShimmerCreatePost";
 
 const ShimmerPosts = () => {
   return (

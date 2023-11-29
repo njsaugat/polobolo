@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import { useNavigate } from "react-router-dom";
-import store from "../../../stores/store";
-import { addNotification } from "../../../stores/notificationSlice";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { axios } from "../../../services/apiClient";
+import { addNotification } from "../../../stores/notificationSlice";
+import store from "../../../stores/store";
 
 export interface SignupData {
   email: string;

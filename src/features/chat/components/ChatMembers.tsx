@@ -1,10 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { Dialog } from "../../../components/Elements/Dialog";
 import { Chat } from "../../../features/posts/types/postType";
 import AuthorProfile from "../../../features/user/Components/AuthorProfile";
-import React from "react";
 import { ResponseType } from "../../../types/responseType";
-import { useTranslation } from "react-i18next";
 
 type ChatMembersProps = {
   chatInfoId: string;

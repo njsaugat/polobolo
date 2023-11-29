@@ -1,7 +1,7 @@
-import React, { KeyboardEvent, useState } from "react";
-import CreateTags from "./CreateTags";
-import { TOTAL_TAGS } from "../../../config/constants";
+import React, { KeyboardEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { TOTAL_TAGS } from "../../../config/constants";
+import CreateTags from "./CreateTags";
 
 type CreatePostProps = {
   tags: string[];

@@ -3,15 +3,15 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import { ResponseType } from "../../../types/responseType";
-import { Comments, Pagination } from "../../posts/types/postType";
 import { useContext } from "react";
-import { PostRefetchContext } from "../../posts/context/PostContext";
-import { CommentRefetchContext } from "../../posts/context/CommentContext";
+import { useTranslation } from "react-i18next";
+import { axios } from "../../../services/apiClient";
 import { addNotification } from "../../../stores/notificationSlice";
 import store from "../../../stores/store";
-import { useTranslation } from "react-i18next";
+import { ResponseType } from "../../../types/responseType";
+import { CommentRefetchContext } from "../../posts/context/CommentContext";
+import { PostRefetchContext } from "../../posts/context/PostContext";
+import { Comments, Pagination } from "../../posts/types/postType";
 
 const postLikeComment = (commentId: string, isLiked: boolean) => {
   const { postId } = useContext(PostRefetchContext);

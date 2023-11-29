@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { Author, PostCardProps } from "../types/postType";
-import { z } from "zod";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDoubleDown,
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { t } from "i18next";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { z } from "zod";
 import { Button } from "../../../components/Elements/Button";
-import getComments from "../../comments/api/getComments";
-import SingleComment from "../../comments/Components/Comment";
-import Avatar from "../../user/Components/Avatar";
-import Like from "../../../components/Shared/Like";
 import Bookmark from "../../../components/Shared/Bookmark";
+import Like from "../../../components/Shared/Like";
+import ShimmerComment from "../../../components/Shimmer/ShimmerComment";
+import { addRefetch } from "../../../stores/refetchSlice";
+import { RootState } from "../../../stores/store";
+import SingleComment from "../../comments/Components/Comment";
+import CreateComment from "../../comments/Components/CreateComment";
+import getComments from "../../comments/api/getComments";
+import Avatar from "../../user/Components/Avatar";
+import postBookmark from "../api/postBookmark";
 import postLike from "../api/postLike";
 import { CommentRefetchContext } from "../context/CommentContext";
-import { useDispatch, useSelector } from "react-redux";
-import { addRefetch } from "../../../stores/refetchSlice";
-import ShimmerComment from "../../../components/Shimmer/ShimmerComment";
-import CreateComment from "../../comments/Components/CreateComment";
-import postBookmark from "../api/postBookmark";
-import { RootState } from "../../../stores/store";
-import { t } from "i18next";
+import { Author, PostCardProps } from "../types/postType";
 
 export const commentValidationSchema = z.object({
   content: z

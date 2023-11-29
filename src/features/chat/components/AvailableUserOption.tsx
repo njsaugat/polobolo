@@ -1,6 +1,6 @@
 import { Combobox } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/outline";
-import { Author, ChatUser } from "../../../features/posts/types/postType";
+import { ChatUser } from "../../../features/posts/types/postType";
 import AuthorProfile from "../../../features/user/Components/AuthorProfile";
 import { CreateChatProps } from "../api/createOnetoOneChat";
 

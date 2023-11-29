@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import moment from "moment";
-import Avatar from "../../../features/user/Components/Avatar";
 import LoadImage from "../../../components/Elements/LoadImage";
+import Avatar from "../../../features/user/Components/Avatar";
 
 type ChatAuthorProfileProps = {
   username: string;

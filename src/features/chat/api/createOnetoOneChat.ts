@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ResponseType } from "../../../types/responseType";
-import { Chat } from "../../../features/posts/types/postType";
 import { JOIN_CHAT_EVENT } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
+import { Chat } from "../../../features/posts/types/postType";
+import { axios } from "../../../services/apiClient";
 import { addNotification } from "../../../stores/notificationSlice";
 import store from "../../../stores/store";
-import { useTranslation } from "react-i18next";
+import { ResponseType } from "../../../types/responseType";
 export type CreateChatProps = {
   receiverIds: string[];
   name: string;

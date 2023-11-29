@@ -1,9 +1,9 @@
-import GraphImage from "../../../assets/images/png/graph-visual.png";
-import MailingList from "./MailingList";
+import { useTranslation } from "react-i18next";
 import AppStore from "../../../assets/images/app-store.svg";
 import GooglePlay from "../../../assets/images/google-play.svg";
-import { useTranslation } from "react-i18next";
+import GraphImage from "../../../assets/images/png/graph-visual.png";
 import LoadImage from "../../../components/Elements/LoadImage";
+import MailingList from "./MailingList";
 const Title = () => {
   const { t } = useTranslation();
   return (

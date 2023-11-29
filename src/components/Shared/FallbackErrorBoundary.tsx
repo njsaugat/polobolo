@@ -1,7 +1,7 @@
-import LoadImage from "../../components/Elements/LoadImage";
-import { Button } from "../../components/Elements/Button";
-import GradientText from "./GradientText";
 import { Link } from "react-router-dom";
+import { Button } from "../../components/Elements/Button";
+import LoadImage from "../../components/Elements/LoadImage";
+import GradientText from "./GradientText";
 
 type FallbackErrorBoundaryProps = {
   error: Error;

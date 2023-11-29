@@ -1,5 +1,5 @@
 // import { MyFallbackComponent } from "../../features/chat/components/ChatSection";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { FallbackErrorBoundary } from "./FallbackErrorBoundary";
 

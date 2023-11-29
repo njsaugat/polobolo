@@ -1,18 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "../../../components/Elements/Button";
-import TextArea from "../../../components/Form/TextArea";
 import { useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "../../../components/Elements/Button";
+import TextArea from "../../../components/Form/TextArea";
 
-import { z } from "zod";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import postMessage from "../api/postMessage";
-import { useParams } from "react-router-dom";
-import { useSocket } from "../../../context/SocketContext";
-import { STOP_TYPING_EVENT, TYPING_EVENT } from "../../../config/constants";
-import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { z } from "zod";
+import { STOP_TYPING_EVENT, TYPING_EVENT } from "../../../config/constants";
+import { useSocket } from "../../../context/SocketContext";
+import postMessage from "../api/postMessage";
 export const chatMessageValidationSchema = z.object({
   chatMessage: z
     .string()

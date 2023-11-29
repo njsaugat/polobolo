@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
-import { Button } from "../../../components/Elements/Button";
-import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../../components/Elements/Button";
 
 const MailingList = () => {
   const { t } = useTranslation();

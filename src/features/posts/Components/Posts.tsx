@@ -1,15 +1,15 @@
-import usePreviousPage from "../../user/hooks/usePreviousPage";
-import PostCard from "./Post";
-import getPosts from "../api/getPosts";
-import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
-import Shimmer from "../../../components/Shimmer/Shimmer";
-import { PostRefetchContext } from "../context/PostContext";
 import { useSelector } from "react-redux";
-import CreatePostDisplay from "./CreatePostDisplay";
-import { Author } from "../types/postType";
-import { RootState } from "stores/store";
 import { useParams } from "react-router-dom";
+import { RootState } from "stores/store";
+import Shimmer from "../../../components/Shimmer/Shimmer";
 import ShimmerPosts from "../../../components/Shimmer/ShimmerPosts";
+import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
+import usePreviousPage from "../../user/hooks/usePreviousPage";
+import getPosts from "../api/getPosts";
+import { PostRefetchContext } from "../context/PostContext";
+import { Author } from "../types/postType";
+import CreatePostDisplay from "./CreatePostDisplay";
+import PostCard from "./Post";
 
 type PostsProps = {
   tag?: string;

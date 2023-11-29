@@ -1,9 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import { Chat } from "features/posts/types/postType";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ResponseType } from "types/responseType";
-import { deleteOneToOneChat } from "../api/deleteChat";
-import { updateGroupChatNameHelper } from "../api/updateGroupChatName";
 import {
   CONNECTED_EVENT,
   DISCONNECT_EVENT,
@@ -12,6 +10,8 @@ import {
   UPDATE_GROUP_NAME_EVENT,
 } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
+import { deleteOneToOneChat } from "../api/deleteChat";
+import { updateGroupChatNameHelper } from "../api/updateGroupChatName";
 
 const useSocketEvents = () => {
   const queryClient = new QueryClient();

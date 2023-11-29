@@ -1,22 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
-import getUserChat from "../api/getUserChat";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../stores/store";
-import { Author, Chat, ChatUser } from "../../../features/posts/types/postType";
-import ChatAuthorProfile from "./ChatAuthorProfile";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
-import AvailableUsers from "./AvailableUsers";
-import EditDeleteMenu from "../../../features/posts/Components/EditDeletePostMenu";
-import DeletePost from "../../../features/posts/Components/DeletePost";
-import deleteChat, { deleteOneToOneChat } from "../api/deleteChat";
-import EditGroupPostName from "./EditGroupPostName";
-import { Dialog } from "../../../components/Elements/Dialog";
-import { Button } from "../../../components/Elements/Button";
-import addChatMember from "../api/addDeleteMembers";
-import useSocketEvents from "../hooks/useSocketEvents";
-import ShimmerChatList from "../../../components/Shimmer/ShimmerChatList";
-import ChatMembers from "./ChatMembers";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Button } from "../../../components/Elements/Button";
+import { Dialog } from "../../../components/Elements/Dialog";
+import ShimmerChatList from "../../../components/Shimmer/ShimmerChatList";
+import DeletePost from "../../../features/posts/Components/DeletePost";
+import EditDeleteMenu from "../../../features/posts/Components/EditDeletePostMenu";
+import { Author, Chat, ChatUser } from "../../../features/posts/types/postType";
+import { RootState } from "../../../stores/store";
+import addChatMember from "../api/addDeleteMembers";
+import deleteChat from "../api/deleteChat";
+import getUserChat from "../api/getUserChat";
+import useSocketEvents from "../hooks/useSocketEvents";
+import AvailableUsers from "./AvailableUsers";
+import ChatAuthorProfile from "./ChatAuthorProfile";
+import ChatMembers from "./ChatMembers";
+import EditGroupPostName from "./EditGroupPostName";
 
 function truncateMessage(text: string, maxLength: number) {
   // if (!text) {

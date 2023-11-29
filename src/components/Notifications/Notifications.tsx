@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SingleNotification } from "./Notification";
 import { RootState } from "stores/store";
 import {
   Notification,
   dismissNotification,
 } from "../../stores/notificationSlice";
+import { SingleNotification } from "./Notification";
 
 export const Notifications = () => {
   const notifications = useSelector<RootState, Notification[]>(

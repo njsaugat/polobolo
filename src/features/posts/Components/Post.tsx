@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { Dialog } from "../../../components/Elements/Dialog";
 
-import { Author, PostCardProps } from "../types/postType";
-import PostAuthor from "./PostAuthor";
-import Tags from "./Tags";
-import Engagements from "./PostEngagements";
-import Carousel from "../../../components/Shared/Carousel";
-import CloseModal from "../../../components/Elements/CloseModal";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { RootState } from "stores/store";
+import CloseModal from "../../../components/Elements/CloseModal";
+import LoadImage from "../../../components/Elements/LoadImage";
+import Carousel from "../../../components/Shared/Carousel";
+import useScreenSize from "../../../hooks/useScreenSize";
+import deletePost from "../api/deletePost";
+import { Author, PostCardProps } from "../types/postType";
 import CreatePost from "./CreatePost";
 import DeletePost from "./DeletePost";
 import EditDeleteMenu from "./EditDeletePostMenu";
-import deletePost from "../api/deletePost";
-import { useLocation } from "react-router-dom";
-import LoadImage from "../../../components/Elements/LoadImage";
-import useScreenSize from "../../../hooks/useScreenSize";
+import PostAuthor from "./PostAuthor";
+import Engagements from "./PostEngagements";
+import Tags from "./Tags";
 export type RefetchProps = {
   refetch: () => void;
 };

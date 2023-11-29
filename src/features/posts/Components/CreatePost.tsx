@@ -1,26 +1,25 @@
-import React, { KeyboardEvent, useEffect, useRef, useState } from "react";
-import { Button } from "../../../components/Elements/Button";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { KeyboardEvent, useEffect, useRef, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import store, { RootState } from "../../../stores/store";
-import { Author, Post } from "../types/postType";
-import { Dialog } from "../../../components/Elements/Dialog";
+import { Button } from "../../../components/Elements/Button";
 import CloseModal from "../../../components/Elements/CloseModal";
+import { Dialog } from "../../../components/Elements/Dialog";
+import TextArea from "../../../components/Form/TextArea";
 import DragAndDrop from "../../../components/Shared/DragDropPhotos";
-import CreateTags from "./CreateTags";
+import { TOTAL_TAGS, TOTAL_UPLOADABLE_IMAGES } from "../../../config/constants";
+import AuthorProfile from "../../../features/user/Components/AuthorProfile";
 import { addNotification } from "../../../stores/notificationSlice";
+import store, { RootState } from "../../../stores/store";
+import { convertToBlob } from "../../../utils/convertToBlob";
+import createPost from "../api/createPost";
+import { Author, Post } from "../types/postType";
 import {
   CreatePostValidationSchema,
   createPostValidationSchema,
 } from "../utils/createPostSchema";
-import createPost from "../api/createPost";
-import { TOTAL_TAGS, TOTAL_UPLOADABLE_IMAGES } from "../../../config/constants";
-import AuthorProfile from "../../../features/user/Components/AuthorProfile";
-import TextArea from "../../../components/Form/TextArea";
 import CreatePostTags from "./CreatePostTags";
-import { convertToBlob } from "../../../utils/convertToBlob";
-import { useTranslation } from "react-i18next";
 
 export type CreatePostDialogProps = {
   post?: Post;

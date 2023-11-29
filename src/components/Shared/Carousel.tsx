@@ -1,13 +1,10 @@
-import React from "react";
-import {
-  Avatar,
-  PostCardProp,
-  PostCardProps,
-} from "../../features/posts/types/postType";
-import LoadImage from "../Elements/LoadImage";
-import { Button } from "../../components/Elements/Button";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "../../components/Elements/Button";
+import {
+  Avatar
+} from "../../features/posts/types/postType";
+import LoadImage from "../Elements/LoadImage";
 
 type CarouselProps = {
   images: Avatar[];

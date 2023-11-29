@@ -1,6 +1,6 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { ResponseType } from "types/responseType";
+import { axios } from "../../../services/apiClient";
 import { Pagination, Posts } from "../types/postType";
 
 const getPosts = (

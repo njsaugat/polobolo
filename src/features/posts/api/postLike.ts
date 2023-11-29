@@ -3,14 +3,14 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import store from "../../../stores/store";
-import { addNotification } from "../../../stores/notificationSlice";
-import { Pagination, Post, PostCardProps, Posts } from "../types/postType";
 import { useContext } from "react";
-import { PostRefetchContext } from "../context/PostContext";
-import { ResponseType } from "../../../types/responseType";
 import { useTranslation } from "react-i18next";
+import { axios } from "../../../services/apiClient";
+import { addNotification } from "../../../stores/notificationSlice";
+import store from "../../../stores/store";
+import { ResponseType } from "../../../types/responseType";
+import { PostRefetchContext } from "../context/PostContext";
+import { Pagination, Posts } from "../types/postType";
 const postLike = (postId: string, isLiked: boolean) => {
   const { refetch, page } = useContext(PostRefetchContext);
   const postUserLike = () => {

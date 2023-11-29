@@ -1,6 +1,6 @@
-import MailingList from "./MailingList";
-import FreeAccess from "../../../assets/images/free-access.svg";
 import { useTranslation } from "react-i18next";
+import FreeAccess from "../../../assets/images/free-access.svg";
+import MailingList from "./MailingList";
 const MarketingFuture = () => {
   const { t } = useTranslation();
   return (

@@ -1,8 +1,8 @@
-import Posts from "./Posts";
 import { useSelector } from "react-redux";
+import { Navigate, useParams } from "react-router-dom";
 import { RootState } from "../../../stores/store";
 import { Author } from "../types/postType";
-import { Navigate, useParams } from "react-router-dom";
+import Posts from "./Posts";
 
 const Bookmarks = () => {
   const user = useSelector<RootState, Author | undefined>(

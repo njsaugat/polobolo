@@ -1,11 +1,7 @@
-import { Controller } from "react-hook-form";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faEye,
-  faEyeSlash,
-} from "@fortawesome/free-solid-svg-icons";
-import { forwardRef, useState, ForwardedRef, Ref, Children } from "react";
+import { ForwardedRef, forwardRef, useState } from "react";
+import { Controller } from "react-hook-form";
 export const inputFieldStyle = `
   w-full px-3 py-2 text-sm leading-tight transition-all duration-300 hover:border-teal-200 outline-none text-gray-700 border`;
 

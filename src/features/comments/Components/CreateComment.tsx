@@ -1,17 +1,17 @@
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useRef } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { Button } from "../../../components/Elements/Button";
 import TextArea from "../../../components/Form/TextArea";
-import React, { useEffect, useRef } from "react";
 import {
   CommentValidationSchema,
   commentValidationSchema,
 } from "../../posts/Components/PostEngagements";
-import { Button } from "../../../components/Elements/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import postComment from "../api/postComments";
 import { Comment } from "../../posts/types/postType";
-import { useTranslation } from "react-i18next";
+import postComment from "../api/postComments";
 
 type CreateCommentProps = {
   showComments: boolean;

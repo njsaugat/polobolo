@@ -3,14 +3,14 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import { ResponseType } from "../../../types/responseType";
-import { Chat } from "../../../features/posts/types/postType";
+import { useTranslation } from "react-i18next";
 import { UPDATE_GROUP_NAME_EVENT } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
-import store from "../../../stores/store";
+import { Chat } from "../../../features/posts/types/postType";
+import { axios } from "../../../services/apiClient";
 import { addNotification } from "../../../stores/notificationSlice";
-import { useTranslation } from "react-i18next";
+import store from "../../../stores/store";
+import { ResponseType } from "../../../types/responseType";
 
 type EditGroupPostName = {
   chatId: string;

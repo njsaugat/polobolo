@@ -1,12 +1,11 @@
+import { ErrorBoundary } from "react-error-boundary";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
+import CloseModal from "../../../components/Elements/CloseModal";
+import { Dialog } from "../../../components/Elements/Dialog";
+import { FallbackErrorBoundary } from "../../../components/Shared/FallbackErrorBoundary";
+import useScreenSize from "../../../hooks/useScreenSize";
 import ChatList from "./ChatList";
 import ChatSection from "./ChatSection";
-import { Navigate, Outlet, useNavigate, useParams } from "react-router-dom";
-import useScreenSize from "../../../hooks/useScreenSize";
-import { Dialog } from "../../../components/Elements/Dialog";
-import CloseModal from "../../../components/Elements/CloseModal";
-import { ErrorBoundary } from "react-error-boundary";
-import { useEffect, useState } from "react";
-import { FallbackErrorBoundary } from "../../../components/Shared/FallbackErrorBoundary";
 
 const Chat = () => {
   const { chatId } = useParams();

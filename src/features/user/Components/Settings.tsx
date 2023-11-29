@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
+import { Navigate, useParams } from "react-router-dom";
 import { RootState } from "stores/store";
 import { Author } from "../../posts/types/postType";
-import { Navigate, useParams } from "react-router-dom";
 import UserDetails from "./UserDetails";
 
 const Settings = () => {

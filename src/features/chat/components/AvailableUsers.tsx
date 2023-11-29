@@ -1,20 +1,20 @@
-import React, { Fragment, useEffect, useState } from "react";
-import getAllUsers from "../api/getAllUser";
 import { Combobox, Transition } from "@headlessui/react";
-import { Author, ChatUser } from "../../../features/posts/types/postType";
-import { ShimmerAvatars } from "../../../components/Shimmer/ShimmerAvatar";
-import createChat from "../api/createOnetoOneChat";
-import { useQueryClient } from "@tanstack/react-query";
 import {
   ChevronDownIcon,
   SearchIcon as MagnifyingGlassIcon,
 } from "@heroicons/react/outline";
-import Toggle from "../../../components/Elements/Toggle";
-import { Button } from "../../../components/Elements/Button";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../stores/store";
-import AvailableUserOption from "./AvailableUserOption";
+import { useQueryClient } from "@tanstack/react-query";
+import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { Button } from "../../../components/Elements/Button";
+import Toggle from "../../../components/Elements/Toggle";
+import { ShimmerAvatars } from "../../../components/Shimmer/ShimmerAvatar";
+import { Author, ChatUser } from "../../../features/posts/types/postType";
+import { RootState } from "../../../stores/store";
+import createChat from "../api/createOnetoOneChat";
+import getAllUsers from "../api/getAllUser";
+import AvailableUserOption from "./AvailableUserOption";
 
 type AvailableUsersProps = {
   isChat: boolean;

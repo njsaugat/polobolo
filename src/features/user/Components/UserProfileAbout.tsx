@@ -1,9 +1,9 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import React, { useState } from "react";
+import { formatDateStringToBirthday } from "../../../utils/helpers";
 import getUserByUsername from "../api/getUserByUsername";
 import UserList from "./UserList";
-import { formatDateStringToBirthday } from "../../../utils/helpers";
-import { useTranslation } from "react-i18next";
 
 const UserProfileAbout = () => {
   const { username } = useParams();

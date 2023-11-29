@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { LocalStorage } from "../../../utils/index";
-import store from "../../../stores/store";
-import { addNotification } from "../../../stores/notificationSlice";
-import { addUser, removeUser } from "../../../stores/userSlice";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
+import { axios } from "../../../services/apiClient";
+import { addNotification } from "../../../stores/notificationSlice";
+import store from "../../../stores/store";
+import { addUser, removeUser } from "../../../stores/userSlice";
 
 const updateProfile = (isOnboarding: boolean = false) => {
   const queryClient = useQueryClient();

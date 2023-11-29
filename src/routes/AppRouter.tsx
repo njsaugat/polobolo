@@ -1,22 +1,22 @@
+import { Suspense, lazy } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import ErrorRouteElement from "../components/Shared/ErrorRouteElement";
-import Login from "../features/auth/Components/Login";
-import Signup from "../features/auth/Components/Signup";
-import Container from "../features/auth/Components/Container";
-import LandingPage from "../features/landing/LandingPage";
-import UserProfileAbout from "../features/user/Components/UserProfileAbout";
-import Settings from "../features/user/Components/Settings";
-import useAuthCheck from "../hooks/useAuthCheck";
-import UserDetails from "../features/user/Components/UserDetails";
-import { Suspense, lazy } from "react";
+import { FallbackErrorBoundary } from "../components/Shared/FallbackErrorBoundary";
+import TestErrorBoundary from "../components/Shared/TestErrorBoundary";
 import ShimmerChat from "../components/Shimmer/ShimmerChat";
 import ShimmerChatSection from "../components/Shimmer/ShimmerChatSection";
-import ShimmerProfile from "../components/Shimmer/ShimmerProfile";
 import ShimmerPosts from "../components/Shimmer/ShimmerPosts";
-import TestErrorBoundary from "../components/Shared/TestErrorBoundary";
-import { ErrorBoundary } from "react-error-boundary";
-import { FallbackErrorBoundary } from "../components/Shared/FallbackErrorBoundary";
+import ShimmerProfile from "../components/Shimmer/ShimmerProfile";
+import Container from "../features/auth/Components/Container";
+import Login from "../features/auth/Components/Login";
+import Signup from "../features/auth/Components/Signup";
+import LandingPage from "../features/landing/LandingPage";
+import Settings from "../features/user/Components/Settings";
+import UserDetails from "../features/user/Components/UserDetails";
+import UserProfileAbout from "../features/user/Components/UserProfileAbout";
+import useAuthCheck from "../hooks/useAuthCheck";
 
 const Chat = lazy(() => import("../features/chat/components/Chat"));
 const ChatSection = lazy(

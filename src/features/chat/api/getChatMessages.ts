@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
 import { JOIN_CHAT_EVENT } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
+import { axios } from "../../../services/apiClient";
 
 const getChatMessages = (chatId: string | undefined) => {
   const { socket } = useSocket();

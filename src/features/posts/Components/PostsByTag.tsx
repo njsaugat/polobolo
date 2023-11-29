@@ -1,8 +1,7 @@
-import React from "react";
-import Posts from "./Posts";
-import { useParams } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
+import { useParams } from "react-router-dom";
 import { FallbackErrorBoundary } from "../../../components/Shared/FallbackErrorBoundary";
+import Posts from "./Posts";
 
 const PostsByTag = () => {
   const { tag } = useParams();

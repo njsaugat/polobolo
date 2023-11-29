@@ -1,7 +1,7 @@
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import LoadImage from "../../../components/Elements/LoadImage";
-import React, { useState } from "react";
 import UploadProfileImage from "./UploadProfileImage";
 
 type UserProfileImage = {

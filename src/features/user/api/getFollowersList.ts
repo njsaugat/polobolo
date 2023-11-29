@@ -1,8 +1,6 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import { ResponseType } from "types/responseType";
-import { Author } from "features/posts/types/postType";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { axios } from "../../../services/apiClient";
 
 const getFollowersList = (followers: boolean) => {
   const { username } = useParams();

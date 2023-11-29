@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react";
-import ChatComposer from "./ChatComposer";
-import getChatMessages from "../api/getChatMessages";
-import ChatAuthorProfile from "./ChatAuthorProfile";
-import { useSelector } from "react-redux";
-import { RootState } from "stores/store";
-import { Author, Chat, ChatMessage } from "features/posts/types/postType";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { useSocket } from "../../../context/SocketContext";
 import { useQueryClient } from "@tanstack/react-query";
+import { Author, ChatMessage } from "features/posts/types/postType";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { RootState } from "stores/store";
 import { ResponseType } from "types/responseType";
-import { updateChatListLastMessage } from "../api/postMessage";
-import TypingChat from "./TypingChat";
 import ShimmerChatSection from "../../../components/Shimmer/ShimmerChatSection";
 import {
   MESSAGE_RECEIVED_EVENT,
   STOP_TYPING_EVENT,
   TYPING_EVENT,
 } from "../../../config/constants";
-import { ErrorBoundary } from "react-error-boundary";
-import { useTranslation } from "react-i18next";
+import { useSocket } from "../../../context/SocketContext";
+import getChatMessages from "../api/getChatMessages";
+import { updateChatListLastMessage } from "../api/postMessage";
+import ChatAuthorProfile from "./ChatAuthorProfile";
+import ChatComposer from "./ChatComposer";
+import TypingChat from "./TypingChat";
 
 const ChatSection = () => {
   const { chatId } = useParams();

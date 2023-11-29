@@ -1,16 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { AppRoutes } from "./routes/AppRouter";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import store from "./stores/store";
 import { Notifications } from "./components/Notifications/Notifications";
-import { SocketProvider } from "./context/SocketContext";
-import AnimatedPage from "./components/Shared/AnimatedPage";
-import "./services/i18n";
 import { LanguageProvider } from "./context/LanguageContext";
+import "./index.css";
+import { AppRoutes } from "./routes/AppRouter";
+import "./services/i18n";
+import store from "./stores/store";
 const queryClient = new QueryClient();
 
 const RootApp = () => (

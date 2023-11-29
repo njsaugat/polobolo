@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { t } from "i18next";
+import { z } from "zod";
 export const signupValidationSchema = z
   .object({
     firstName: z

@@ -1,6 +1,5 @@
-import React from "react";
-import { PostCardProp, PostCardProps } from "../types/postType";
 import { Link, useParams } from "react-router-dom";
+import { PostCardProp } from "../types/postType";
 
 const Tags = ({ post }: PostCardProp) => {
   const { tag } = useParams();

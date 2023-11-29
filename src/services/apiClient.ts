@@ -1,10 +1,8 @@
-import Axios, { AxiosResponse } from "axios";
-import { useDispatch } from "react-redux";
-import { Notification, addNotification } from "../stores/notificationSlice";
+import Axios from "axios";
+import { useTranslation } from "react-i18next";
+import { addNotification } from "../stores/notificationSlice";
 import store from "../stores/store";
 import { LocalStorage } from "../utils/index";
-import { ResponseType } from "types/responseType";
-import { useTranslation } from "react-i18next";
 
 export const axios = Axios.create({
   baseURL: "http://localhost:8080/api/v1",

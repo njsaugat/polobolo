@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { Button } from "../../../components/Elements/Button";
 import CloseModal from "../../../components/Elements/CloseModal";
 import { Dialog } from "../../../components/Elements/Dialog";
 import DragAndDrop from "../../../components/Shared/DragDropPhotos";
-import { useState } from "react";
-import postImage from "../api/postImage";
 import { convertToBlob } from "../../../utils/convertToBlob";
+import postImage from "../api/postImage";
 
 type UploadProfileImageProps = {
   isImageUploadOpen: boolean;

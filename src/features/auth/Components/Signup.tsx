@@ -1,16 +1,16 @@
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import InputField from "../../../components/Form/InputField";
 import {
   SignupValidationSchema,
   signupValidationSchema,
 } from "../utils/signupValidation";
-import InputField from "../../../components/Form/InputField";
 
-import useRegisterUser from "../api/registerUser";
-import { Button } from "../../../components/Elements/Button";
-import AuthFormEnhancements from "./AuthFormEnhancements";
-import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { Button } from "../../../components/Elements/Button";
+import useRegisterUser from "../api/registerUser";
+import AuthFormEnhancements from "./AuthFormEnhancements";
 
 const Signup = () => {
   const { email } = useParams();

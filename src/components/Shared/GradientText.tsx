@@ -1,4 +1,3 @@
-import React from "react";
 import { LogoProps } from "./Logo";
 
 const GradientText = ({ content, className }: LogoProps) => {

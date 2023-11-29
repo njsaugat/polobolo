@@ -1,12 +1,5 @@
+import { ForwardedRef, forwardRef } from "react";
 import { Controller } from "react-hook-form";
-import {
-  forwardRef,
-  useState,
-  ForwardedRef,
-  Ref,
-  Children,
-  useEffect,
-} from "react";
 export const inputFieldStyle = `
   w-full px-3 py-2 text-sm leading-tight transition-all duration-300 hover:border-teal-200 outline-none text-gray-700 border 
 `;

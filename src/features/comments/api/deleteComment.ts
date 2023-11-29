@@ -3,16 +3,16 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
-import store, { RootState } from "../../../stores/store";
-import { addNotification } from "../../../stores/notificationSlice";
-import { Comments, Pagination, Posts } from "../../posts/types/postType";
-import { ResponseType } from "types/responseType";
+import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Refetch } from "stores/refetchSlice";
-import { useContext } from "react";
+import { ResponseType } from "types/responseType";
+import { axios } from "../../../services/apiClient";
+import { addNotification } from "../../../stores/notificationSlice";
+import store, { RootState } from "../../../stores/store";
 import { PostRefetchContext } from "../../posts/context/PostContext";
-import { useTranslation } from "react-i18next";
+import { Comments, Pagination, Posts } from "../../posts/types/postType";
 
 const deleteComment = (commentId: string | undefined, postId: string) => {
   const queryClient = useQueryClient();

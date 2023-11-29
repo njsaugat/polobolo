@@ -1,4 +1,4 @@
-import { Dialog as UIDialog, Transition } from "@headlessui/react";
+import { Transition, Dialog as UIDialog } from "@headlessui/react";
 import * as React from "react";
 import { Fragment } from "react";
 

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Switch } from "@headlessui/react";
 type ToggleProps = {
   enabled: boolean;

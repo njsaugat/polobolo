@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import Navbar from "./features/landing/Components/Navbar";
+import { ErrorBoundary } from "react-error-boundary";
 import { useDispatch } from "react-redux";
-import { addUser } from "./stores/userSlice";
+import { Outlet } from "react-router-dom";
+import { FallbackErrorBoundary } from "./components/Shared/FallbackErrorBoundary";
+import { SocketProvider } from "./context/SocketContext";
+import Navbar from "./features/landing/Components/Navbar";
 import getUser from "./features/user/api/getUser";
 import useAuthCheck from "./hooks/useAuthCheck";
-import { SocketProvider } from "./context/SocketContext";
-import { ErrorBoundary } from "react-error-boundary";
-import { FallbackErrorBoundary } from "./components/Shared/FallbackErrorBoundary";
+import { addUser } from "./stores/userSlice";
 
 const App = () => {
   const loggedIn = useAuthCheck();

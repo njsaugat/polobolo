@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { axios } from "../../../services/apiClient";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { LoginValidationSchema } from "../utils/loginValidation";
-import { LocalStorage } from "../../../utils/index";
 import { onboardingThresholdSeconds as thresholdSeconds } from "../../../config/constants";
+import { axios } from "../../../services/apiClient";
+import { addNotification } from "../../../stores/notificationSlice";
+import store from "../../../stores/store";
 import {
   handleEmailVerification,
   handleInitialLogin,
   handleLoginUser,
 } from "../../../stores/userSlice";
-import store, { RootState } from "../../../stores/store";
-import { addNotification } from "../../../stores/notificationSlice";
-import { useTranslation } from "react-i18next";
+import { LocalStorage } from "../../../utils/index";
+import { LoginValidationSchema } from "../utils/loginValidation";
 const isUserInitialLogin = (createdAt: string, updatedAt: string) => {
   let createdAtDate = new Date(createdAt).valueOf();
   let updatedAtDate = new Date(updatedAt).valueOf();

@@ -1,5 +1,3 @@
-import React from "react";
-
 const ShimmerProfile = () => {
   return (
     <div className="flex items-center justify-center w-full">

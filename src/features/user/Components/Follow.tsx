@@ -1,10 +1,10 @@
-import { Button } from "../../../components/Elements/Button";
-import React, { useState } from "react";
-import postFollow from "../api/postUserFollow";
+import { Author } from "features/posts/types/postType";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
-import { Author } from "features/posts/types/postType";
-import { useTranslation } from "react-i18next";
+import { Button } from "../../../components/Elements/Button";
+import postFollow from "../api/postUserFollow";
 
 type FollowProps = {
   toBeFollowedUserId: string;

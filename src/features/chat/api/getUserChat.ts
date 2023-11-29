@@ -1,8 +1,4 @@
-import {
-  useInfiniteQuery,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { axios } from "../../../services/apiClient";
 
 const getUserChat = () => {
