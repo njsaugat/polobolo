@@ -7,10 +7,12 @@ import { JOIN_CHAT_EVENT } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
 import { addNotification } from "../../../stores/notificationSlice";
 import store from "../../../stores/store";
+import { useTranslation } from "react-i18next";
 
 const addChatMember = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { socket } = useSocket();
   const postAddChatMember = ({
     chatId,
@@ -36,8 +38,8 @@ const addChatMember = () => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: "Chat member added successfully.",
+          title: t("notification.success"),
+          message: t("notificationMessages.addMember"),
         })
       );
 

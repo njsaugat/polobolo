@@ -1,10 +1,13 @@
 import { z } from "zod";
+import { t } from "i18next";
 
 export const loginValidationSchema = z.object({
   email: z.string().email({
-    message: "Must be a valid email",
+    message: t("validationMessages.validEmail"),
   }),
-  password: z.string().min(1, { message: "Password is required" }),
+  password: z
+    .string()
+    .min(1, { message: t("validationMessages.requirePassword") }),
 });
 
 export type LoginValidationSchema = z.infer<typeof loginValidationSchema>;

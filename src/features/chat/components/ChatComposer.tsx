@@ -11,11 +11,12 @@ import postMessage from "../api/postMessage";
 import { useParams } from "react-router-dom";
 import { useSocket } from "../../../context/SocketContext";
 import { STOP_TYPING_EVENT, TYPING_EVENT } from "../../../config/constants";
-
+import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 export const chatMessageValidationSchema = z.object({
   chatMessage: z
     .string()
-    .min(0, { message: "Message should be at least 1 character." }),
+    .min(0, { message: t("validationMessages.chatMessage") }),
 });
 
 export type ChatMessageValidationSchema = z.infer<
@@ -38,6 +39,7 @@ const ChatComposer = ({ addCurrentMessage }: ChatComposerProps) => {
   } = useForm<ChatMessageValidationSchema>({
     resolver: zodResolver(chatMessageValidationSchema),
   });
+  const { t } = useTranslation();
   const { mutate, error, isLoading } = postMessage(chatId);
   const chatMessageRef = useRef<HTMLTextAreaElement>(null);
   const { socket } = useSocket();
@@ -76,7 +78,7 @@ const ChatComposer = ({ addCurrentMessage }: ChatComposerProps) => {
         errors={errors}
         label=""
         type="comment"
-        placeholder="Enter your message."
+        placeholder={t("chatPage.enterMessage")}
         defaultValue=""
         onKeyDown={handleInputChange}
       >

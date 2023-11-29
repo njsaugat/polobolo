@@ -4,10 +4,11 @@ import { RootState } from "stores/store";
 import { Author } from "../types/postType";
 import Avatar from "../../user/Components/Avatar";
 import CreatePost from "./CreatePost";
+import { useTranslation } from "react-i18next";
 
 const CreatePostDisplay = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { t } = useTranslation();
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
@@ -31,7 +32,7 @@ const CreatePostDisplay = () => {
             }}
           >
             <input
-              placeholder="Speak your mind 💬"
+              placeholder={`${t("posts.createPost")} 💬`}
               onChange={() => {
                 openModal();
               }}

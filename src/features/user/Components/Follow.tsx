@@ -4,6 +4,7 @@ import postFollow from "../api/postUserFollow";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
 import { Author } from "features/posts/types/postType";
+import { useTranslation } from "react-i18next";
 
 type FollowProps = {
   toBeFollowedUserId: string;
@@ -20,6 +21,7 @@ const Follow = ({
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
+  const { t } = useTranslation();
   return (
     <>
       {user?.account._id !== toBeFollowedUserId && (
@@ -37,7 +39,7 @@ const Follow = ({
             mutate();
           }}
         >
-          {isFollowed ? "Unfollow" : "Follow"}
+          {isFollowed ? t("userPages.unfollow") : t("userPages.follow")}
         </Button>
       )}
     </>

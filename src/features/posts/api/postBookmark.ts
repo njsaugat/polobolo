@@ -1,12 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { axios } from "../../../services/apiClient";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { LocalStorage } from "../../../utils/index";
 import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
+import { useTranslation } from "react-i18next";
 
 const postBookmark = (postId: string | undefined) => {
-  const queryClient = useQueryClient();
+  const { t } = useTranslation();
   const postData = () => {
     return axios.post(`/social-media/bookmarks/${postId}`);
   };
@@ -19,8 +18,8 @@ const postBookmark = (postId: string | undefined) => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: response?.message,
+          title: t("notification.success"),
+          message: t("notificationMessages.bookmarkPost"),
         })
       );
     },

@@ -7,6 +7,7 @@ import { JOIN_CHAT_EVENT } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
 import { addNotification } from "../../../stores/notificationSlice";
 import store from "../../../stores/store";
+import { useTranslation } from "react-i18next";
 export type CreateChatProps = {
   receiverIds: string[];
   name: string;
@@ -16,6 +17,7 @@ const createChat = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { socket } = useSocket();
+  const { t } = useTranslation();
   const postCreateChat = ({ receiverIds, isGroup, name }: CreateChatProps) => {
     if (isGroup) {
       const groupChatData = { name: name, participants: receiverIds };
@@ -42,8 +44,8 @@ const createChat = () => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: "Chat created successfully.",
+          title: t("notification.success"),
+          message: t("notificationMessages.createChat"),
         })
       );
 

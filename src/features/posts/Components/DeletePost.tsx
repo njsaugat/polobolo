@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "../../../components/Elements/Button";
 import { Dialog } from "../../../components/Elements/Dialog";
 export type DeletePostDialogProps = {
@@ -14,6 +15,7 @@ const DeletePost = ({
   content,
   isLoading,
 }: DeletePostDialogProps) => {
+  const { t } = useTranslation();
   return (
     <Dialog
       className="z-50 rounded-lg md:w-1/2 lg:w-1/3 deleteDialog "
@@ -29,7 +31,7 @@ const DeletePost = ({
             closeModal();
           }}
         >
-          NO
+          {t("userPages.no")}
         </Button>
         <Button
           variant="danger"
@@ -39,7 +41,7 @@ const DeletePost = ({
             handleDelete();
           }}
         >
-          Yes
+          {t("userPages.yes")}
         </Button>
       </div>
     </Dialog>

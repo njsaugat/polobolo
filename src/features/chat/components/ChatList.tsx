@@ -16,11 +16,12 @@ import addChatMember from "../api/addDeleteMembers";
 import useSocketEvents from "../hooks/useSocketEvents";
 import ShimmerChatList from "../../../components/Shimmer/ShimmerChatList";
 import ChatMembers from "./ChatMembers";
+import { useTranslation } from "react-i18next";
 
 function truncateMessage(text: string, maxLength: number) {
-  if (!text) {
-    return "Start the conversation.😊";
-  }
+  // if (!text) {
+  //   return "Start the conversation.😊";
+  // }
   if (text?.length > maxLength) {
     return `${text.substring(0, maxLength)}...`;
   }
@@ -61,6 +62,7 @@ const ChatList = () => {
     (store) => store.user.user
   );
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const isUserGroupAdmin = (chat: Chat) => chat?.admin === user?.account?._id;
 
   const openLeaveChatModal = (chat: Chat) =>
@@ -133,7 +135,10 @@ const ChatList = () => {
                       }
                       url={participant.avatar.url}
                       lastMessage={truncateMessage(
-                        lastMessage ? lastMessage : chat?.lastMessage?.content,
+                        lastMessage
+                          ? lastMessage
+                          : chat?.lastMessage?.content ??
+                              `${t("chatPage.startChat")} 😊`,
                         20
                       )}
                       sentTime={chat?.updatedAt}
@@ -205,7 +210,7 @@ const ChatList = () => {
             });
             setIsOpenChatLeave(undefined);
           }}
-          content="Are you sure you want to leave the chat❓"
+          content={t("chatPage.leaveChat")}
         />
       ) : null}
       {!!chatInfoId ? (
@@ -232,7 +237,7 @@ const ChatList = () => {
             setIsOpenChatDelete(undefined);
             navigate(".");
           }}
-          content="Are you sure you want to delete the chat❓"
+          content={t("chatPage.deleteChat")}
         />
       ) : null}
     </>

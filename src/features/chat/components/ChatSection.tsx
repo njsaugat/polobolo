@@ -18,6 +18,7 @@ import {
   TYPING_EVENT,
 } from "../../../config/constants";
 import { ErrorBoundary } from "react-error-boundary";
+import { useTranslation } from "react-i18next";
 
 const ChatSection = () => {
   const { chatId } = useParams();
@@ -29,6 +30,7 @@ const ChatSection = () => {
     (store) => store.user.user
   );
   const { socket } = useSocket();
+  const { t } = useTranslation();
 
   const handleOnSocketTyping = (currentChatId: string) => {
     if (currentChatId !== chatId) return;
@@ -70,9 +72,7 @@ const ChatSection = () => {
       <div className=" flex flex-col-reverse transition-all duration-1000  w-full h-[calc(100vh-140px)] md:h-[calc(100%-70px)] overflow-y-auto">
         {isTyping && <TypingChat />}
         {data?.data?.length === 0 ? (
-          <h1 className="w-full mb-10 text-center">
-            {"Start the conversation"}
-          </h1>
+          <h1 className="w-full mb-10 text-center">{t("chatPage.startChat")}</h1>
         ) : null}
         {data?.data?.map((chatMessage: ChatMessage) => (
           <div

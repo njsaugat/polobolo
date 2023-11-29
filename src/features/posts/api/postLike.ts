@@ -10,12 +10,14 @@ import { Pagination, Post, PostCardProps, Posts } from "../types/postType";
 import { useContext } from "react";
 import { PostRefetchContext } from "../context/PostContext";
 import { ResponseType } from "../../../types/responseType";
+import { useTranslation } from "react-i18next";
 const postLike = (postId: string, isLiked: boolean) => {
   const { refetch, page } = useContext(PostRefetchContext);
   const postUserLike = () => {
     return axios.post(`/social-media/like/post/${postId}`);
   };
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
   return useMutation({
     mutationFn: postUserLike,
     onMutate: async (pageParam) => {
@@ -65,8 +67,8 @@ const postLike = (postId: string, isLiked: boolean) => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: `Post ${message}`,
+          title: t("notification.success"),
+          message: t("notificationMessages.likePost"),
         })
       );
       refetch({

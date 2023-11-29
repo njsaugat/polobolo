@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { Refetch } from "stores/refetchSlice";
 import { useContext } from "react";
 import { PostRefetchContext } from "../../posts/context/PostContext";
+import { useTranslation } from "react-i18next";
 
 const deleteComment = (commentId: string | undefined, postId: string) => {
   const queryClient = useQueryClient();
@@ -19,6 +20,7 @@ const deleteComment = (commentId: string | undefined, postId: string) => {
   const refetchComment = useSelector<RootState, Refetch>(
     (store) => store.refetch.refetch
   );
+  const { t } = useTranslation();
 
   const deleteData = () => {
     const config = {
@@ -100,8 +102,8 @@ const deleteComment = (commentId: string | undefined, postId: string) => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: "Comment deleted successfully.",
+          title: t("notification.success"),
+          message: t("notificationMessages.deleteComment"),
         })
       );
       refetch({

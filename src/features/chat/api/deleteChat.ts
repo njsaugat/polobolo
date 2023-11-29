@@ -10,6 +10,7 @@ import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
 import { ResponseType } from "../../../types/responseType";
 import { Chat, ChatMessage } from "../../../features/posts/types/postType";
+import { useTranslation } from "react-i18next";
 
 export const deleteOneToOneChat = (
   queryClient: QueryClient,
@@ -26,6 +27,7 @@ export const deleteOneToOneChat = (
 
 const deleteChat = () => {
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
   const deleteChatData = ({
     chatId,
     isGroup,
@@ -65,8 +67,8 @@ const deleteChat = () => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: "User chat deleted successfully.",
+          title: t("notification.success"),
+          message: t("notificationMessages.deleteChat"),
         })
       );
     },

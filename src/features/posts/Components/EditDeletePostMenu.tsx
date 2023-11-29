@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 
 type EditDeleteMenuProps = {
   openAddParticipantModal?: () => void;
@@ -45,33 +46,34 @@ const EditDeleteMenu = ({
   isGroupLeaveOption,
   isGroupAdmin,
 }: EditDeleteMenuProps) => {
+  const { t } = useTranslation();
   const menuItems = [
     {
-      label: "Add User",
+      label: t("options.addUser"),
       icon: faUser,
       onClick: openAddParticipantModal,
       condition: showGroupInfo && isGroupAdmin,
     },
     {
-      label: "Info",
+      label: t("options.info"),
       icon: faInfo,
       onClick: openInfoModal,
       condition: showGroupInfo,
     },
     {
-      label: "Edit",
+      label: t("options.edit"),
       icon: faEdit,
       onClick: openEditModal,
       condition: !isNotEdit,
     },
     {
-      label: "Leave",
+      label: t("options.leave"),
       icon: faSignOut,
       onClick: openLeaveModal,
       condition: isGroupLeaveOption,
     },
     {
-      label: "Delete",
+      label: t("options.delete"),
       icon: faTrash,
       onClick: openDeleteModal,
       condition: !isNotDelete,

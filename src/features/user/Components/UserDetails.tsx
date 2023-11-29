@@ -14,6 +14,7 @@ import updateProfile from "../api/updateUserProfile";
 import { Button } from "../../../components/Elements/Button";
 import { Link } from "react-router-dom";
 import { Spinner } from "../../../components/Elements/Spinner";
+import { useTranslation } from "react-i18next";
 
 const getComputedDate = (dob: string = "") => {
   const dateObject = new Date(dob);
@@ -55,6 +56,7 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
   const loggedInUser = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
+  const { t } = useTranslation();
   const { mutate, error, isLoading } = updateProfile(isOnboarding);
   const onSubmit: SubmitHandler<SettingsValidationSchema> = (data) => {
     mutate(data);
@@ -93,7 +95,7 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
             name="firstName"
             control={control}
             errors={errors}
-            label="First Name"
+            label={t("authPage.firstName")}
             type="text"
             onKeyDown={handleInputChange}
             defaultValue={loggedInUser?.firstName}
@@ -103,7 +105,7 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
             name="lastName"
             control={control}
             errors={errors}
-            label="Last Name"
+            label={t("authPage.lastName")}
             type="text"
             onKeyDown={handleInputChange}
             defaultValue={loggedInUser?.lastName ? loggedInUser?.lastName : ""}
@@ -113,8 +115,8 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
             name="bio"
             control={control}
             errors={errors}
-            label="Bio"
-            placeholder="Enter your Bio"
+            label={t("userPages.bio")}
+            placeholder={t("userPages.enterBio")}
             type="text"
             defaultValue={loggedInUser?.bio ? loggedInUser?.bio : ""}
             onKeyDown={handleInputChange}
@@ -125,7 +127,7 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
             name="location"
             control={control}
             errors={errors}
-            label="Location"
+            label={t("userPages.location")}
             type="text"
             onKeyDown={handleInputChange}
             defaultValue={loggedInUser?.location}
@@ -134,7 +136,7 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
             name="dob"
             control={control}
             errors={errors}
-            label="Date of birth"
+            label={t("userPages.dob")}
             type="date"
             onKeyDown={handleInputChange}
             defaultValue={getComputedDate(loggedInUser?.dob)}
@@ -144,7 +146,7 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
             name="phoneNumber"
             control={control}
             errors={errors}
-            label="Phone Number"
+            label={t("userPages.phoneNumber")}
             type="number"
             onKeyDown={handleInputChange}
             defaultValue={loggedInUser?.phoneNumber}
@@ -157,11 +159,11 @@ const UserDetails = ({ isOnboarding }: UserDetailsProps) => {
               loggedInUser.lastName
             ) ? (
               <Link to="/home" className="hover:underline">
-                Return Home
+                {t("userPages.returnHome")}{" "}
               </Link>
             ) : null}
             <Button type="submit" variant="blend">
-              Save
+              {t("userPages.save")}{" "}
             </Button>
           </div>
         </form>

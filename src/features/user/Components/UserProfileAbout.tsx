@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import getUserByUsername from "../api/getUserByUsername";
 import UserList from "./UserList";
 import { formatDateStringToBirthday } from "../../../utils/helpers";
+import { useTranslation } from "react-i18next";
 
 const UserProfileAbout = () => {
   const { username } = useParams();
   const { error, data, isLoading } = getUserByUsername(username);
   const [isFollowersOpen, setIsFollowersOpen] = useState(false);
   const [isFollowingOpen, setIsFollowingOpen] = useState(false);
-
+  const { t } = useTranslation();
   const user = data?.data;
   return (
     <div className="flex flex-col lg:w-3/4 ">
@@ -26,7 +27,7 @@ const UserProfileAbout = () => {
             }
           >
             <p className="text-lg font-semibold">{user?.followersCount}</p>
-            <p className="text-gray-500">Followers 🚀</p>
+            <p className="text-gray-500">{t("userPages.followers")} 🚀</p>
           </div>
           <div
             onClick={() =>
@@ -39,7 +40,7 @@ const UserProfileAbout = () => {
             }
           >
             <p className="text-lg font-semibold">{user?.followingCount}</p>
-            <p className="text-gray-500">Following 👥</p>
+            <p className="text-gray-500">{t("userPages.following")} 👥</p>
           </div>
         </div>
         <div className="flex flex-col flex-wrap gap-10 fmt-4">
@@ -53,7 +54,8 @@ const UserProfileAbout = () => {
             🎂
           </p>
           <p>
-            <strong>Location:</strong> {user?.location || "Not provided"} 🌍
+            <strong>Location:</strong>{" "}
+            {user?.location || t("userPages.notProvided")} 🌍
           </p>
           <p>
             <strong>Email:</strong>{" "}
@@ -63,8 +65,8 @@ const UserProfileAbout = () => {
             📧
           </p>
           <p>
-            <strong>Phone Number:</strong> {user?.phoneNumber || "Not provided"}{" "}
-            📞
+            <strong>Phone Number:</strong>{" "}
+            {user?.phoneNumber || t("userPages.notProvided")} 📞
           </p>
         </div>
       </div>

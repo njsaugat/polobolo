@@ -11,6 +11,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import postComment from "../api/postComments";
 import { Comment } from "../../posts/types/postType";
+import { useTranslation } from "react-i18next";
 
 type CreateCommentProps = {
   showComments: boolean;
@@ -29,6 +30,7 @@ const CreateComment = ({
   closeModal,
 }: CreateCommentProps) => {
   const commentRef = useRef<HTMLTextAreaElement>(null);
+  const { t } = useTranslation();
   const {
     control,
     register,
@@ -70,7 +72,7 @@ const CreateComment = ({
         errors={errors || error}
         label=""
         type="comment"
-        placeholder="Enter a comment 💭"
+        placeholder={`${t("comments.createComment")} 💭`}
         defaultValue={comment ? comment.content : ""}
         onKeyDown={handleInputChange}
         className="border shadow-lg rounded-2xl"

@@ -5,11 +5,13 @@ import { LocalStorage } from "../../../utils/index";
 import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
 import { addUser, removeUser } from "../../../stores/userSlice";
+import { useTranslation } from "react-i18next";
 
 const updateProfile = (isOnboarding: boolean = false) => {
   const queryClient = useQueryClient();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const username = pathname.split("/")[2];
   const postData = (profileData: any) => {
     return axios.patch(`/social-media/profile`, profileData);
@@ -27,10 +29,10 @@ const updateProfile = (isOnboarding: boolean = false) => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: `User profile ${
-            isOnboarding ? "created" : "updated"
-          } successfully.`,
+          title: t("notification.success"),
+          message: isOnboarding
+            ? t("notificationMessages.createdProfile")
+            : t("notificationMessages.updatedProfile"),
         })
       );
       if (isOnboarding) {

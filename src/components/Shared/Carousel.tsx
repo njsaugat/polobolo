@@ -1,26 +1,31 @@
 import React from "react";
 import {
+  Avatar,
   PostCardProp,
   PostCardProps,
 } from "../../features/posts/types/postType";
 import LoadImage from "../Elements/LoadImage";
+import { Button } from "../../components/Elements/Button";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type CarouselProps = {
+  images: Avatar[];
   currentIndex: number;
   prevSlide: () => void;
   nextSlide: () => void;
 };
 const Carousel = ({
-  post,
+  images,
   currentIndex,
   prevSlide,
   nextSlide,
-}: PostCardProp & CarouselProps) => {
+}: CarouselProps) => {
   return (
     <div className="relative self-start overflow-hidden lg:w-4/6">
       <div className="carousel">
         <div className="carousel-inner">
-          {post.images.map((image, index) => (
+          {images.map((image, index) => (
             <div
               key={image._id}
               className={`carousel-slide h-[24rem] md:h-[36rem] lg:h-[54rem] transition-all duration-200  ${
@@ -37,18 +42,20 @@ const Carousel = ({
         </div>
       </div>
 
-      <button
-        className="absolute left-0 w-10 h-10 p-2 text-white transition-all transform -translate-y-1/2 bg-gray-500 rounded-full opacity-75 hover:opacity-100 top-1/2"
+      <Button
+        className="absolute left-0 w-10 h-10 p-2 text-2xl text-black transition-all transform -translate-y-1/2 border-0 rounded-full shadow-2xl top-1/2"
         onClick={prevSlide}
+        size="xs"
       >
-        {"<"}
-      </button>
-      <button
-        className="absolute right-0 w-10 h-10 p-2 text-white transition-all -translate-y-1/2 bg-gray-500 rounded-full opacity-75 hover:opacity-100 top-1/2"
+        <FontAwesomeIcon icon={faAngleLeft} className="text-xl" />
+      </Button>
+      <Button
+        className="absolute right-0 w-10 h-10 p-2 text-2xl text-black transition-all -translate-y-1/2 border-0 rounded-full top-1/2"
         onClick={nextSlide}
+        size="xs"
       >
-        {">"}
-      </button>
+        <FontAwesomeIcon icon={faAngleRight} className="text-xl" />
+      </Button>
     </div>
   );
 };

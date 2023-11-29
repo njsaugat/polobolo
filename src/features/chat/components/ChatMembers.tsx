@@ -4,6 +4,7 @@ import { Chat } from "../../../features/posts/types/postType";
 import AuthorProfile from "../../../features/user/Components/AuthorProfile";
 import React from "react";
 import { ResponseType } from "../../../types/responseType";
+import { useTranslation } from "react-i18next";
 
 type ChatMembersProps = {
   chatInfoId: string;
@@ -11,7 +12,7 @@ type ChatMembersProps = {
 };
 const ChatMembers = ({ chatInfoId, closeModal }: ChatMembersProps) => {
   const queryClient = useQueryClient();
-
+  const { t } = useTranslation();
   return (
     <Dialog
       isOpen={!!chatInfoId}
@@ -19,7 +20,7 @@ const ChatMembers = ({ chatInfoId, closeModal }: ChatMembersProps) => {
       className="rounded-lg md:w-1/2 lg:w-1/3 deleteDialog "
       modalClassName=" mx-10"
     >
-      <h3>Members:</h3>
+      <h3>{t("chatPage.members")} :</h3>
       {queryClient
         .getQueryData<ResponseType<Chat[]>>(["chats"])
         ?.data.map((chat: Chat) =>

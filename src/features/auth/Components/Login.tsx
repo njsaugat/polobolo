@@ -13,10 +13,12 @@ import useAuthCheck from "../../../hooks/useAuthCheck";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
 import AuthFormEnhancements from "./AuthFormEnhancements";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const navigate = useNavigate();
   const isLoggedIn = useAuthCheck();
+  const { t } = useTranslation();
   const isInitialLogin = useSelector<RootState, boolean>(
     (store) => store.user.isInitialLogin
   );
@@ -50,7 +52,9 @@ const Login = () => {
     <div className="w-full max-w-xl mx-auto">
       <div className="flex justify-center my-12">
         <div className="w-full p-5 bg-white rounded-lg shadow-xl lg:w-11/12">
-          <h3 className="pt-4 text-2xl font-bold text-center ">Welcome Back</h3>
+          <h3 className="pt-4 text-2xl font-bold text-center ">
+            {t("authPage.welcome")}
+          </h3>
           <form
             className="px-8 pt-6 pb-8 mb-4"
             onSubmit={handleSubmit(onSubmit)}
@@ -59,7 +63,7 @@ const Login = () => {
               name="email"
               control={control}
               errors={errors || error}
-              label="Email"
+              label={t("authPage.email")}
               type="text"
               onKeyDown={handleInputChange}
               className="w-full"
@@ -68,7 +72,7 @@ const Login = () => {
               name="password"
               control={control}
               errors={errors || error}
-              label="Password"
+              label={t("authPage.password")}
               type="password"
               onKeyDown={handleInputChange}
             />
@@ -78,7 +82,7 @@ const Login = () => {
                 type="submit"
                 isLoading={isLoading}
               >
-                Login
+                {t("landingPage.login")}
               </Button>
             </div>
             <hr className="mb-6 border-t" />

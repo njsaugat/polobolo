@@ -2,19 +2,23 @@ import { faAngleDown, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { links } from "../../../utils/navbarLinks";
+import useLinks from "../../../utils/navbarLinks";
 import { Link } from "react-router-dom";
 import useLogoutUser from "../../auth/api/logoutUser";
 import { Button } from "../../../components/Elements/Button";
 import DeletePost from "../../../features/posts/Components/DeletePost";
+import { useTranslation } from "react-i18next";
+import AvailableLanguages from "../../../components/Shared/AvailableLanguages";
 
 type NavbarMenuProps = {
-  username: string;
+  username: string | undefined;
 };
 export default function NavbarMenu({ username }: NavbarMenuProps) {
   const { mutate, error, isLoading } = useLogoutUser();
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const closeModal = () => setIsLogoutOpen(false);
+  const links = useLinks();
+  const { t } = useTranslation();
   return (
     <Menu as="div" className={`  overflow-x-hidden`}>
       <div>
@@ -52,46 +56,60 @@ export default function NavbarMenu({ username }: NavbarMenuProps) {
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm `}
                 >
                   {<FontAwesomeIcon icon={faHome} />} &nbsp;
-                  <span className={` text-xs `}>{"Home"}</span>
+                  <span className={` text-xs `}>{t("userPages.home")}</span>
                 </Link>
               )}
             </Menu.Item>
-            {links.map((link) => {
-              return (
-                <Menu.Item key={link.link + link.id}>
-                  {({ active }) => (
-                    <Link
-                      to={`/user/${username}/${link.link}`}
-                      className={`${
-                        active
-                          ? "bg-gradient-to-r from-teal-200 to-teal-400  text-slate-700"
-                          : "text-gray-900"
-                      } group flex w-full items-center rounded-md px-2 py-2 text-sm `}
-                    >
-                      {link.icon} &nbsp;
-                      <span className={` text-xs `}>{link.text}</span>
-                    </Link>
-                  )}
-                </Menu.Item>
-              );
-            })}
+            {username
+              ? links.map((link) => {
+                  return (
+                    <Menu.Item key={link.link + link.id}>
+                      {({ active }) => (
+                        <Link
+                          to={`/user/${username}/${link.link}`}
+                          className={`${
+                            active
+                              ? "bg-gradient-to-r from-teal-200 to-teal-400  text-slate-700"
+                              : "text-gray-900"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm `}
+                        >
+                          {link.icon} &nbsp;
+                          <span className={` text-xs `}>{link.text}</span>
+                        </Link>
+                      )}
+                    </Menu.Item>
+                  );
+                })
+              : null}
             <hr />
             <Menu.Item>
               {({ active }) => (
                 <Button
-                  variant="moretransparent"
-                  className={`${
-                    active
-                      ? "bg-gradient-to-r from-teal-200 to-teal-400  text-slate-700"
-                      : "text-gray-900"
-                  } group flex w-full items-center rounded-md px-2 py-2 text-sm border-none mt-1 `}
-                  onClick={() => setIsLogoutOpen(true)}
+                  variant="inverse"
+                  className={` group flex w-full items-center rounded-md px-2 py-2 text-sm border-none mt-1 `}
                 >
-                  {} &nbsp;
-                  <span className={` text-xs `}>{"Logout"}</span>
+                  <AvailableLanguages />
                 </Button>
               )}
             </Menu.Item>
+            {username ? (
+              <Menu.Item>
+                {({ active }) => (
+                  <Button
+                    variant="moretransparent"
+                    className={`${
+                      active
+                        ? "bg-gradient-to-r from-teal-200 to-teal-400  text-slate-700"
+                        : "text-gray-900"
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm border-none mt-1 `}
+                    onClick={() => setIsLogoutOpen(true)}
+                  >
+                    {} &nbsp;
+                    <span className={` text-xs `}>{t("userPages.logout")}</span>
+                  </Button>
+                )}
+              </Menu.Item>
+            ) : null}
           </div>
         </Menu.Items>
       </Transition>
@@ -105,7 +123,7 @@ export default function NavbarMenu({ username }: NavbarMenuProps) {
               mutate();
               closeModal();
             }}
-            content="Are you sure you want to logout❓"
+            content={t("userPages.logoutUser")}
           />
         </>
       )}

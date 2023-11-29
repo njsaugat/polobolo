@@ -1,18 +1,19 @@
 import { z } from "zod";
+import { t } from "i18next";
 
 export const settingsValidationSchema = z.object({
   firstName: z
     .string()
-    .min(3, { message: "Firstname should be at least 3 characters" })
-    .max(255, { message: "Firstname should be at most 255 characters" }),
+    .min(3, { message: t("validationMessages.firstName") })
+    .max(255, { message: t("validationMessages.maxFirstName") }),
   lastName: z
     .string()
-    .min(3, { message: "Lastname should be at least 3 characters" })
-    .max(255, { message: "Lastname should be at most 255 characters" }),
+    .min(3, { message: t("validationMessages.lastName") })
+    .max(255, { message: t("validationMessages.maxLastName") }),
   bio: z
     .string()
-    .min(10, { message: "Bio should be at least 10 characters" })
-    .max(255, { message: "Lastname should be at most 255 characters" }),
+    .min(10, { message: t("validationMessages.bio") })
+    .max(255, { message: t("validationMessages.maxBio") }),
   location: z.string().max(100).min(1),
   dob: z.string(),
   phoneNumber: z.string().regex(/^\d{9,15}$/),

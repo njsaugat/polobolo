@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { addNotification } from "../../stores/notificationSlice";
 import store from "../../stores/store";
 import UploadImage from "./UploadImage";
+import { useTranslation } from "react-i18next";
 
 type DragAndDropProps = {
   fileDataURLs: string[];
@@ -18,7 +19,7 @@ export default function DragAndDrop({
   const [dragActive, setDragActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
   const [files, setFiles] = useState<any>([]);
-
+  const { t } = useTranslation();
   function handleChange(e: any) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
@@ -72,6 +73,8 @@ export default function DragAndDrop({
     inputRef.current.click();
   }
 
+  const getFileNaming = () =>
+    TOTAL_UPLOADABLE_IMAGES === 1 ? t("posts.image") : t("posts.files");
   useEffect(() => {
     let fileReader: any,
       isCancel = false;
@@ -81,8 +84,10 @@ export default function DragAndDrop({
       dispatch(
         addNotification({
           type: "error",
-          title: "Error",
-          message: `Only ${TOTAL_UPLOADABLE_IMAGES} images allowed to be uploaded.`,
+          title: t("notification.error"),
+          message: `${TOTAL_UPLOADABLE_IMAGES} ${t(
+            "notificationMessages.uploadImage"
+          )}`,
         })
       );
     } else if (file) {
@@ -131,16 +136,18 @@ export default function DragAndDrop({
       ) : (
         <p>
           <span className="hidden md:inline">
-            🚀 Drag & Drop {TOTAL_UPLOADABLE_IMAGES === 1 ? "image" : "files"}{" "}
-            or{" "}
+            🚀 {t("posts.drag")} {getFileNaming()} {t("posts.or")}{" "}
           </span>
           <span
             className="font-bold text-teal-600 cursor-pointer"
             onClick={openFileExplorer}
           >
-            <u> Select {TOTAL_UPLOADABLE_IMAGES === 1 ? "image" : "files"} </u>
+            <u>
+              {" "}
+              {t("posts.select")} {getFileNaming()}{" "}
+            </u>
           </span>{" "}
-          📂to upload
+          📂{t("posts.upload")}
         </p>
       )}
 

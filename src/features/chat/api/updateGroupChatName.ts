@@ -10,6 +10,7 @@ import { UPDATE_GROUP_NAME_EVENT } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
 import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
+import { useTranslation } from "react-i18next";
 
 type EditGroupPostName = {
   chatId: string;
@@ -39,6 +40,7 @@ export const updateGroupChatNameHelper = (
 };
 const updateGroupChatName = () => {
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
   const { socket } = useSocket();
   const updateName = ({ chatId, groupName }: EditGroupPostName) => {
     return axios.patch<ResponseType<Chat>>(`/chat-app/chats/group/${chatId}`, {
@@ -67,8 +69,8 @@ const updateGroupChatName = () => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: "Group chat name updated successfully.",
+          title: t("notification.success"),
+          message: t("notificationMessages.updateGroupName"),
         })
       );
     },

@@ -1,26 +1,32 @@
+import { useTranslation } from "react-i18next";
 import Analytics from "../../../assets/images/png/analytics.png";
 import AuditCards from "../../../assets/images/png/audit_cards.png";
 import PostPerformance from "../../../assets/images/png/post-performance.png";
+import { useMemo } from "react";
 
-const analytics = [
-  {
-    image: Analytics,
-    text: "Advanced Analytics to Boost Your ROI",
-  },
-  {
-    image: AuditCards,
-    text: "In-House Valuation Tools",
-  },
-  {
-    image: PostPerformance,
-    text: "Campaign Performance Tracker",
-  },
-];
 const Highlights = () => {
+  const { t } = useTranslation();
+  const analytics = useMemo(
+    () => [
+      {
+        image: Analytics,
+        text: t("landingPage.analytics"),
+      },
+      {
+        image: AuditCards,
+        text: t("landingPage.audit"),
+      },
+      {
+        image: PostPerformance,
+        text: t("landingPage.performance"),
+      },
+    ],
+    [t]
+  );
   return (
     <div className="flex flex-col justify-center mx-28">
       <h1 className="my-10 text-4xl font-bold tracking-wider text-center">
-        What we bring to the table
+        {t("landingPage.highlights")}
       </h1>
       <div className="flex flex-wrap justify-center lg:justify-between ">
         {analytics.map((analytic) => {

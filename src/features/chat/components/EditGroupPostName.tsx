@@ -9,6 +9,7 @@ import { Button } from "../../../components/Elements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import updateGroupChatName from "../api/updateGroupChatName";
+import { useTranslation } from "react-i18next";
 
 type EditGroupPostName = {
   chatId: string;
@@ -40,7 +41,7 @@ const EditGroupPostName = ({
     setValue("content", groupName);
   }, []);
   const onSubmit: SubmitHandler<CommentValidationSchema> = (data) => {};
-
+  const { t } = useTranslation();
   return (
     <>
       <Dialog
@@ -69,7 +70,7 @@ const EditGroupPostName = ({
               closeModal();
             }}
           >
-            Update Name
+            {t("chatPage.updateGroupName")}
           </Button>
         </form>
       </Dialog>

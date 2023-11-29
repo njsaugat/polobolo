@@ -1,7 +1,16 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import {
+  Middleware,
+  configureStore,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
 import notificationReducer from "./notificationSlice";
 import refetchReducer from "./refetchSlice";
 import userSlice from "./userSlice";
+
+const loggerMiddleware: Middleware = () => (next) => (action) => {
+  console.log("Dispatching action:", action);
+  return next(action);
+};
 
 const store = configureStore({
   reducer: {
@@ -12,7 +21,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(loggerMiddleware),
 });
 
 export default store;

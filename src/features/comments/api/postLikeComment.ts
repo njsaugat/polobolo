@@ -11,6 +11,7 @@ import { PostRefetchContext } from "../../posts/context/PostContext";
 import { CommentRefetchContext } from "../../posts/context/CommentContext";
 import { addNotification } from "../../../stores/notificationSlice";
 import store from "../../../stores/store";
+import { useTranslation } from "react-i18next";
 
 const postLikeComment = (commentId: string, isLiked: boolean) => {
   const { postId } = useContext(PostRefetchContext);
@@ -20,6 +21,7 @@ const postLikeComment = (commentId: string, isLiked: boolean) => {
     return axios.post(`/social-media/like/comment/${commentId}`);
   };
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
   return useMutation({
     mutationFn: postUserLikeComment,
     onMutate: async (pageParam) => {
@@ -62,14 +64,13 @@ const postLikeComment = (commentId: string, isLiked: boolean) => {
       queryClient.setQueryData(["comments", postId], context.previousLikes);
     },
     onSuccess: (response) => {
-      const { message } = response;
       const { dispatch } = store;
 
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: `Comment ${message}`,
+          title: t("notification.success"),
+          message: t("notificationMessages.likeComment"),
         })
       );
       refetch({

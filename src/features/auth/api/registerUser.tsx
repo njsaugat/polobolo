@@ -3,6 +3,7 @@ import { axios } from "../../../services/apiClient";
 import { useNavigate } from "react-router-dom";
 import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
+import { useTranslation } from "react-i18next";
 
 export interface SignupData {
   email: string;
@@ -12,6 +13,7 @@ export interface SignupData {
 }
 const useRegisterUser = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const registerUser = (signupData: SignupData) => {
     return axios.post("/users/register", signupData);
   };
@@ -23,8 +25,8 @@ const useRegisterUser = () => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: `User profile created successfully. Please Login.`,
+          title: t("notification.success"),
+          message: t("notificationMessages.signupUser"),
         })
       );
       navigate("/login");

@@ -1,6 +1,7 @@
 import React, { KeyboardEvent, useState } from "react";
 import CreateTags from "./CreateTags";
 import { TOTAL_TAGS } from "../../../config/constants";
+import { useTranslation } from "react-i18next";
 
 type CreatePostProps = {
   tags: string[];
@@ -16,6 +17,7 @@ const CreatePostTags = ({
   tagRef,
   onKeyDownTag,
 }: CreatePostProps) => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col w-full h-auto gap-2 mt-6">
       <div className="flex flex-wrap gap-2">
@@ -31,7 +33,7 @@ const CreatePostTags = ({
         name="tag"
         type="text"
         className="w-full p-2 mt-2 border shadow-lg md:mt-1 rounded-xl focus:outline-none"
-        placeholder="Add 🔖tags and press enter"
+        placeholder={t("posts.createTags")}
         ref={tagRef}
         onKeyDown={(e) => onKeyDownTag(e)}
         disabled={tags.length >= TOTAL_TAGS}

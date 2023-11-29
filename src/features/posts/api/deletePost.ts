@@ -2,9 +2,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axios } from "../../../services/apiClient";
 import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
+import { useTranslation } from "react-i18next";
 
 const deletePost = (postId: string | undefined) => {
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
   const deleteData = () => {
     const config = {
       headers: {
@@ -22,8 +24,8 @@ const deletePost = (postId: string | undefined) => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message: "Post deleted successfully.",
+          title: t("notification.success"),
+          message: t("notificationMessages.deletePost"),
         })
       );
     },

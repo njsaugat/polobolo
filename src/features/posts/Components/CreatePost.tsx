@@ -20,6 +20,7 @@ import AuthorProfile from "../../../features/user/Components/AuthorProfile";
 import TextArea from "../../../components/Form/TextArea";
 import CreatePostTags from "./CreatePostTags";
 import { convertToBlob } from "../../../utils/convertToBlob";
+import { useTranslation } from "react-i18next";
 
 export type CreatePostDialogProps = {
   post?: Post;
@@ -52,6 +53,7 @@ const CreatePost = ({
   } = useForm<CreatePostValidationSchema>({
     resolver: zodResolver(createPostValidationSchema),
   });
+  const { t } = useTranslation();
 
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
@@ -122,8 +124,8 @@ const CreatePost = ({
       dispatch(
         addNotification({
           type: "warning",
-          title: "Warning",
-          message: `Only ${TOTAL_TAGS} tags are allowed per post.`,
+          title: t("notification.warning"),
+          message: `${TOTAL_TAGS} ${t("notificationMessages.limitedTags")}`,
         })
       );
       setErrorDispatched(true);
@@ -184,7 +186,7 @@ const CreatePost = ({
               errors={errors}
               label=""
               type="text"
-              placeholder="Speak your mind 💬"
+              placeholder={`${t("posts.createPost")} 💬`}
               defaultValue={post?.content ? post?.content : ""}
               className={`block w-full h-48 md:h-28 px-3 py-2 placeholder-gray-400 border border-gray-300 shadow-lg 
               appearance-none resize-none rounded-2xl focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm 
@@ -215,7 +217,7 @@ const CreatePost = ({
               variant="blend"
               className="self-end mt-6 text-right rounded-full"
             >
-              {post ? "Update" : "Post"}
+              {post ? t("posts.update") : t("posts.post")}
             </Button>
           </form>
         </div>

@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
 import { handleUpdateProfilePic } from "../../../stores/userSlice";
+import { useTranslation } from "react-i18next";
 
 const postImage = (coverImageExist: boolean | undefined) => {
   const queryClient = useQueryClient();
   const { username } = useParams();
+  const { t } = useTranslation();
   const postImage = (formData: any) => {
     const config = {
       headers: {
@@ -33,8 +35,10 @@ const postImage = (coverImageExist: boolean | undefined) => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
-          message,
+          title: t("notification.success"),
+          message: coverImageExist
+            ? t("notificationMessages.updateCoverImage")
+            : t("notificationMessages.updateProfileImage"),
         })
       );
     },

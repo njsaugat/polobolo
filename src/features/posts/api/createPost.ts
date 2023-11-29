@@ -3,10 +3,12 @@ import { axios } from "../../../services/apiClient";
 import { useParams } from "react-router-dom";
 import store from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
+import { useTranslation } from "react-i18next";
 
 const createPost = (postId: string | undefined) => {
   const queryClient = useQueryClient();
   const { username } = useParams();
+  const { t } = useTranslation();
   const postData = (formData: any) => {
     const config = {
       headers: {
@@ -31,10 +33,10 @@ const createPost = (postId: string | undefined) => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
+          title: t("notification.success"),
           message: postId
-            ? "Post updated successfully."
-            : "Post created successfully.",
+            ? t("notificationMessages.updatePost")
+            : t("notificationMessages.createPost"),
         })
       );
     },

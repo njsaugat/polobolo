@@ -14,6 +14,7 @@ import { Button } from "../../../components/Elements/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores/store";
 import AvailableUserOption from "./AvailableUserOption";
+import { useTranslation } from "react-i18next";
 
 type AvailableUsersProps = {
   isChat: boolean;
@@ -25,7 +26,9 @@ const AvailableUsers = ({
   buttonRef,
   addParticipant,
 }: AvailableUsersProps) => {
+  "Search User";
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
   const [isSearching, setIsSearching] = useState(
     queryClient.getQueriesData(["chats", "users"])?.length > 0 ? true : false
   );
@@ -103,7 +106,11 @@ const AvailableUsers = ({
               />
 
               <Combobox.Input
-                placeholder={isChat ? "Search User" : "Search Profiles"}
+                placeholder={
+                  isChat
+                    ? t("homePage.searchUser")
+                    : t("homePage.searchProfile")
+                }
                 className="w-full py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 border-none focus:outline-none"
                 displayValue={(selected: ChatUser | ChatUser[]) =>
                   selected
@@ -146,7 +153,7 @@ const AvailableUsers = ({
                   <>
                     {isChat && isSearching ? (
                       <div className="flex items-center justify-between w-full pr-3 pl-14 ">
-                        <span>Create group</span>
+                        <span>{t("chatPage.createGroup")}</span>
                         <Toggle
                           enabled={isGroupChatEnabled}
                           setEnabled={setIsGroupChatEnabled}
@@ -184,7 +191,7 @@ const AvailableUsers = ({
                 onClick={handleCreateGroup}
                 disabled={!(Array.isArray(selected) && selected?.length > 1)}
               >
-                {"Create Group"}
+                {t("chatPage.createGroup")}
               </Button>
             </div>
           </div>

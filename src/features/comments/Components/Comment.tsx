@@ -12,6 +12,7 @@ import CloseModal from "../../../components/Elements/CloseModal";
 import DeletePost from "../../posts/Components/DeletePost";
 import { PostRefetchContext } from "../../posts/context/PostContext";
 import deleteComment from "../api/deleteComment";
+import { useTranslation } from "react-i18next";
 
 type CommentProps = { comment: Comment };
 const SingleComment = ({ comment }: CommentProps) => {
@@ -29,6 +30,7 @@ const SingleComment = ({ comment }: CommentProps) => {
     (store) => store.user.user
   );
   const closeModal = () => setIsOpenCommentEdit(false);
+  const { t } = useTranslation();
   return (
     <div className={` relative overflow-hidden w-full p-3 my-1  `}>
       <div className="flex justify-between ">
@@ -91,7 +93,7 @@ const SingleComment = ({ comment }: CommentProps) => {
                   mutateDelete();
                   closeModal();
                 }}
-                content="Are you sure you want to delete the comment❓"
+                content={t("userPages.deleteComment")}
               />
             </>
           )}

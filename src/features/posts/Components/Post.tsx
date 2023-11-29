@@ -136,7 +136,7 @@ const PostCard = ({ post }: PostCardProps) => {
               </div>
             </div>
             <Carousel
-              post={post}
+              images={post?.images}
               currentIndex={currentIndex}
               prevSlide={prevSlide}
               nextSlide={nextSlide}

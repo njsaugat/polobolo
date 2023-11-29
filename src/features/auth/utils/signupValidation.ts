@@ -1,34 +1,31 @@
 import { z } from "zod";
-
+import { t } from "i18next";
 export const signupValidationSchema = z
   .object({
     firstName: z
       .string()
-      .min(3, { message: "Firstname should be at least 3 characters" }),
-    lastName: z
-      .string()
-      .min(3, { message: "Lastname should be at least 3 characters" }),
+      .min(3, { message: t("validationMessages.firstName") }),
+    lastName: z.string().min(3, { message: t("validationMessages.lastName") }),
     email: z.string().email({
-      message: "Must be a valid email",
+      message: t("validationMessages.validEmail"),
     }),
     password: z
       .string()
-      .min(8, { message: "Password must be at least 8 characters long" })
-      .max(30, { message: "Password must be at most 30 characters long" })
+      .min(8, { message: t("validationMessages.minPassword") })
+      .max(30, { message: t("validationMessages.maxPassword") })
       .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, {
-        message:
-          "Password must contain at least one uppercase letter, one lowercase letter, and one digit",
+        message: t("validationMessages.passwordRequirement"),
       }),
     confirmPassword: z
       .string()
-      .min(1, { message: "Confirm Password is required" }),
+      .min(1, { message: t("validationMessages.confPassReq") }),
     terms: z.literal(true, {
-      errorMap: () => ({ message: "You must accept Terms and Conditions" }),
+      errorMap: () => ({ message: t("validationMessages.acceptTOC") }),
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
-    message: "Password don't match",
+    message: t("validationMessages.matchPassword"),
   });
 
 export type SignupValidationSchema = z.infer<typeof signupValidationSchema>;

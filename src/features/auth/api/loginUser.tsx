@@ -11,6 +11,7 @@ import {
 } from "../../../stores/userSlice";
 import store, { RootState } from "../../../stores/store";
 import { addNotification } from "../../../stores/notificationSlice";
+import { useTranslation } from "react-i18next";
 const isUserInitialLogin = (createdAt: string, updatedAt: string) => {
   let createdAtDate = new Date(createdAt).valueOf();
   let updatedAtDate = new Date(updatedAt).valueOf();
@@ -20,6 +21,7 @@ const isUserInitialLogin = (createdAt: string, updatedAt: string) => {
 };
 const useLoginUser = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const loginUser = (loginData: LoginValidationSchema) => {
     return axios.post("/users/login", loginData);
@@ -44,8 +46,8 @@ const useLoginUser = () => {
           dispatch(
             addNotification({
               type: "success",
-              title: "Success",
-              message: "Please update your profile.",
+              title: t("notification.success"),
+              message: t("notificationMessages.updateProfile"),
             })
           );
         } else {
@@ -56,8 +58,8 @@ const useLoginUser = () => {
             dispatch(
               addNotification({
                 type: "info",
-                title: "Caution",
-                message: "Please verify your email address.",
+                title: t("notification.caution"),
+                message: t("notificationMessages.verifyEmail"),
               })
             );
           }, 1000);

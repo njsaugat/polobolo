@@ -20,11 +20,12 @@ import ShimmerComment from "../../../components/Shimmer/ShimmerComment";
 import CreateComment from "../../comments/Components/CreateComment";
 import postBookmark from "../api/postBookmark";
 import { RootState } from "../../../stores/store";
+import { t } from "i18next";
 
 export const commentValidationSchema = z.object({
   content: z
     .string()
-    .min(3, { message: "Comment should be at least 3 characters." }),
+    .min(3, { message: t("validationMessages.commentContent") }),
 });
 export type ModalOpen = { isModalOpen?: boolean };
 

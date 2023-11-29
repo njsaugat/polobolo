@@ -19,12 +19,14 @@ import { PostRefetchContext } from "../../posts/context/PostContext";
 import { nanoid } from "nanoid";
 import { useSelector } from "react-redux";
 import { Refetch } from "stores/refetchSlice";
+import { useTranslation } from "react-i18next";
 
 const postComment = (postId: string, commentId?: string) => {
   const { page, refetch } = useContext(PostRefetchContext);
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
+  const { t } = useTranslation();
   const refetchComment = useSelector<RootState, Refetch>(
     (store) => store.refetch.refetch
   );
@@ -148,10 +150,10 @@ const postComment = (postId: string, commentId?: string) => {
       dispatch(
         addNotification({
           type: "success",
-          title: "Success",
+          title: t("notification.success"),
           message: commentId
-            ? "Comment updated successfully."
-            : "Comment created successfully.",
+            ? t("notificationMessages.updateComment")
+            : t("notificationMessages.createComment"),
         })
       );
       refetchComment({

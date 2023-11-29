@@ -63,6 +63,14 @@ const publicRoutes = [
         ),
       },
       {
+        path: "/signup/:email",
+        element: (
+          <Container>
+            <Signup />
+          </Container>
+        ),
+      },
+      {
         path: "/login",
         element: (
           <Container>

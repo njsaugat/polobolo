@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../stores/store";
 import ShimmerProfile from "../../../components/Shimmer/ShimmerProfile";
 import Follow from "./Follow";
-import { links } from "../../../utils/navbarLinks";
+import useLinks from "../../../utils/navbarLinks";
 import UserProfileImage from "./UserProfileImage";
 
 export interface UserProfileProps {
@@ -19,6 +19,7 @@ const UserProfile = () => {
   const { username } = useParams();
   const { pathname } = useLocation();
   const [opened, setOpened] = useState("about");
+  const links = useLinks();
   useEffect(() => {
     const pathArr = pathname.split("/");
     let currentRoute = pathArr[pathArr.length - 1];
@@ -84,7 +85,7 @@ const UserProfile = () => {
                   >
                     <span className="flex md:w-28 lg:w-32 gap-x-6">
                       <span>{link.icon}</span>
-                      <span className="hidden md:flex">{link.link}</span>
+                      <span className="hidden md:flex">{link.text}</span>
                     </span>
                   </Button>
                 </Link>

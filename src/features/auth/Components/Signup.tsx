@@ -9,8 +9,11 @@ import InputField from "../../../components/Form/InputField";
 import useRegisterUser from "../api/registerUser";
 import { Button } from "../../../components/Elements/Button";
 import AuthFormEnhancements from "./AuthFormEnhancements";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Signup = () => {
+  const { email } = useParams();
   const {
     control,
     register,
@@ -33,13 +36,14 @@ const Signup = () => {
         data.firstName.toLowerCase() + "_" + data.lastName.toLowerCase(),
     });
   };
+  const { t } = useTranslation();
 
   return (
     <div className="w-full max-w-xl mx-auto">
       <div className="flex justify-center my-12">
         <div className="w-full p-5 bg-white rounded-lg shadow-xl lg:w-full">
           <h3 className="pt-4 text-2xl font-bold text-center ">
-            Create New Account
+            {t("authPage.createAccount")}
           </h3>
           <form
             className="px-8 pt-6 pb-8 mb-4"
@@ -50,7 +54,7 @@ const Signup = () => {
                 name="firstName"
                 control={control}
                 errors={errors}
-                label="First Name"
+                label={t("authPage.firstName")}
                 type="text"
                 onKeyDown={handleInputChange}
               />
@@ -59,7 +63,7 @@ const Signup = () => {
                 name="lastName"
                 control={control}
                 errors={errors}
-                label="Last Name"
+                label={t("authPage.lastName")}
                 type="text"
                 onKeyDown={handleInputChange}
               />
@@ -68,16 +72,17 @@ const Signup = () => {
               name="email"
               control={control}
               errors={errors || error}
-              label="Email"
+              label={t("authPage.email")}
               type="text"
               onKeyDown={handleInputChange}
               className="w-full"
+              defaultValue={email ?? ""}
             />
             <InputField<SignupValidationSchema>
               name="password"
               control={control}
               errors={errors}
-              label="Password"
+              label={t("authPage.password")}
               type="password"
               onKeyDown={handleInputChange}
             />
@@ -85,7 +90,7 @@ const Signup = () => {
               name="confirmPassword"
               control={control}
               errors={errors}
-              label="Confirm Password"
+              label={t("authPage.confirmPassword")}
               type="password"
               onKeyDown={handleInputChange}
             />
@@ -93,7 +98,7 @@ const Signup = () => {
               name="terms"
               control={control}
               errors={errors}
-              label="Accept Terms & Conditions"
+              label={t("authPage.acceptTOC")}
               type="checkbox"
               onKeyDown={() => {}}
             />
@@ -103,7 +108,7 @@ const Signup = () => {
               type="submit"
               isLoading={isLoading}
             >
-              Register Account
+              {t("authPage.registerAccount")}
             </Button>
             <hr className="my-6 border-t" />
             <AuthFormEnhancements formType="login" />

@@ -4,10 +4,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { axios } from "../../../services/apiClient";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { LocalStorage } from "../../../utils/index";
 import store, { RootState } from "../../../stores/store";
-import { addNotification } from "../../../stores/notificationSlice";
 import {
   Author,
   Chat,
