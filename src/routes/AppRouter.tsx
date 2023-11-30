@@ -161,7 +161,7 @@ const protectedRoutes = [
         ),
         children: [
           {
-            index: true, // Use the index property to specify the default route
+            index: true,
             element: <UserProfileAbout />,
           },
           {
