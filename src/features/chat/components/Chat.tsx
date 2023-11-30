@@ -47,7 +47,6 @@ const Chat = () => {
         </div>
       </ErrorBoundary>
     </div>
-    // </ErrorBoundary>
   );
 };
 

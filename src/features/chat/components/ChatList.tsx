@@ -19,9 +19,6 @@ import ChatMembers from "./ChatMembers";
 import EditGroupPostName from "./EditGroupPostName";
 
 function truncateMessage(text: string, maxLength: number) {
-  // if (!text) {
-  //   return "Start the conversation.😊";
-  // }
   if (text?.length > maxLength) {
     return `${text.substring(0, maxLength)}...`;
   }

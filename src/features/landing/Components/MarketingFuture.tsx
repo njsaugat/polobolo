@@ -4,8 +4,8 @@ import MailingList from "./MailingList";
 const MarketingFuture = () => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col-reverse items-center p-40 mt-20 md:flex-row bg-orange-dim ">
-      <div className="w-1/2 ">
+    <div className="flex flex-col-reverse items-center p-10 mt-20 md:p-20 lg:p-40 md:flex-row bg-orange-dim ">
+      <div className="w-full md:w-1/2 ">
         <h2 className="my-5 text-4xl font-bold leading-snug tracking-wider">
           {t("landingPage.marketingFuture")}
         </h2>

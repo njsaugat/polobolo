@@ -5,7 +5,6 @@ import { languages, useLanguage } from "../../context/LanguageContext";
 
 export default function AvailableLanguages() {
   const { language, setLanguage, changeLanguage } = useLanguage();
-  console.log(language);
   return (
     <div className="text-xs">
       <Listbox
@@ -50,7 +49,6 @@ export default function AvailableLanguages() {
                         className={`block truncate text-xs ${
                           lng ? "font-medium" : "font-normal"
                         }`}
-                        // onClick={() => changeLanguage(lng)}
                       >
                         {lng.nativeName}
                       </span>

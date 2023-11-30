@@ -11,16 +11,14 @@ export const languages = [
 export type Language = (typeof languages)[number];
 export type LanguageContext = {
   language: Language;
-  setLanguage: React.Dispatch<SetStateAction<Language>> ;
+  setLanguage: React.Dispatch<SetStateAction<Language>>;
   changeLanguage: (language: Language) => void;
-  // setLanguage:
 };
-console.log(languages);
 export const LanguageContext = createContext<LanguageContext>({
   language:
     languages.find((language) => language.key === i18n.language) ??
     languages[0],
-  setLanguage: ()=>{},
+  setLanguage: () => {},
   changeLanguage: () => {},
 });
 

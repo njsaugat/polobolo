@@ -42,7 +42,7 @@ export default function NavbarMenu({ username }: NavbarMenuProps) {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className={`absolute right-1 md:right-[1%] lg:right-[12%]   lg:translate-x-full top-16 border w-32  z-50  bg-white shadow-xl overflow-x-hidden `}
+          className={`absolute right-1 md:right-[1%] lg:right-[50%]   lg:translate-x-full top-12 border w-32  z-50  bg-white shadow-xl overflow-x-hidden `}
         >
           <div className="px-1 py-1 ">
             <Menu.Item>
@@ -82,16 +82,7 @@ export default function NavbarMenu({ username }: NavbarMenuProps) {
                 })
               : null}
             <hr />
-            <Menu.Item>
-              {({ active }) => (
-                <Button
-                  variant="inverse"
-                  className={` group flex w-full items-center rounded-md px-2 py-2 text-sm border-none mt-1 `}
-                >
-                  <AvailableLanguages />
-                </Button>
-              )}
-            </Menu.Item>
+            <Menu.Item>{({ active }) => <AvailableLanguages />}</Menu.Item>
             {username ? (
               <Menu.Item>
                 {({ active }) => (

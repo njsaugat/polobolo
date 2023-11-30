@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { FallbackErrorBoundary } from "./components/Shared/FallbackErrorBoundary";
 import ReactDOM from "react-dom/client";
+import { ErrorBoundary } from "react-error-boundary";
 import { Provider } from "react-redux";
 import { Notifications } from "./components/Notifications/Notifications";
 import { LanguageProvider } from "./context/LanguageContext";
@@ -11,16 +13,16 @@ import store from "./stores/store";
 const queryClient = new QueryClient();
 
 const RootApp = () => (
-  <Provider store={store}>
-    <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <Notifications />
-        <AppRoutes />
-        {/* <SocketProvider>
-      </SocketProvider> */}
-        <ReactQueryDevtools />
-      </LanguageProvider>
-    </QueryClientProvider>
-  </Provider>
+  <ErrorBoundary FallbackComponent={FallbackErrorBoundary}>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <LanguageProvider>
+          <Notifications />
+          <AppRoutes />
+          <ReactQueryDevtools />
+        </LanguageProvider>
+      </QueryClientProvider>
+    </Provider>
+  </ErrorBoundary>
 );
 ReactDOM.createRoot(document.getElementById("root")!).render(<RootApp />);

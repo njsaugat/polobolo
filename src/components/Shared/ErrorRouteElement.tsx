@@ -1,4 +1,9 @@
-import { Link, Navigate, isRouteErrorResponse, useRouteError } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  isRouteErrorResponse,
+  useRouteError,
+} from "react-router-dom";
 import LoadImage from "../../components/Elements/LoadImage";
 import useAuthCheck from "../../hooks/useAuthCheck";
 import GradientText from "./GradientText";
@@ -6,7 +11,6 @@ import GradientText from "./GradientText";
 const ErrorRouteElement = () => {
   const error = useRouteError();
   const isLoggedIn = useAuthCheck();
-  console.log(isLoggedIn);
   if (!isLoggedIn) {
     return <Navigate to="/login" />;
   }
@@ -19,8 +23,6 @@ const ErrorRouteElement = () => {
           <p className="mb-8 text-2xl font-light leading-normal md:text-3xl">
             Sorry we couldn't find the page you're looking for
           </p>
-          {/* <p className="text-base">{error.message}</p> */}
-
           <div
             id="error-page"
             className="flex flex-col items-center justify-center gap-8"

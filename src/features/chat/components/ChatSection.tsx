@@ -67,11 +67,12 @@ const ChatSection = () => {
   }
   return (
     <>
-      {/* <ErrorBoundary FallbackComponent={MyFallbackComponent}> */}
       <div className=" flex flex-col-reverse transition-all duration-1000  w-full h-[calc(100vh-140px)] md:h-[calc(100%-70px)] overflow-y-auto">
         {isTyping && <TypingChat />}
         {data?.data?.length === 0 ? (
-          <h1 className="w-full mb-10 text-center">{t("chatPage.startChat")}</h1>
+          <h1 className="w-full mb-10 text-center">
+            {t("chatPage.startChat")}
+          </h1>
         ) : null}
         {data?.data?.map((chatMessage: ChatMessage) => (
           <div
@@ -102,7 +103,6 @@ const ChatSection = () => {
       </div>
 
       <ChatComposer addCurrentMessage={() => {}} />
-      {/* </ErrorBoundary> */}
     </>
   );
 };

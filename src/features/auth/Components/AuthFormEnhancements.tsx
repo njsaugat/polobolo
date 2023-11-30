@@ -25,6 +25,13 @@ const AuthFormEnhancements = ({ formType }: FormType) => {
         >
           {t(`landingPage.${formType}`)} !
         </Link>
+        <br />
+        <Link
+          to="/"
+          className="inline-block mt-4 text-teal-500 capitalize align-baseline hover:text-teal-800"
+        >
+          {t(`userPages.returnHome`)}{" "}
+        </Link>
       </div>
     </>
   );

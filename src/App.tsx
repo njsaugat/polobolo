@@ -1,7 +1,5 @@
-import { ErrorBoundary } from "react-error-boundary";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { FallbackErrorBoundary } from "./components/Shared/FallbackErrorBoundary";
 import { SocketProvider } from "./context/SocketContext";
 import Navbar from "./features/landing/Components/Navbar";
 import getUser from "./features/user/api/getUser";
@@ -19,17 +17,19 @@ const App = () => {
     );
   }
 
-  const userData = fetchUserData();
+  const { isLoading, userData } = fetchUserData();
 
   return (
-    <ErrorBoundary FallbackComponent={FallbackErrorBoundary}>
-      <SocketProvider>
-        <div className="min-w-full overflow-x-hidden font-montserrat">
-          <Navbar user={userData} isLoggedIn={loggedIn} />
-          <Outlet />
-        </div>
-      </SocketProvider>
-    </ErrorBoundary>
+    <SocketProvider>
+      <div className="min-w-full overflow-x-hidden font-montserrat">
+        <Navbar
+          user={userData}
+          isLoggedIn={loggedIn}
+          isLoading={isLoading ?? true}
+        />
+        <Outlet />
+      </div>
+    </SocketProvider>
   );
 };
 
@@ -41,7 +41,7 @@ const fetchUserData = () => {
     dispatch(addUser(data?.data));
   }
 
-  return data?.data;
+  return { userData: data?.data, isLoading };
 };
 
 export default App;

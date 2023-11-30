@@ -1,4 +1,3 @@
-// import { MyFallbackComponent } from "../../features/chat/components/ChatSection";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { FallbackErrorBoundary } from "./FallbackErrorBoundary";
@@ -20,9 +19,7 @@ const BuggyCounter = () => {
   );
 };
 
-// TestErrorBoundary component
 const TestErrorBoundary = () => {
-  // const [counter,setCounter]=useState();
   return (
     <div className="p-10">
       <ErrorBoundary FallbackComponent={FallbackErrorBoundary}>
