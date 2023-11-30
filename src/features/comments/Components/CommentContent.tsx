@@ -4,6 +4,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import { useDisclosure } from "../../../hooks/useDisclosure";
 type CommentContentProps = {
   content: string;
 };
@@ -20,7 +21,7 @@ function getMaxLength(windowSize: number) {
 }
 
 const CommentContent = ({ content }: CommentContentProps) => {
-  const [showMore, setShowMore] = useState(false);
+  const { isOpen: showMore, toggle: toggleShowMore } = useDisclosure(false);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const updateWindowSize = () => {
     setWindowSize(window.innerWidth);
@@ -33,9 +34,6 @@ const CommentContent = ({ content }: CommentContentProps) => {
   }, []);
   const maxLength = getMaxLength(windowSize);
   const isToggleRequired = content.length > maxLength;
-  const toggleShowMore = () => {
-    setShowMore(!showMore);
-  };
 
   return (
     <div className="text-sm transition-all duration-500">

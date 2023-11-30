@@ -7,6 +7,7 @@ import { RootState } from "stores/store";
 import CloseModal from "../../../components/Elements/CloseModal";
 import LoadImage from "../../../components/Elements/LoadImage";
 import Carousel from "../../../components/Shared/Carousel";
+import { useDisclosure } from "../../../hooks/useDisclosure";
 import useScreenSize from "../../../hooks/useScreenSize";
 import deletePost from "../api/deletePost";
 import { Author, PostCardProps } from "../types/postType";
@@ -21,9 +22,21 @@ export type RefetchProps = {
 };
 
 const PostCard = ({ post }: PostCardProps) => {
-  const [isOpenPostImage, setIsOpenPostImage] = useState(false);
-  const [isOpenPostEdit, setIsOpenPostEdit] = useState(false);
-  const [isOpenPostDelete, setIsOpenPostDelete] = useState(false);
+  const {
+    isOpen: isOpenPostImage,
+    open: openPostImageModal,
+    close: closePostImageModal,
+  } = useDisclosure(false);
+  const {
+    isOpen: isOpenPostEdit,
+    open: openModalEdit,
+    close: closeModalEdit,
+  } = useDisclosure(false);
+  const {
+    isOpen: isOpenPostDelete,
+    open: openModalDelete,
+    close: closeModalDelete,
+  } = useDisclosure(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { pathname } = useLocation();
   const isScreenSmall = useScreenSize(992);
@@ -31,13 +44,6 @@ const PostCard = ({ post }: PostCardProps) => {
     (store) => store.user.user
   );
   const { mutate, error, isLoading } = deletePost(post._id);
-
-  const closePostImageModal = () => setIsOpenPostImage(false);
-
-  const openPostImageModal = () => setIsOpenPostImage(true);
-
-  const openModalEdit = () => setIsOpenPostEdit(true);
-  const closeModalEdit = () => setIsOpenPostEdit(false);
 
   const prevSlide = () => {
     setCurrentIndex(
@@ -60,8 +66,8 @@ const PostCard = ({ post }: PostCardProps) => {
         pathname.includes(user?.account.username.toLowerCase()) && (
           <>
             <EditDeleteMenu
-              openEditModal={() => setIsOpenPostEdit(true)}
-              openDeleteModal={() => setIsOpenPostDelete(true)}
+              openEditModal={openModalEdit}
+              openDeleteModal={openModalDelete}
               isShown={true}
             />
             {isOpenPostEdit ? (
@@ -75,7 +81,7 @@ const PostCard = ({ post }: PostCardProps) => {
             {isOpenPostDelete ? (
               <DeletePost
                 isOpen={isOpenPostDelete}
-                closeModal={() => setIsOpenPostDelete(false)}
+                closeModal={closeModalDelete}
                 isLoading={isLoading}
                 handleDelete={() => {
                   mutate();

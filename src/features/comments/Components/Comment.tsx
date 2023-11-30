@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { useDisclosure } from "../../../hooks/useDisclosure";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import CloseModal from "../../../components/Elements/CloseModal";
@@ -16,8 +17,16 @@ import CreateComment from "./CreateComment";
 
 type CommentProps = { comment: Comment };
 const SingleComment = ({ comment }: CommentProps) => {
-  const [isOpenCommentEdit, setIsOpenCommentEdit] = useState(false);
-  const [isOpenCommentDelete, setIsOpenCommentDelete] = useState(false);
+  const {
+    isOpen: isOpenCommentEdit,
+    open: openCommentEdit,
+    close: closeCommentEdit,
+  } = useDisclosure(false);
+  const {
+    isOpen: isOpenCommentDelete,
+    open: openCommentDelete,
+    close: closeCommentDelete,
+  } = useDisclosure(false);
   const { postId } = useContext(PostRefetchContext);
   const { mutate, error } = postLikeComment(comment._id, comment.isLiked);
   const {
@@ -29,7 +38,6 @@ const SingleComment = ({ comment }: CommentProps) => {
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
-  const closeModal = () => setIsOpenCommentEdit(false);
   const { t } = useTranslation();
   return (
     <div className={` relative overflow-hidden w-full p-3 my-1  `}>
@@ -67,9 +75,9 @@ const SingleComment = ({ comment }: CommentProps) => {
               handleRefetch={() => {}}
               postId={postId}
               comment={comment}
-              closeModal={closeModal}
+              closeModal={closeCommentEdit}
             />
-            <CloseModal closeModal={closeModal} closeComment={true} />
+            <CloseModal closeModal={closeCommentEdit} closeComment={true} />
           </div>
         ) : (
           <CommentContent content={comment.content} />
@@ -78,8 +86,8 @@ const SingleComment = ({ comment }: CommentProps) => {
       {comment.author._id === user?._id && (
         <>
           <EditDeleteMenu
-            openEditModal={() => setIsOpenCommentEdit(true)}
-            openDeleteModal={() => setIsOpenCommentDelete(true)}
+            openEditModal={openCommentEdit}
+            openDeleteModal={openCommentDelete}
             className="comment"
             isShown={isOpenCommentEdit ? false : true}
           />
@@ -87,13 +95,13 @@ const SingleComment = ({ comment }: CommentProps) => {
             <>
               <DeletePost
                 isOpen={isOpenCommentDelete}
-                closeModal={closeModal}
+                closeModal={closeCommentDelete}
                 isLoading={isLoading}
                 handleDelete={() => {
                   mutateDelete();
-                  closeModal();
+                  closeCommentEdit();
                 }}
-                content={t("userPages.deleteComment")}
+                content={t("comments.deleteComment")}
               />
             </>
           )}

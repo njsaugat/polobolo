@@ -1,19 +1,17 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "stores/store";
+import { useDisclosure } from "../../../hooks/useDisclosure";
 import Avatar from "../../user/Components/Avatar";
 import { Author } from "../types/postType";
 import CreatePost from "./CreatePost";
 
 const CreatePostDisplay = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, open: openModal, close: closeModal } = useDisclosure(false);
   const { t } = useTranslation();
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
   );
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
   return (
     <div className="w-11/12 p-4 bg-white border rounded-lg shadow-2xl drop- md:w-3/5 lg:w-1/2">
       <div className="flex">

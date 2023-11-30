@@ -1,7 +1,8 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ForwardedRef, forwardRef, useState } from "react";
+import { ForwardedRef, forwardRef } from "react";
 import { Controller } from "react-hook-form";
+import { useDisclosure } from "../../hooks/useDisclosure";
 export const inputFieldStyle = `
   w-full px-3 py-2 text-sm leading-tight transition-all duration-300 hover:border-teal-200 outline-none text-gray-700 border`;
 
@@ -40,7 +41,7 @@ const InputField = forwardRef(
     }: InputFieldProps<SchemaType>,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
-    const [isEyeShown, setIsEyeShown] = useState(false);
+    const { isOpen: isEyeShown, toggle: toggleEye } = useDisclosure(false);
     return (
       <div
         className={`${
@@ -87,9 +88,7 @@ const InputField = forwardRef(
             <FontAwesomeIcon
               icon={isEyeShown ? faEyeSlash : faEye}
               className="absolute cursor-pointer text-slate-400 right-2"
-              onClick={() => {
-                setIsEyeShown((prevEyeState) => !prevEyeState);
-              }}
+              onClick={toggleEye}
             />
           )}
           {children}

@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+import { useDisclosure } from "../../../hooks/useDisclosure";
 import { formatDateStringToBirthday } from "../../../utils/helpers";
 import getUserByUsername from "../api/getUserByUsername";
 import UserList from "./UserList";
@@ -8,8 +8,16 @@ import UserList from "./UserList";
 const UserProfileAbout = () => {
   const { username } = useParams();
   const { error, data, isLoading } = getUserByUsername(username);
-  const [isFollowersOpen, setIsFollowersOpen] = useState(false);
-  const [isFollowingOpen, setIsFollowingOpen] = useState(false);
+  const {
+    isOpen: isFollowersOpen,
+    open: openFollowersModal,
+    close: closeFollowersModal,
+  } = useDisclosure(false);
+  const {
+    isOpen: isFollowingOpen,
+    open: openFollowingModal,
+    close: closeFollowingModal,
+  } = useDisclosure(false);
   const { t } = useTranslation();
   const user = data?.data;
   return (
@@ -18,7 +26,7 @@ const UserProfileAbout = () => {
         <div className="flex justify-between mt-4 mb-5">
           <div
             onClick={() =>
-              user && user?.followersCount > 0 && setIsFollowersOpen(true)
+              user && user?.followersCount > 0 && openFollowersModal()
             }
             className={
               user && user?.followersCount > 0
@@ -31,7 +39,7 @@ const UserProfileAbout = () => {
           </div>
           <div
             onClick={() =>
-              user && user?.followingCount > 0 && setIsFollowingOpen(true)
+              user && user?.followingCount > 0 && openFollowingModal
             }
             className={
               user && user?.followingCount > 0
@@ -73,7 +81,7 @@ const UserProfileAbout = () => {
       {isFollowersOpen && (
         <UserList
           isOpen={isFollowersOpen}
-          closeModal={() => setIsFollowersOpen(false)}
+          closeModal={closeFollowersModal}
           followers={true}
         />
       )}
@@ -81,7 +89,7 @@ const UserProfileAbout = () => {
       {isFollowingOpen && (
         <UserList
           isOpen={isFollowingOpen}
-          closeModal={() => setIsFollowingOpen(false)}
+          closeModal={closeFollowingModal}
           followers={false}
         />
       )}

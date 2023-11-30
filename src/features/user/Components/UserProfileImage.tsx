@@ -2,6 +2,7 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import LoadImage from "../../../components/Elements/LoadImage";
+import { useDisclosure } from "../../../hooks/useDisclosure";
 import UploadProfileImage from "./UploadProfileImage";
 
 type UserProfileImage = {
@@ -21,18 +22,23 @@ const UserProfileImage = ({
   isCover,
   coverTitle,
 }: UserProfileImage) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isImageUploadOpen, setIsImageUploadOpen] = useState(false);
-  const closeModal = () => setIsImageUploadOpen(false);
+  const {
+    isOpen: isHovered,
+    open: openHover,
+    close: closeHover,
+  } = useDisclosure(false);
+  const {
+    isOpen: isImageUploadOpen,
+    open: openImageUpload,
+    close: closeImageUpload,
+  } = useDisclosure(false);
   return (
     <>
       <div
         className={isCover ? coverImageClassname : profileImageClassname}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onClick={() =>
-          isUserAdmin ? setIsImageUploadOpen(true) : setIsImageUploadOpen(false)
-        }
+        onMouseEnter={openHover}
+        onMouseLeave={closeHover}
+        onClick={() => (isUserAdmin ? openImageUpload() : closeImageUpload())}
       >
         {isCover && url?.includes("placeholder") ? (
           <h3 className="absolute text-5xl text-white lowercase -translate-x-1/2 -translate-y-1/2 md:uppercase left-1/2 font-cursive top-1/2">
@@ -71,7 +77,7 @@ const UserProfileImage = ({
       {isImageUploadOpen && (
         <UploadProfileImage
           isImageUploadOpen={isImageUploadOpen}
-          closeModal={closeModal}
+          closeModal={closeImageUpload}
           title={
             isCover
               ? "Upload your cover image 📷 "

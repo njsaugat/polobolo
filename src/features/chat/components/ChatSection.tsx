@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { Author, ChatMessage } from "features/posts/types/postType";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -13,6 +13,7 @@ import {
   TYPING_EVENT,
 } from "../../../config/constants";
 import { useSocket } from "../../../context/SocketContext";
+import { useDisclosure } from "../../../hooks/useDisclosure";
 import getChatMessages from "../api/getChatMessages";
 import { updateChatListLastMessage } from "../api/postMessage";
 import ChatAuthorProfile from "./ChatAuthorProfile";
@@ -23,7 +24,11 @@ const ChatSection = () => {
   const { chatId } = useParams();
   const queryClient = useQueryClient();
   const { data, isLoading, error } = getChatMessages(chatId);
-  const [isTyping, setIsTyping] = useState(false);
+  const {
+    isOpen: isTyping,
+    open: startTyping,
+    close: stopTyping,
+  } = useDisclosure(false);
 
   const user = useSelector<RootState, Author | undefined>(
     (store) => store.user.user
@@ -33,11 +38,11 @@ const ChatSection = () => {
 
   const handleOnSocketTyping = (currentChatId: string) => {
     if (currentChatId !== chatId) return;
-    setIsTyping(true);
+    startTyping();
   };
   const handleOnSocketStopTyping = (currentChatId: string) => {
     if (currentChatId !== chatId) return;
-    setIsTyping(false);
+    stopTyping();
   };
   const onMessageReceived = (chatMessage: ChatMessage) => {
     const previousChats: ResponseType<ChatMessage[]> | undefined =

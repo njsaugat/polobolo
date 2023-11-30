@@ -1,12 +1,13 @@
 import { faAngleDown, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Button } from "../../../components/Elements/Button";
 import AvailableLanguages from "../../../components/Shared/AvailableLanguages";
 import DeletePost from "../../../features/posts/Components/DeletePost";
+import { useDisclosure } from "../../../hooks/useDisclosure";
 import useLinks from "../../../utils/navbarLinks";
 import useLogoutUser from "../../auth/api/logoutUser";
 
@@ -15,8 +16,11 @@ type NavbarMenuProps = {
 };
 export default function NavbarMenu({ username }: NavbarMenuProps) {
   const { mutate, error, isLoading } = useLogoutUser();
-  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
-  const closeModal = () => setIsLogoutOpen(false);
+  const {
+    isOpen: isLogoutOpen,
+    open: openLogoutModal,
+    close: closeLogoutModal,
+  } = useDisclosure(false);
   const links = useLinks();
   const { t } = useTranslation();
   return (
@@ -93,7 +97,7 @@ export default function NavbarMenu({ username }: NavbarMenuProps) {
                         ? "bg-gradient-to-r from-teal-200 to-teal-400  text-slate-700"
                         : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm border-none mt-1 `}
-                    onClick={() => setIsLogoutOpen(true)}
+                    onClick={openLogoutModal}
                   >
                     {} &nbsp;
                     <span className={` text-xs `}>{t("userPages.logout")}</span>
@@ -108,11 +112,11 @@ export default function NavbarMenu({ username }: NavbarMenuProps) {
         <>
           <DeletePost
             isOpen={isLogoutOpen}
-            closeModal={closeModal}
+            closeModal={closeLogoutModal}
             isLoading={isLoading}
             handleDelete={() => {
               mutate();
-              closeModal();
+              closeLogoutModal();
             }}
             content={t("userPages.logoutUser")}
           />
