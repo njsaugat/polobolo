@@ -39,7 +39,7 @@ const UserProfileAbout = () => {
           </div>
           <div
             onClick={() =>
-              user && user?.followingCount > 0 && openFollowingModal
+              user && user?.followingCount > 0 && openFollowingModal()
             }
             className={
               user && user?.followingCount > 0
@@ -56,24 +56,24 @@ const UserProfileAbout = () => {
             <strong>Username:</strong> {user?.account?.username} 📛
           </p>
           <p>
-            <strong>Date of Birth:</strong>{" "}
+            <strong>{t("userPages.dob")}:</strong>{" "}
             {(user?.dob && formatDateStringToBirthday(user?.dob)) ||
               "Not provided"}{" "}
             🎂
           </p>
           <p>
-            <strong>Location:</strong>{" "}
+            <strong>{t("userPages.location")}:</strong>{" "}
             {user?.location || t("userPages.notProvided")} 🌍
           </p>
           <p>
-            <strong>Email:</strong>{" "}
+            <strong>{t("authPage.email")}:</strong>{" "}
             <a href={`mailto:${user?.account?.email}`}>
               {user?.account?.email}{" "}
             </a>
             📧
           </p>
           <p>
-            <strong>Phone Number:</strong>{" "}
+            <strong>{t("userPages.phoneNumber")}:</strong>{" "}
             {user?.phoneNumber || t("userPages.notProvided")} 📞
           </p>
         </div>
