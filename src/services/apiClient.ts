@@ -1,5 +1,4 @@
 import Axios from "axios";
-import { useTranslation } from "react-i18next";
 import { addNotification } from "../stores/notificationSlice";
 import store from "../stores/store";
 import { LocalStorage } from "../utils/index";
@@ -30,7 +29,6 @@ axios.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    const { t } = useTranslation();
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       LocalStorage.remove("accessToken");
@@ -45,7 +43,7 @@ axios.interceptors.response.use(
     dispatch(
       addNotification({
         type: "error",
-        title: t("notification.error"),
+        title: "Error",
         message,
       })
     );

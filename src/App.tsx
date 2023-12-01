@@ -8,6 +8,7 @@ import { addUser } from "./stores/userSlice";
 
 const App = () => {
   const loggedIn = useAuthCheck();
+  const { isLoading, userData } = fetchUserData();
 
   if (!loggedIn) {
     return (
@@ -16,8 +17,6 @@ const App = () => {
       </>
     );
   }
-
-  const { isLoading, userData } = fetchUserData();
 
   return (
     <SocketProvider>

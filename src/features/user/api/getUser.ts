@@ -10,6 +10,7 @@ const getUser = () => {
   return useQuery({
     queryKey: ["user"],
     queryFn: getUserProfile,
+    useErrorBoundary: true,
     staleTime: 60 * 60 * 1000,
   });
 };

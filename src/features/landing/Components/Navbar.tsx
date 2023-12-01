@@ -23,8 +23,6 @@ const Navbar = ({ isLoggedIn, user, isLoading }: NavbarProps) => {
   const { t } = useTranslation();
   return (
     <div className="relative flex items-center w-screen px-2 pt-2 transition-all duration-300 space-around">
-      {/* <AvailableUsers isChat={false} /> */}
-
       {showSearchBar && isScreenSmall ? (
         <>
           <ArrowLeftIcon
@@ -34,7 +32,7 @@ const Navbar = ({ isLoggedIn, user, isLoading }: NavbarProps) => {
             onClick={() => setShowSearchBar(false)}
           />
           <div className="w-full ">
-            <AvailableUsers isChat={false} />
+            {user && <AvailableUsers isChat={false} />}
           </div>
         </>
       ) : (
@@ -44,7 +42,7 @@ const Navbar = ({ isLoggedIn, user, isLoading }: NavbarProps) => {
 
           {!isScreenSmall && isLoggedIn ? (
             <div className="flex items-center justify-center w-2/5 md:ml-[10%] lg:ml-[16%] pt-1 ">
-              <AvailableUsers isChat={false} />
+              {user && <AvailableUsers isChat={false} />}
             </div>
           ) : null}
           <div
