@@ -8,7 +8,7 @@ import InputField from "../../../components/Form/InputField";
 import {
   CommentValidationSchema,
   commentValidationSchema,
-} from "../../../features/posts/Components/PostEngagements";
+} from "../../posts/Components/PostEngagements";
 import updateGroupChatName from "../api/updateGroupChatName";
 
 type EditGroupPostName = {

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Button } from "../../../components/Elements/Button";
 import Logo from "../../../components/Shared/Logo";
-import AvailableUsers from "../../../features/chat/components/AvailableUsers";
+import AvailableUsers from "../../chat/Components/AvailableUsers";
 import { Author } from "../../../features/posts/types/postType";
 import useScreenSize from "../../../hooks/useScreenSize";
 import Avatar from "../../user/Components/Avatar";

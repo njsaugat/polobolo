@@ -1,6 +1,6 @@
 import moment from "moment";
 import LoadImage from "../../../components/Elements/LoadImage";
-import Avatar from "../../../features/user/Components/Avatar";
+import Avatar from "../../user/Components/Avatar";
 
 type ChatAuthorProfileProps = {
   username: string;

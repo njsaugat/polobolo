@@ -18,9 +18,9 @@ import UserDetails from "../features/user/Components/UserDetails";
 import UserProfileAbout from "../features/user/Components/UserProfileAbout";
 import useAuthCheck from "../hooks/useAuthCheck";
 
-const Chat = lazy(() => import("../features/chat/components/Chat"));
+const Chat = lazy(() => import("../features/chat/Components/Chat"));
 const ChatSection = lazy(
-  () => import("../features/chat/components/ChatSection")
+  () => import("../features/chat/Components/ChatSection")
 );
 
 const Posts = lazy(() => import("../features/posts/Components/Posts"));

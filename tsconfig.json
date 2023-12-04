@@ -19,7 +19,7 @@
   },
   "typeRoots": ["node_modules/@types", "src/types"],
   "include": ["src"],
-  "exclude": ["src/features/chat/components/AvailableUsers.tsx"]
+  "exclude": ["src/features/chat/Components/AvailableUsers.tsx"]
   // "references": [{ "path": "./tsconfig.node.json" }]
   // "paths": {
   //   "src/*": ["./src/*"]

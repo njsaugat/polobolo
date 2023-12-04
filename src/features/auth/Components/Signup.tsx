@@ -16,7 +16,6 @@ const Signup = () => {
   const { email } = useParams();
   const {
     control,
-    register,
     trigger,
     handleSubmit,
     formState: { errors, isValid },

@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { Button } from "../../../components/Elements/Button";
 import Toggle from "../../../components/Elements/Toggle";
 import { ShimmerAvatars } from "../../../components/Shimmer/ShimmerAvatar";
-import { Author, ChatUser } from "../../../features/posts/types/postType";
+import { Author, ChatUser } from "../../posts/types/postType";
 import { RootState } from "../../../stores/store";
 import createChat from "../api/createOnetoOneChat";
 import getAllUsers from "../api/getAllUser";
