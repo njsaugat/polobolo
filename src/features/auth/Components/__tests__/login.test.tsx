@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import App from "../../../../App";
@@ -32,4 +33,14 @@ describe("Login component tests", () => {
     expect(inputs[0].name.toLowerCase()).toBe("email");
     expect(inputs[1].name.toLowerCase()).toBe("email");
   });
+=======
+import { expect, test } from "vitest";
+// // sum.js
+export function sum(a: number, b: number) {
+  return a + b;
+}
+
+test("adds 1 + 2 to equal 3", () => {
+  expect(sum(1, 2)).toBe(3);
+>>>>>>> Stashed changes
 });

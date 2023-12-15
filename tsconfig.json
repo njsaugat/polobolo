@@ -16,13 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "src",
-    "types": ["node", "jest", "@testing-library/jest-dom"],
-    "paths": {
-      "src/*": ["src/*"]
-    }
+    "types": ["vitest/globals"]
   },
   "typeRoots": ["node_modules/@types", "src/types"],
-  "include": ["src"],
+  "include": ["src", "./setupTest.ts"],
   "exclude": ["src/features/chat/Components/AvailableUsers.tsx"]
   // "references": [{ "path": "./tsconfig.node.json" }]
   // "paths": {
