@@ -16,7 +16,7 @@ export type LanguageContext = {
 };
 export const LanguageContext = createContext<LanguageContext>({
   language:
-    languages.find((language) => language.key === i18n.language) ??
+    languages.find((language) => language.key === i18n?.language) ??
     languages[0],
   setLanguage: () => {},
   changeLanguage: () => {},
@@ -27,10 +27,11 @@ export const LanguageProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const [selectedLanguage, setLanguage] = useState<Language>(
-    languages.find((language) => language.key === i18n.language) ?? languages[0]
+    languages.find((language) => language.key === i18n?.language) ??
+      languages[0]
   );
 
   const changeLanguage = (language: Language) =>

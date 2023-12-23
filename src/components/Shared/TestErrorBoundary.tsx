@@ -22,6 +22,7 @@ const BuggyCounter = () => {
 const TestErrorBoundary = () => {
   return (
     <div className="p-10">
+      <div> Hey</div>
       <ErrorBoundary FallbackComponent={FallbackErrorBoundary}>
         <BuggyCounter />
         <br />
