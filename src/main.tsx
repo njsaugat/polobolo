@@ -10,6 +10,7 @@ import "./index.css";
 import { AppRoutes } from "./routes/AppRouter";
 import "./services/i18n";
 import store from "./stores/store";
+import { Background } from "./components/Shared/Background";
 const queryClient = new QueryClient();
 
 const RootApp = () => (
@@ -18,6 +19,7 @@ const RootApp = () => (
       <QueryClientProvider client={queryClient}>
         <LanguageProvider>
           <Notifications />
+          <Background />
           <AppRoutes />
           <ReactQueryDevtools />
         </LanguageProvider>
