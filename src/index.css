@@ -34,3 +34,23 @@
   animation: bounce 0.4s ease-in-out infinite alternate;
   animation-delay: 0s;
 }
+
+.box {
+  color: white;
+  border: 3px solid #0000;
+  background: linear-gradient(#131219, #131219) padding-box,
+    linear-gradient(var(--angle), #070707, #2dd4bf) border-box;
+  animation: 8s rotate linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
