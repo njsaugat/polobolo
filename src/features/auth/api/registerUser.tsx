@@ -11,12 +11,14 @@ export interface SignupData {
   role: string;
   username: string;
 }
+export const registerUser = (signupData: SignupData) => {
+  console.log(signupData)
+  return axios.post("/users/register", signupData);
+};
 const useRegisterUser = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const registerUser = (signupData: SignupData) => {
-    return axios.post("/users/register", signupData);
-  };
+
   return useMutation({
     mutationKey: ["register"],
     mutationFn: registerUser,

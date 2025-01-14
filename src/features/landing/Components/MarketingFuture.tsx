@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import FreeAccess from "../../../assets/images/free-access.svg";
+// import FreeAccess from "../../../assets/images/free-access.svg";
 import MailingList from "./MailingList";
 const MarketingFuture = () => {
   const { t } = useTranslation();
@@ -9,11 +9,8 @@ const MarketingFuture = () => {
         <h2 className="my-5 text-4xl font-bold leading-snug tracking-wider">
           {t("landingPage.marketingFuture")}
         </h2>
-        <MailingList />
       </div>
-      <div className="flex justify-end w-1/2">
-        <img src={FreeAccess} alt="free-access" className="w-52" />
-      </div>
+      <div className="flex justify-end w-1/2"></div>
     </div>
   );
 };

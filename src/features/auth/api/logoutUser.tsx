@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { axios } from "../../../services/apiClient";
 import store from "../../../stores/store";
-import { handleLogoutUser } from "../../../stores/userSlice";
+import { handleLogoutUser, removeUser } from "../../../stores/userSlice";
 import { LocalStorage } from "../../../utils";
 
 const useLogoutUser = () => {
@@ -18,8 +18,10 @@ const useLogoutUser = () => {
       if (statusCode === 200) {
         LocalStorage.remove("accessToken");
         queryClient.removeQueries(["auth-user"]);
+        queryClient.removeQueries(["user"]);
         const { dispatch } = store;
         dispatch(handleLogoutUser());
+        dispatch(removeUser(undefined));
         navigate("/login");
       }
     },

@@ -11,6 +11,7 @@ const variants = {
   light: "bg-gradient-to-t from-slate-300 to-teal-300 border-none",
   transparent: "bg-gradient-to-r from-teal-50 to-teal-200",
   moretransparent: "bg-gradient-to-r from-teal-50 to-teal-100",
+  fulltransparent: "bg-transparent text-teal-600",
 };
 
 const sizes = {
@@ -50,7 +51,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={cslx(
-          "flex justify-center items-center border border-gray-300 disabled:opacity-70 disabled:cursor-not-allowed    hover:opacity-80  focus:outline-none focus:shadow-outline",
+          "flex justify-center items-center border-0 border-gray-300 disabled:opacity-70 disabled:cursor-not-allowed    hover:opacity-80  focus:outline-none focus:shadow-outline",
           variants[variant],
           sizes[size],
           className

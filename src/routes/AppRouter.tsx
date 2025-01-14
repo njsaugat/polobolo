@@ -17,6 +17,7 @@ import Settings from "../features/user/Components/Settings";
 import UserDetails from "../features/user/Components/UserDetails";
 import UserProfileAbout from "../features/user/Components/UserProfileAbout";
 import useAuthCheck from "../hooks/useAuthCheck";
+import Redirect from "../features/auth/Components/Redirect";
 
 const Chat = lazy(() => import("../features/chat/Components/Chat"));
 const ChatSection = lazy(
@@ -53,6 +54,10 @@ const publicRoutes = [
       {
         index: true,
         element: <LandingPage />,
+      },
+      {
+        path: `/auth`,
+        element: <Redirect />,
       },
       {
         path: "/signup",
@@ -105,6 +110,7 @@ const protectedRoutes = [
           </Suspense>
         ),
       },
+
       {
         path: "/chats",
         element: (

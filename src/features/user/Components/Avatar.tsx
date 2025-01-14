@@ -14,7 +14,7 @@ const Avatar = ({ url, firstName, className, username }: AvatarProps) => {
     (store) => store.user.user
   );
   let updatedProfilePicURL;
-  if (user?.account.username === username) {
+  if (user?.account?.username === username) {
     updatedProfilePicURL = useSelector<RootState, string | undefined>(
       (store) => store.user.updatedProfilePicURL
     );
@@ -23,7 +23,7 @@ const Avatar = ({ url, firstName, className, username }: AvatarProps) => {
     <Link to={`/user/${username}`}>
       <LoadImage
         src={
-          updatedProfilePicURL && user?.account.username === username
+          updatedProfilePicURL && user?.account?.username === username
             ? updatedProfilePicURL
             : url
         }

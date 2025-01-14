@@ -22,8 +22,8 @@ export const userSlice = createSlice({
     addUser: (state, action: PayloadAction<Author | undefined>) => {
       state.user = action.payload;
     },
-    removeUser: (state) => {
-      state.user = undefined;
+    removeUser: (state, action: PayloadAction<Author | undefined>) => {
+      state.user = action.payload;
     },
     handleLoginUser: (state) => {
       state.isLoggedIn = true;

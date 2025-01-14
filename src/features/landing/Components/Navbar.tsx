@@ -43,7 +43,11 @@ const Navbar = ({ isLoggedIn, user, isLoading }: NavbarProps) => {
           showSearchBar && isScreenSmall ? "hidden" : "block"
         } relative flex items-center w-screen px-2 pt-2 transition-all duration-300 space-around`}
       >
-        {isScreenSmall ? <Logo content={"Pb"} className="w-16 " /> : <Logo />}
+        {isScreenSmall ? (
+          <Logo content={"Pb"} className="w-16 " />
+        ) : (
+          <Logo className="w-full " />
+        )}
 
         {!isScreenSmall && isLoggedIn ? (
           <div className="flex items-center justify-center w-2/5 md:ml-[10%] lg:ml-[16%] pt-1 ">
@@ -92,12 +96,15 @@ const Navbar = ({ isLoggedIn, user, isLoading }: NavbarProps) => {
               ) : (
                 <>
                   <Link to="/login">
-                    <Button className="p-3 mx-3 font-bold bg-gradient-to-r from-teal-50 to-slate-100">
+                    <Button
+                      variant="primary"
+                      className="p-3 mx-3 font-bold border-2 shadow-2xl box border-teal- bg-gradient-to-r from-teal-50 to-slate-100"
+                    >
                       {t("landingPage.login")}
                     </Button>
                   </Link>
                   <Link to="/signup">
-                    <Button className="font-bold">
+                    <Button variant="fulltransparent" className="font-bold ">
                       {t("landingPage.signup")}
                     </Button>
                   </Link>
