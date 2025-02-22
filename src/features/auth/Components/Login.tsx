@@ -14,7 +14,7 @@ import {
   loginValidationSchema,
 } from "../utils/loginValidation";
 import AuthFormEnhancements from "./AuthFormEnhancements";
-
+import OAuthLogin from "./OAuthLogin";
 const Login = () => {
   const navigate = useNavigate();
   const isLoggedIn = useAuthCheck();
@@ -84,6 +84,10 @@ const Login = () => {
               >
                 {t("landingPage.login")}
               </Button>
+            </div>
+            <div className="flex flex-col items-center space-y-2 ">
+              <OAuthLogin platform={"google"} />
+              <OAuthLogin platform={"github"} />
             </div>
             <hr className="mb-6 border-t" />
             <AuthFormEnhancements formType="signup" />

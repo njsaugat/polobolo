@@ -20,7 +20,7 @@ const MailingList = () => {
         placeholder={t("landingPage.signupMailingList")}
         className="w-3/4 p-2 text-xs border-0 outline-none"
       />
-      <Button type="submit">{t("landingPage.signup")}</Button>
+      <Button type="submit" >{t("landingPage.signup")}</Button>
     </form>
   );
 };

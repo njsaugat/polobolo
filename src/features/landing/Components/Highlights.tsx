@@ -3,9 +3,19 @@ import { useTranslation } from "react-i18next";
 import Analytics from "../../../assets/images/png/analytics.png";
 import AuditCards from "../../../assets/images/png/audit_cards.png";
 import PostPerformance from "../../../assets/images/png/post-performance.png";
-
+import { motion } from "framer-motion";
+import SquigglyLines from "../../../components/Shared/SquigglyLines";
 const Highlights = () => {
   const { t } = useTranslation();
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5,
+      },
+    },
+  };
   const analytics = useMemo(
     () => [
       {
@@ -27,8 +37,17 @@ const Highlights = () => {
     <div className="flex flex-col justify-center mx-28">
       <h1 className="my-10 text-4xl font-bold tracking-wider text-center">
         {t("landingPage.highlights")}
+        <span className="relative text-green-500 whitespace-nowrap">
+          <SquigglyLines />
+          <span className="relative"> using AI</span>
+        </span>
       </h1>
-      <div className="flex flex-wrap justify-center lg:justify-between ">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="flex flex-wrap justify-center lg:justify-between "
+      >
         {analytics.map((analytic) => {
           return (
             <div
@@ -42,7 +61,7 @@ const Highlights = () => {
             </div>
           );
         })}
-      </div>
+      </motion.div>
     </div>
   );
 };

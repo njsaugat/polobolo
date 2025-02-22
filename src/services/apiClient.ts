@@ -29,15 +29,6 @@ axios.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      LocalStorage.remove("accessToken");
-      const response = await refreshAccessToken();
-      const { accessToken } = response.data;
-      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-      LocalStorage.set("accessToken", accessToken);
-      return axios(originalRequest);
-    }
     const message = error.response?.data?.message || error.message;
     const { dispatch } = store;
     dispatch(
@@ -47,6 +38,16 @@ axios.interceptors.response.use(
         message,
       })
     );
+    if (error?.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      LocalStorage.remove("accessToken");
+      const response = await refreshAccessToken();
+      const { accessToken } = response.data;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+      LocalStorage.set("accessToken", accessToken);
+      return axios(originalRequest);
+    }
+
     return Promise.reject(error);
   }
 );
